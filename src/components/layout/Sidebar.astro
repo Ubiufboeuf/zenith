@@ -1,0 +1,37 @@
+---
+import { Icon } from '@/components/ui/Icon'
+import { IconCart } from '../ui/Icons'
+import { SidebarLink } from '@/components/layout/SidebarLink'
+import { sidebarLinks } from '@/lib/sidebarLinks'
+import { SidebarUserCard } from '@/components/layout/SidebarUserCard'
+---
+
+<aside class='h-full w-full grid grid-rows-[64px_1fr_80px] border-r bg-darker border-border'>
+  <header class='h-full w-full flex items-center gap-3 pl-6 border-b border-border'>
+    <div class='flex items-center justify-center size-9 rounded-lg bg-primary'>
+      <Icon class='size-5 stroke-2 text-dark fill-transparent'>
+        <IconCart />
+      </Icon>
+    </div>
+    <div class='h-fit flex flex-col justify-center'>
+      <h1 class='text-sm text-light font-semibold'>Sistema interno</h1>
+      <span class='text-xs text-neutral-400'>Zenith</span>
+    </div>
+  </header>
+  <main class='h-fit min-h-full w-full flex flex-col gap-1 px-3 pt-4 overflow-y-auto text-neutral-400'>
+    <div class='flex flex-col gap-1'>
+      <h1 class='ml-3 text-xs tracking-wider uppercase mb-1'>Principal</h1>
+      { sidebarLinks.principal.map((link) => (
+        <SidebarLink {...link} />
+      )) }
+    </div>
+    <div class='w-full h-px my-3 bg-border' />
+    <div class='flex flex-col gap-1'>
+      <h1 class='ml-3 text-xs tracking-wider uppercase mb-1'>Principal</h1>
+      { sidebarLinks.system.map((link) => (
+        <SidebarLink {...link} />
+      )) }
+    </div>
+  </main>
+  <SidebarUserCard client:load />
+</aside>
