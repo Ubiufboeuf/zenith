@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark: #070709;
+  --color-darker: #040406;
+  --color-light: #eeeeee;
+  --color-primary: #11ad32;
+  --color-accent: #212126;
+  --color-border: #28292b;
+}
+
+@font-face {
+  font-family: Inter;
+  src:
+    local('Inter'),
+    url('/assets/Inter.woff2')
+}
+
+:root {
+  font-family: Inter, system-ui;
+  color-scheme: dark;
+}
+
+.gutter-stable {
+  scrollbar-gutter: stable;
+}
