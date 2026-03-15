@@ -105,3 +105,11 @@ export const IconTicket = () => (
     <path d='M12 17.5v-11' />
   </Svg>
 )
+
+export const IconMenu = () => (
+  <Svg>
+    <path d='M4 6l16 0' />
+    <path d='M4 12l16 0' />
+    <path d='M4 18l16 0' />
+  </Svg>
+)

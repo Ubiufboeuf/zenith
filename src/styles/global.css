@@ -17,6 +17,12 @@
     url('/assets/Inter.woff2')
 }
 
+@custom-variant sidebar-mini {
+  &:where(:has(#checkbox-sidebar-state:checked) *) {
+    @slot;
+  }
+}
+
 :root {
   font-family: Inter, system-ui;
   color-scheme: dark;
