@@ -1,7 +1,9 @@
 {
   "conventionalCommits.scopes": [
     "ui",
+    "layout",
     "lib",
-    "dashboard"
+    "dashboard",
+    "sidebar"
   ]
 }
