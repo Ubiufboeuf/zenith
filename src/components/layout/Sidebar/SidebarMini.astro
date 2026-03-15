@@ -6,7 +6,7 @@ import { SidebarUserCardMini } from './SidebarUserCardMini'
 ---
 
 <aside class='not-sidebar-mini:w-64 h-full w-fit grid grid-rows-[64px_1fr_64px] border-r bg-darker border-border'>
-  <header class='h-full w-full flex items-center justify-center border-b border-border'>
+  <header class='relative h-full w-full flex items-center justify-center *:z-1 *:absolute *:left-3 border-b border-border'>
     <ToggleSidebar />
   </header>
   <main class='h-fit min-h-full w-full flex flex-col gap-1 px-3 pt-4 overflow-y-auto text-neutral-400'>
