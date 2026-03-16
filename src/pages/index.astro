@@ -12,17 +12,17 @@ const timestamp = new Date().getTime()
 
 <Layout>
 	<section class='h-fit w-full min-h-full flex flex-col p-6 gap-5'>
-		<header class='h-18 flex justify-between gap-2'>
-			<div class='h-full flex flex-col justify-center gap-1'>
+		<header class='h-fit sm:h-18 flex not-sm:flex-col justify-between gap-2'>
+			<div class='not-sm:hidden h-full flex flex-col justify-center gap-1 shrink-0'>
 				<h1 class='text-2xl font-semibold text-light'>Bienvenido</h1>
-				<span class='text-neutral-400'>{capitalize(formatDate(timestamp, 'es-US', { dateStyle: 'full' }), ' ')}</span>
+				<span class='text-nowrap text-neutral-400'>{capitalize(formatDate(timestamp, 'es-US', { dateStyle: 'full' }), ' ')}</span>
 			</div>
-			<div class='h-full flex flex-col justify-center items-end gap-1'>
+			<div class='h-full flex flex-row-reverse sm:flex-col justify-between sm:justify-center items-center sm:items-end gap-1 shrink-0'>
 				<Clock client:load />
 				<TerminalInfo client:load />
 			</div>
 		</header>
-		<section class='h-32 w-full grid grid-cols-3 gap-4'>
+		<section class='h-40 sm:h-32 w-full grid not-sm:grid-rows-3 sm:grid-cols-3 gap-2 sm:gap-4'>
 			<DashboardLink to='/new_sale' icon={IconCart} class='h-full min-h-fit w-full' main>Nueva Venta</DashboardLink>
 			<DashboardLink to='/history' icon={IconTicket} class='h-full min-h-fit w-full'>Ver Historial</DashboardLink>
 			<DashboardLink to='/search' icon={IconBox} class='h-full min-h-fit w-full'>Buscar Producto</DashboardLink>

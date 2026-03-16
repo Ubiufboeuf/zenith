@@ -4,6 +4,6 @@ export function Clock () {
   const time = useClock()
 
   return (
-    <span class='text-3xl font-bold tracking-widest'>{time}</span>
+    <span class='text-xl sm:text-3xl font-bold tracking-widest text-nowrap'>{time}</span>
   )
 }
