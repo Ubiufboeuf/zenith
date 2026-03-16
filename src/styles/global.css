@@ -10,6 +10,7 @@
   --color-card: #0f0f12;
 
   --breakpoint-ml: 792px;
+  --breakpoint-mtb: 355px; /* min (width) tab bar */
 }
 
 @font-face {
