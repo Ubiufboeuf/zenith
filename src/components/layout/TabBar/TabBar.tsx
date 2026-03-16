@@ -26,8 +26,6 @@ export function TabBar ({ pathname }: { pathname: string }) {
     more: handleClickMore
   }
 
-  console.log({ pathname })
-
   return (
     <nav class='fixed bottom-0 h-18 w-full flex border-t border-border desktop:hidden items-center justify-evenly sm:px-4 overflow-x-auto [scrollbar-width:none] bg-base-dark'>
       { barItems.map((item) => {
