@@ -3,22 +3,24 @@ import { SidebarLinkMini } from '@/components/layout/Sidebar/SidebarLinkMini'
 import { sidebarLinks } from '@/lib/sidebarLinks'
 import { ToggleSidebar } from './ToggleSidebar'
 import { SidebarUserCardMini } from './SidebarUserCardMini'
+
+const { pathname } = Astro.url
 ---
 
-<aside class='not-sidebar-mini:ml:w-64 h-full w-fit grid grid-rows-[64px_1fr_64px] border-r bg-darker border-border'>
+<aside class='not-sidebar-mini:ml:w-65 not-sm:hidden h-full w-fit grid grid-rows-[64px_1fr_64px] border-r bg-darker border-border'>
   <header class='h-full w-full flex items-center justify-center border-b border-border'>
     <ToggleSidebar class='fixed left-3 z-3' />
   </header>
   <main class='h-fit min-h-full w-full flex flex-col gap-1 px-3 pt-4 overflow-y-auto text-neutral-400'>
     <div class='flex flex-col gap-1'>
       { sidebarLinks.principal.map((link) => (
-        <SidebarLinkMini {...link} />
+        <SidebarLinkMini pathname={pathname} {...link} />
       )) }
     </div>
     <div class='w-full h-px my-3 bg-border' />
     <div class='flex flex-col gap-1'>
       { sidebarLinks.system.map((link) => (
-        <SidebarLinkMini {...link} />
+        <SidebarLinkMini pathname={pathname} {...link} />
       )) }
     </div>
   </main>
