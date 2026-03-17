@@ -18,7 +18,7 @@ export function TabBar ({ pathname }: { pathname: string }) {
     setButtonActive(isActive ? undefined : id)
 
     const checkbox = document.querySelector('#checkbox-sidebar-state')
-    if (checkbox instanceof HTMLInputElement) checkbox.checked = false
+    if (checkbox instanceof HTMLInputElement) checkbox.checked = true
   }
 
   const buttonFunctions: Record<BarButtonId, () => void> = {

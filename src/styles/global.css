@@ -33,7 +33,7 @@
   }
 }
 
-@custom-variant sidebar-mini {
+@custom-variant sidebar-open {
   &:where(:has(#checkbox-sidebar-state:checked) *) {
     @slot;
   }
