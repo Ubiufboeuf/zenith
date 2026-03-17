@@ -1,4 +1,4 @@
-import { IconCart, IconCollection, IconHistory, IconSearch, IconUsers } from '@/components/ui/Icons'
+import { IconCart, IconCollection, IconDots, IconHistory, IconSearch, IconUsers } from '@/components/ui/Icons'
 import type { TargetedMouseEvent } from 'preact'
 import type { ReactNode } from 'preact/compat'
 
@@ -28,5 +28,5 @@ export const barItems: TabBarItem[] = [
   { id: 'new_sale', type: 'link', title: 'Venta', href: '/new_sale', icon: ({ active }: { active?: boolean }) => <IconCart active={active} /> },
   { id: 'search', type: 'button', title: 'Buscar', icon: ({ active }: { active?: boolean }) => <IconSearch active={active} /> },
   { id: 'history', type: 'link', title: 'Historial', href: '/history', icon: ({ active }: { active?: boolean }) => <IconHistory active={active} /> },
-  { id: 'more', type: 'button', title: 'Más', icon: ({ active }: { active?: boolean }) => <IconUsers active={active} /> }
+  { id: 'more', type: 'button', title: 'Más', icon: ({ active }: { active?: boolean }) => <IconDots active={active} /> }
 ]
