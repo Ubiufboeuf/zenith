@@ -5,6 +5,7 @@
     "lib",
     "dashboard",
     "sidebar",
-    "tabbar"
+    "tabbar",
+    "ux"
   ]
 }
