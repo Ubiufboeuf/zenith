@@ -6,6 +6,7 @@
     "dashboard",
     "sidebar",
     "tabbar",
-    "ux"
+    "ux",
+    "security"
   ]
 }
