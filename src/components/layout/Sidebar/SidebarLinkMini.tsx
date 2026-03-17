@@ -13,7 +13,7 @@ export function SidebarLinkMini ({ pathname, title, href, icon: LinkIcon }: Prop
     <a
       href={href}
       title={title}
-      class={`${pathname === href ? 'active' : ''} group size-10 flex items-center justify-center gap-3 rounded-lg transition-colors text-neutral-400 hover:text-light hover:bg-accent [.active]:text-primary [.active]:bg-primary/10`}
+      class={`${pathname === href ? 'active' : ''} group size-10 flex items-center justify-center gap-3 rounded-lg transition-colors text-neutral-400 shr:text-light shr:bg-accent [.active]:text-primary [.active]:bg-primary/10`}
     >
       <Icon class='size-5 stroke-2'>
         <LinkIcon />
