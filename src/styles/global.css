@@ -20,6 +20,19 @@
     url('/assets/Inter.woff2')
 }
 
+@custom-variant shr {
+  @media (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+  @media (pointer: coarse) {
+    &:active {
+      @slot;
+    }
+  }
+}
+
 @custom-variant sidebar-mini {
   &:where(:has(#checkbox-sidebar-state:checked) *) {
     @slot;
