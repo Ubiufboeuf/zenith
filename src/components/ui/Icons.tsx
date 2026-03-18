@@ -33,7 +33,7 @@ const Svg = ({ children, viewBox = '0 0 24 24', class: className, width = '24', 
   </svg>
 )
 
-export const IconCart = ({ active }: { active?: boolean }) => (
+export const IconCart = ({ active }: { active?: boolean } = { active: false }) => (
   <Svg>
     { active ? <>
       <circle cx='8' cy='21' r='2' fill='currentColor' />
