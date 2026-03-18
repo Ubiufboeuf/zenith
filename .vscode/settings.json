@@ -9,6 +9,7 @@
     "ux",
     "security",
     "deps",
-    "drawer"
+    "drawer",
+    "ts"
   ]
 }
