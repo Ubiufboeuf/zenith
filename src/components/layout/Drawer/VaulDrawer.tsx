@@ -2,12 +2,14 @@ import { useDrawerStore } from '@/stores/useDrawerStore'
 import { Drawer } from 'vaul'
 import { DrawerUserCard } from './DrawerUserCard'
 import { DrawerTitle } from './DrawerTitle'
+import { useUIStore } from '@/stores/useUIStore'
 
 export function VaulDrawer () {
   const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen)
   const setIsDrawerOpen = useDrawerStore((state) => state.setIsDrawerOpen)
+  const isMobile = useUIStore((state) => state.deviceType === 'mobile')
   
-  return (
+  return isMobile && (
     <Drawer.Root open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
       <Drawer.Portal>
         <Drawer.Overlay className='fixed inset-0 bg-black/40' />
