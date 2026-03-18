@@ -18,8 +18,8 @@ const timestamp = new Date().getTime()
 				<span class='text-nowrap text-neutral-400'>{capitalize(formatDate(timestamp, 'es-US', { dateStyle: 'full' }), ' ')}</span>
 			</div>
 			<div class='h-full flex flex-row-reverse sm:flex-col justify-between sm:justify-center items-center sm:items-end gap-1 shrink-0'>
-				<Clock client:load />
-				<TerminalInfo client:load />
+				<Clock client:idle />
+				<TerminalInfo client:idle />
 			</div>
 		</header>
 		<section class='h-40 sm:h-32 w-full grid not-sm:grid-rows-3 sm:grid-cols-3 gap-2 sm:gap-4'>
