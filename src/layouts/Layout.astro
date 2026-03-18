@@ -9,16 +9,38 @@ import { useTabBarStore } from '@/stores/useTabBarStore'
 
 interface Props {
   title?: string
+	tabBar?: boolean
 }
 
-const { title } = Astro.props
-const { pathname } = Astro.url
+const { props, cookies, url, request } = Astro
+const { title, tabBar } = props
+const { pathname } = url
 
 const activeItem = barItems.find((i) => i.type === 'link' && i.href === pathname)?.id
 useTabBarStore.setState({ activeItem })
+
+// #region - detectDeviceType
+const deviceCode = cookies.get('monado-device-type')?.value
+const ua = request.headers.get('user-agent') || ''
+
+const mobileRegex = /(Mobi|Android(?!.*Nexus 7)|iPhone|iPod|Windows Phone|BlackBerry|Symbian|IEMobile|Opera Mini|Fennec|webOS|hpwos|avantgo|bada|blazer|compal|elaine|hiptop|kindle|lge|maemo|midp|mmp|netfront|palm|phone|plucker|pocket|psp|series60|treo|up\.browser|up\.link|vodafone|wap|windows ce|xda|xiino)/i
+const tabletRegex = /(iPad|Android(?!.*mobile)|Kindle|Playbook|Silk|Tablet|hpw|webos|Nexus 7)/i
+
+let detectedType = 'desktop'
+if (mobileRegex.test(ua)) detectedType = 'mobile'
+else if (tabletRegex.test(ua)) detectedType = 'tablet'
+
+const devices: Record<string, string> = { M: 'mobile', T: 'tablet', D: 'desktop' }
+const deviceType = devices[deviceCode!] || detectedType
+// #endregion
 ---
 
-<html lang='es' class='h-full w-full gutter-stable bg-dark'>
+<html
+	lang='es'
+	class='h-full w-full gutter-stable bg-dark'
+	data-device-type={deviceType}
+	data-using-tab-bar={tabBar}
+>
 	<head>
 		<meta charset='utf-8' />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
@@ -26,6 +48,50 @@ useTabBarStore.setState({ activeItem })
 		<meta name='viewport' content='width=device-width' />
 		<title>{title ? `${title} - Zenith` : 'Zenith'}</title>
 		<link rel='preload' href='/assets/Inter.woff2' as='font' type='font/woff2' crossorigin='anonymous' />
+		<script>
+			// - Detect device type -
+
+			import { useUIStore, type DeviceType } from '@/stores/useUIStore'
+			
+			const { setDeviceType } = useUIStore.getState()
+
+			function setCookie (name: string, value: string, days: number) {
+				const date = new Date()
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
+				const expires = `; expires=${date.toUTCString()}`
+				document.cookie = `${name}=${value}${expires}; path=/; SameSite=Lax`
+			}
+			
+			function detectDeviceType () {
+				const { dataset } = document.documentElement
+				const serverDetectedDeviceType = dataset.deviceType
+
+				const devices: Record<string, DeviceType> = { M: 'mobile', T: 'tablet', D: 'desktop' }
+				const ua = navigator.userAgent
+				const mobileRegex = /(Mobi|Android(?!.*Nexus 7)|iPhone|iPod|Windows Phone|BlackBerry|Symbian|IEMobile|Opera Mini|Fennec|webOS|hpwos|avantgo|bada|blazer|compal|elaine|hiptop|kindle|lge|maemo|midp|mmp|netfront|palm|phone|plucker|pocket|psp|series60|treo|up\.browser|up\.link|vodafone|wap|windows ce|xda|xiino)/i
+				const tabletRegex = /(iPad|Android(?!.*mobile)|Kindle|Playbook|Silk|Tablet|hpw|webos|Nexus 7)/i
+
+				let deviceCode = 'D'
+
+				if (mobileRegex.test(ua) && !/iPad/i.test(ua)) {
+					deviceCode = 'M' // Celular
+				} else if (tabletRegex.test(ua)) {
+					deviceCode = 'T' // Tablet
+				}
+
+				const deviceType = devices[deviceCode]
+
+				// Actualizar deviceType sólo si hay diferencia con el servidor
+				if (serverDetectedDeviceType !== deviceType) {
+					dataset.deviceType = deviceType
+					setCookie('monado-device-type', deviceCode, 30)
+				}
+
+				setDeviceType(deviceType)
+			}
+
+			detectDeviceType()
+		</script>
 	</head>
 	<body class='h-full w-full'>
 		<div class='h-full w-full sm:grid grid-cols-[auto_1fr]'>
