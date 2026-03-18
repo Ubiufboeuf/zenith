@@ -1,12 +1,17 @@
 import { Icon } from '@/components/ui/Icon'
 import type { TabBarButton } from '@/lib/barItems'
+import { useTabBarStore } from '@/stores/useTabBarStore'
 
-export function TabBarButton ({ active, title, icon: ButtonIcon, onClick }: TabBarButton) {
+export function TabBarButton ({ id, title, icon: ButtonIcon, onClick }: TabBarButton) {
+  const active = useTabBarStore((state) => state.isButtonActive)
+
   return (
     <button
+      id={id}
       title={title}
       class={`${active ? 'active' : ''} group flex flex-col items-center justify-center gap-1 h-full w-13 mtb:w-17.75 cursor-pointer`}
       onClick={onClick}
+      data-is-tab-bar-item='true'
     >
       <div class='flex items-center justify-center h-fit w-fit p-1 px-2 mtb:px-4 rounded-full transition-colors text-neutral-300 group-[.active]:text-light group-[.active]:bg-neutral-700 group-shr:bg-neutral-800'>
         <Icon class='size-6'>

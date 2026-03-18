@@ -4,6 +4,8 @@ import Sidebar from '../components/layout/Sidebar/Sidebar.astro'
 import { SidebarStateManager } from '@/components/layout/Sidebar/SidebarStateManager'
 import '../styles/global.css'
 import { TabBar } from '@/components/layout/TabBar/TabBar'
+import { barItems } from '@/lib/barItems'
+import { useTabBarStore } from '@/stores/useTabBarStore'
 
 interface Props {
   title?: string
@@ -11,6 +13,9 @@ interface Props {
 
 const { title } = Astro.props
 const { pathname } = Astro.url
+
+const activeItem = barItems.find((i) => i.type === 'link' && i.href === pathname)?.id
+useTabBarStore.setState({ activeItem })
 ---
 
 <html lang='es' class='h-full w-full gutter-stable bg-dark'>

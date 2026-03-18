@@ -1,31 +1,67 @@
-import { useState } from 'preact/hooks'
+import { useEffect } from 'preact/hooks'
 import { TabBarButton } from './TabBarButton'
 import { TabBarLink } from './TabBarLink'
-import { barItems, type BarButtonId } from '@/lib/barItems'
+import { barItems } from '@/lib/barItems'
+import { useSidebarStore } from '@/stores/useSidebarStore'
+import { useTabBarStore } from '@/stores/useTabBarStore'
 
 export function TabBar ({ pathname }: { pathname: string }) {
-  const [buttonActive, setButtonActive] = useState<BarButtonId>()
+  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen)
+  const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen)
+  
+  const activeItem = useTabBarStore((state) => state.activeItem)
+  const setActiveItem = useTabBarStore((state) => state.setActiveItem)
 
-  function handleClickSearch () {
-    const id = 'search'
-    if (buttonActive === id) setButtonActive(undefined)
-    else setButtonActive(id)
+  const setIsButtonActive = useTabBarStore((state) => state.setIsButtonActive)
+  
+  function loadInitialActiveItem () {
+    const activeItem = barItems.find((i) => i.type === 'link' && i.href === pathname)
+    setActiveItem(activeItem?.id)
+  }
+  
+  function clickLink (event: MouseEvent) {
+    const { target } = event
+    if (!(target instanceof HTMLElement)) return
+    
+    const { id } = target
+
+    setActiveItem(id)
   }
 
   function handleClickMore () {
-    const id = 'more'
-    const isActive = buttonActive === id
-    setButtonActive(isActive ? undefined : id)
+    setIsSidebarOpen(true)
+    setIsButtonActive(true)
 
     const checkbox = document.querySelector('#checkbox-sidebar-state')
     if (checkbox instanceof HTMLInputElement) checkbox.checked = true
   }
 
-  const buttonFunctions: Record<BarButtonId, () => void> = {
-    search: handleClickSearch,
-    more: handleClickMore
+  function handleClick (event: MouseEvent) {
+    const { target } = event
+    if (!(target instanceof HTMLElement)) return
+
+    const item = target.closest('[data-is-tab-bar-item]')
+
+    if (!item) {
+      if (activeItem) setActiveItem(undefined)
+      return
+    }
   }
 
+  useEffect(() => {    
+    window.addEventListener('click', handleClick)
+    
+    return window.removeEventListener('click', handleClick)
+  }, [])
+
+  useEffect(() => {
+    loadInitialActiveItem()
+  }, [pathname])
+
+  useEffect(() => {
+    setIsButtonActive(Boolean(isSidebarOpen))
+  }, [isSidebarOpen])
+  
   return (
     <nav class='fixed bottom-0 h-18 w-full flex border-t border-border desktop:hidden items-center justify-evenly sm:px-4 overflow-x-auto [scrollbar-width:none] bg-base-dark'>
       { barItems.map((item) => {
@@ -39,19 +75,18 @@ export function TabBar ({ pathname }: { pathname: string }) {
             href={item.href}
             title={title}
             icon={ItemIcon}
-            active={pathname === item.href && !buttonActive}
+            onClick={clickLink}
           />
         )
 
-        if (type === 'button') return (
+        if (type === 'button' && id === 'more') return (
           <TabBarButton
             id={id}
             type={type}
             key={`tab-bar-button:${title}`}
             title={title}
             icon={ItemIcon}
-            onClick={buttonFunctions?.[item.id]}
-            active={buttonActive === item.id}
+            onClick={handleClickMore}
           />
         )
       }) }
