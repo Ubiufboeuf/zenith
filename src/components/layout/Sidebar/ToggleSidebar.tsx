@@ -9,6 +9,7 @@ export function ToggleSidebar ({ class: className }: { class?: string }) {
   function toggleSidebar () {
     const newState = !isSidebarOpen
     setIsSidebarOpen(newState)
+    cookieStore.set('_ziso', newState ? '1' : '0')
   }
   
   return (

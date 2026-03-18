@@ -4,8 +4,6 @@ import Sidebar from '../components/layout/Sidebar/Sidebar.astro'
 import { SidebarStateManager } from '@/components/layout/Sidebar/SidebarStateManager'
 import '../styles/global.css'
 import { TabBar } from '@/components/layout/TabBar/TabBar'
-import { barItems } from '@/lib/barItems'
-import { useTabBarStore } from '@/stores/useTabBarStore'
 import { VaulDrawer } from '@/components/layout/Drawer/VaulDrawer'
 
 interface Props {
@@ -16,9 +14,6 @@ interface Props {
 const { props, cookies, url, request } = Astro
 const { title, tabBar } = props
 const { pathname } = url
-
-const activeItem = barItems.find((i) => i.type === 'link' && i.href === pathname)?.id
-useTabBarStore.setState({ activeItem })
 
 // #region - detectDeviceType
 const deviceCode = cookies.get('monado-device-type')?.value
@@ -33,6 +28,10 @@ else if (tabletRegex.test(ua)) detectedType = 'tablet'
 
 const devices: Record<string, string> = { M: 'mobile', T: 'tablet', D: 'desktop' }
 const deviceType = devices[deviceCode!] || detectedType
+// #endregion
+
+// #region - initialValues
+const isSidebarOpen = Astro.cookies.get('_ziso')?.value === '1'
 // #endregion
 ---
 
@@ -93,10 +92,29 @@ const deviceType = devices[deviceCode!] || detectedType
 
 			detectDeviceType()
 		</script>
+		<script>
+			// #region - initialValues
+
+			import { useSidebarStore } from '@/stores/useSidebarStore'
+
+			function getCookie (cookie: string) {
+				return document.cookie
+          .split('; ')
+					.find((c) => c.startsWith(`${cookie}=`))
+					?.split('=')
+					?.[1]
+			}
+			
+
+			const isSidebarOpen = getCookie('_ziso') === '1'
+			useSidebarStore.setState({ isSidebarOpen })
+			
+			// #endregion
+		</script>
 	</head>
 	<body class='h-full w-full'>
 		<div class='h-full w-full sm:grid grid-cols-[auto_1fr]'>
-			<SidebarStateManager />
+			<SidebarStateManager initialState={isSidebarOpen} />
 			<Sidebar />
 			<SidebarMini />
 			<main class='w-full h-full'>
