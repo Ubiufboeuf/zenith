@@ -2,12 +2,12 @@ import { useEffect } from 'preact/hooks'
 import { TabBarButton } from './TabBarButton'
 import { TabBarLink } from './TabBarLink'
 import { barItems } from '@/lib/barItems'
-import { useSidebarStore } from '@/stores/useSidebarStore'
 import { useTabBarStore } from '@/stores/useTabBarStore'
+import { useDrawerStore } from '@/stores/useDrawerStore'
 
 export function TabBar ({ pathname }: { pathname: string }) {
-  const isSidebarOpen = useSidebarStore((state) => state.isSidebarOpen)
-  const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen)
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen)
+  const setIsDrawerOpen = useDrawerStore((state) => state.setIsDrawerOpen)
   
   const activeItem = useTabBarStore((state) => state.activeItem)
   const setActiveItem = useTabBarStore((state) => state.setActiveItem)
@@ -29,11 +29,8 @@ export function TabBar ({ pathname }: { pathname: string }) {
   }
 
   function handleClickMore () {
-    setIsSidebarOpen(true)
+    setIsDrawerOpen(true)
     setIsButtonActive(true)
-
-    const checkbox = document.querySelector('#checkbox-sidebar-state')
-    if (checkbox instanceof HTMLInputElement) checkbox.checked = true
   }
 
   function handleClick (event: MouseEvent) {
@@ -59,8 +56,8 @@ export function TabBar ({ pathname }: { pathname: string }) {
   }, [pathname])
 
   useEffect(() => {
-    setIsButtonActive(Boolean(isSidebarOpen))
-  }, [isSidebarOpen])
+    setIsButtonActive(Boolean(isDrawerOpen))
+  }, [isDrawerOpen])
   
   return (
     <nav class='not-tabbar:hidden not-mobile:hidden fixed bottom-0 h-18 w-full flex border-t border-border desktop:hidden items-center justify-evenly sm:px-4 overflow-x-auto [scrollbar-width:none] bg-base-dark'>

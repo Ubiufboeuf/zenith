@@ -6,6 +6,7 @@ import '../styles/global.css'
 import { TabBar } from '@/components/layout/TabBar/TabBar'
 import { barItems } from '@/lib/barItems'
 import { useTabBarStore } from '@/stores/useTabBarStore'
+import { VaulDrawer } from '@/components/layout/Drawer/VaulDrawer'
 
 interface Props {
   title?: string
@@ -103,5 +104,6 @@ const deviceType = devices[deviceCode!] || detectedType
 			</main>
 		</div>
 		<TabBar pathname={pathname} client:load />
+		<VaulDrawer client:load />
 	</body>
 </html>
