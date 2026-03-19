@@ -111,7 +111,7 @@ const isSidebarOpen = Astro.cookies.get('_ziso')?.value === '1'
 			// #endregion
 		</script>
 	</head>
-	<body class='h-fit w-full min-h-full'>
+	<body class='h-full w-full'>
 		<div class='h-full w-full sm:grid grid-cols-[auto_1fr]'>
 			<SidebarStateManager initialState={isSidebarOpen} />
 			<Sidebar />
