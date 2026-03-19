@@ -17,9 +17,10 @@
 
 @font-face {
   font-family: Inter;
+  font-display: swap;
   src:
     local('Inter'),
-    url('/assets/Inter.woff2')
+    url('/assets/Inter.woff2') format('woff2')
 }
 
 @custom-variant shr {
