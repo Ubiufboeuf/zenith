@@ -60,7 +60,7 @@ export function TabBar ({ pathname }: { pathname: string }) {
   }, [isDrawerOpen])
   
   return (
-    <nav class='not-tabbar:hidden not-mobile:hidden fixed bottom-0 h-18 w-full flex border-t border-border desktop:hidden items-center justify-evenly sm:px-4 overflow-x-auto [scrollbar-width:none] bg-base-dark'>
+    <nav class='not-tabbar:hidden not-mobile:hidden fixed bottom-0 h-18 w-full flex border-t border-border desktop:hidden items-center justify-evenly sm:px-4 overflow-x-auto [scrollbar-width:none] bg-dark'>
       { barItems.map((item) => {
         const { id, type, title, icon: ItemIcon } = item
 
