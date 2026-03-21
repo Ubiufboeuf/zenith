@@ -10,6 +10,7 @@
     "security",
     "deps",
     "drawer",
-    "ts"
+    "ts",
+    "search"
   ]
 }
