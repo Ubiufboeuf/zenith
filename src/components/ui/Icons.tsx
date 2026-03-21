@@ -164,3 +164,32 @@ export const IconArrow = () => (
     <path d='M13 6l6 6' />
   </Svg>
 )
+
+export const IconList = () => (
+  <Svg strokeLinecap='round'>
+    <path d='M3 5h.01' />
+    <path d='M3 12h.01' />
+    <path d='M3 19h.01' />
+    <path d='M8 5h13' />
+    <path d='M8 12h13' />
+    <path d='M8 19h13' />
+  </Svg>
+)
+
+export const IconGrid = () => (
+  <Svg>
+    <path d='M4 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4' />
+    <path d='M14 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4' />
+    <path d='M4 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4' />
+    <path d='M14 15a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -4' />
+  </Svg>
+)
+
+export const IconChart2 = () => (
+  <Svg>
+    <path d='M3 3v16a2 2 0 0 0 2 2h16' />
+    <path d='M18 17V9' />
+    <path d='M13 17V5' />
+    <path d='M8 17v-3' />
+  </Svg>
+)
