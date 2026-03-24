@@ -1,63 +1,16 @@
 import { capitalize } from '@/lib/capitalize'
 import { Icon } from '../ui/Icon'
 import { IconBox } from '../ui/Icons'
+import { useProductsStore } from '@/stores/useProductsStore'
 
 const sortOptions = [
   { id: 'name', label: 'Nombre', selected: true },
   { id: 'price', label: 'Precio', selected: false },
   { id: 'stock', label: 'Stock', selected: false }
 ]
-
-const results = [
-  {
-    id: 'prod-1',
-    code: '123abc',
-    name: 'Aceite Girasol 1L Pack Ahorro 2x1',
-    category: 'Cocina',
-    priceId: 'price-1',
-    prices: {
-      'price-1': {
-        currency: '$',
-        currency_name: 'Peso',
-        value: 125
-      },
-      'price-2': {
-        currency: 'U$S',
-        currency_name: 'Dólar',
-        value: 3.1
-      }
-    },
-    stock: {
-      current: 25,
-      min: 20
-    }
-  },
-  {
-    id: 'prod-2',
-    code: '123abc',
-    name: 'café molido 500g - nescafé (nestlé café)',
-    category: 'Cocina',
-    priceId: 'price-2',
-    prices: {
-      'price-1': {
-        currency: '$',
-        currency_name: 'Peso',
-        value: 125
-      },
-      'price-2': {
-        currency: 'U$S',
-        currency_name: 'Dólar',
-        value: 3.1
-      }
-    },
-    stock: {
-      current: 19,
-      min: 20
-    }
-  }
-]
-
 export function ResultsSection () {
+  const results = useProductsStore((state) => state.results)
+
   return (
     <section class='flex flex-col gap-3'>
       <span class='text-sm text-neutral-500'>18 produtos encontrados</span>
@@ -74,7 +27,8 @@ export function ResultsSection () {
         )) }
       </div>
       <div class='grid gap-2'>
-        { results.map(({ id, name, code, category, prices, priceId, stock }) => {
+        { results?.map((fuseResult) => {
+          const { id, name, code, category, prices, priceId, stock } = fuseResult.item
           const price = prices[priceId as keyof typeof prices]
           const enoughStock = stock.current >= stock.min
 
