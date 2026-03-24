@@ -27,8 +27,7 @@ export function ResultsSection () {
         )) }
       </div>
       <div class='grid gap-2'>
-        { results?.map((fuseResult) => {
-          const { id, name, code, category, prices, priceId, stock } = fuseResult.item
+        { results?.map(({ id, name, code, category, prices, priceId, stock }) => {
           const price = prices[priceId as keyof typeof prices]
           const enoughStock = stock.current >= stock.min
 

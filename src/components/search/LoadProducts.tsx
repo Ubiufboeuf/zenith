@@ -3,7 +3,6 @@ import { getProducts } from '@/services/productsServices'
 import { useProductsStore } from '@/stores/useProductsStore'
 
 export function LoadProducts () {
-  const products = useProductsStore((state) => state.products)
   const setProducts = useProductsStore((state) => state.setProducts)
   
   async function loadProducts () {
@@ -16,8 +15,4 @@ export function LoadProducts () {
   useEffect(() => {
     loadProducts()
   }, [])
-
-  useEffect(() => {
-    console.log('products:', products)
-  }, [products])
 }
