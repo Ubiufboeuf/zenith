@@ -1,5 +1,4 @@
 import type { Product } from '@/db/dbTypes'
-import type { FuseResult } from 'fuse.js'
 import { create } from 'zustand'
 
 type Result = Product
@@ -8,8 +7,14 @@ interface ProductsStore {
   products: Product[] | undefined
   setProducts: (products: Product[] | undefined) => void
 
-  results: FuseResult<Result>[] | undefined
-  setResults: (results: FuseResult<Result>[] | undefined) => void
+  results: Result[] | undefined
+  setResults: (results: Result[] | undefined) => void
+
+  search: string | undefined
+  setSearch: (query: string | undefined) => void
+
+  thereAreResults: boolean | undefined
+  setThereAreResults: (thereAreResults: boolean | undefined) => void
 }
 
 export const useProductsStore = create<ProductsStore>((set) => ({
@@ -17,5 +22,11 @@ export const useProductsStore = create<ProductsStore>((set) => ({
   setProducts: (products) => set({ products }),
 
   results: undefined,
-  setResults: (results) => set({ results })
+  setResults: (results) => set({ results }),
+
+  search: undefined,
+  setSearch: (search) => set({ search }),
+
+  thereAreResults: undefined,
+  setThereAreResults: (thereAreResults) => set({ thereAreResults })
 }))
