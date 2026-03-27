@@ -44,8 +44,6 @@ export function SearchBar () {
     const results = search(query, searchOptions)
     console.log('(initial search) results:', results)
 
-    if (!results?.length) return
-
     setResults(results)
   }
   
@@ -71,7 +69,6 @@ export function SearchBar () {
     if (!results?.length) {
       console.log('No se encontraron resultados para la query:', { query })
       setThereAreResults(false)
-      return
     }
 
     setThereAreResults(true)
