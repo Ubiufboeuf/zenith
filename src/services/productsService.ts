@@ -1,4 +1,4 @@
-import type { Product } from '@/db/dbTypes'
+import type { Product } from '@/types/dbTypes'
 
 export async function getProducts (): Promise<Product[] | undefined> {
   let res
