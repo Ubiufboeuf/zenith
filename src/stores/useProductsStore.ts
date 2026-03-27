@@ -15,6 +15,9 @@ interface ProductsStore {
 
   thereAreResults: boolean | undefined
   setThereAreResults: (thereAreResults: boolean | undefined) => void
+
+  lowStockVisible: boolean
+  setLowStockVisible: (lowStockVisible: boolean) => void
 }
 
 export const useProductsStore = create<ProductsStore>((set) => ({
@@ -28,5 +31,8 @@ export const useProductsStore = create<ProductsStore>((set) => ({
   setSearch: (search) => set({ search }),
 
   thereAreResults: undefined,
-  setThereAreResults: (thereAreResults) => set({ thereAreResults })
+  setThereAreResults: (thereAreResults) => set({ thereAreResults }),
+
+  lowStockVisible: false,
+  setLowStockVisible: (lowStockVisible) => set({ lowStockVisible })
 }))

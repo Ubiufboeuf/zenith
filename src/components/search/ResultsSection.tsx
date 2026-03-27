@@ -1,6 +1,7 @@
 import { useProductsStore } from '@/stores/useProductsStore'
 import { Result } from './Results/Result'
 import { useMediaCheck } from '@/hooks/useMediaCheck'
+import { useEffect, useState } from 'preact/hooks'
 
 const sortOptions = [
   { id: 'name', label: 'Nombre', selected: true },
@@ -8,11 +9,27 @@ const sortOptions = [
   { id: 'stock', label: 'Stock', selected: false }
 ]
 export function ResultsSection () {
-  const results = useProductsStore((state) => state.results)
+  const allResults = useProductsStore((state) => state.results)
   const query = useProductsStore((state) => state.search)
   const thereAreResults = useProductsStore((state) => state.thereAreResults)
+  const lowStockVisible = useProductsStore((state) => state.lowStockVisible)
   
   const [xs] = useMediaCheck('(width >= 640px)')
+
+  const [results, setResults] = useState(allResults)
+
+  useEffect(() => {
+    if (!allResults) return
+    setResults(allResults)
+  }, [allResults])
+
+  useEffect(() => {
+    const visibleResults = (lowStockVisible)
+      ? allResults?.filter(({ stock }) => stock.current < stock.min)
+      : allResults
+
+    setResults(visibleResults)
+  }, [lowStockVisible, query])
 
   return (
     <section class='flex flex-col gap-3'>
