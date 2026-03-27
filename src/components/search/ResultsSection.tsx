@@ -16,7 +16,7 @@ export function ResultsSection () {
 
   return (
     <section class='flex flex-col gap-3'>
-      <span class='text-sm text-neutral-500'>18 produtos encontrados</span>
+      <span class='text-sm text-neutral-500'>{results?.length ?? 0} produtos encontrados</span>
       <div class='flex items-center gap-1'>
         <span class='text-sm text-neutral-500'>Ordenar por:</span>
         { sortOptions.map(({ id, label, selected }) => (
