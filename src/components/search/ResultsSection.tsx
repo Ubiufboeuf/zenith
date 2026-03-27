@@ -1,5 +1,6 @@
 import { useProductsStore } from '@/stores/useProductsStore'
-import { Result } from './Result'
+import { Result } from './Results/Result'
+import { useMediaCheck } from '@/hooks/useMediaCheck'
 
 const sortOptions = [
   { id: 'name', label: 'Nombre', selected: true },
@@ -10,6 +11,8 @@ export function ResultsSection () {
   const results = useProductsStore((state) => state.results)
   const query = useProductsStore((state) => state.search)
   const thereAreResults = useProductsStore((state) => state.thereAreResults)
+  
+  const [xs] = useMediaCheck('(width >= 412px)')
 
   return (
     <section class='flex flex-col gap-3'>
@@ -30,7 +33,7 @@ export function ResultsSection () {
         { (thereAreResults === false) ? (
           <h1>No se encontraron resulados para la búsqueda{query ? `: "${query}"` : ''}</h1>
         ) : (
-          results?.map((result) => <Result key={`search-result:${result.id}`} {...result} /> )
+          results?.map((result) => <Result key={`search-result:${result.id}`} result={result} xs={xs} /> )
         ) }
       </div>
     </section>
