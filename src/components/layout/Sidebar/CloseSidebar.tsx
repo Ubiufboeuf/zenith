@@ -2,16 +2,17 @@ import { useSidebarStore } from '@/stores/useSidebarStore'
 
 export function CloseSidebar () {
   const setIsSidebarOpen = useSidebarStore((state) => state.setIsSidebarOpen)
-  
+
   function closeSidebar () {
     setIsSidebarOpen(false)
+    cookieStore.set('_ziso', '0')
   }
 
   return (
     <label
       htmlFor='checkbox-sidebar-state'
       role='button'
-      class='not-sidebar-open:hidden ml:hidden fixed z-1 top-0 left-0 h-screen w-screen cursor-pointer not-sm:[transition:all_250ms_ease_allow-discrete] bg-black/80 not-sm:not-sidebar-open:bg-transparent'
+      class='not-sidebar-open:hidden mobile:not-xs:hidden ml:hidden fixed z-1 top-0 left-0 h-screen w-screen cursor-pointer not-sm:[transition:all_250ms_ease_allow-discrete] bg-black/80 not-sm:not-sidebar-open:bg-transparent'
       onClick={closeSidebar}
     />
   )
