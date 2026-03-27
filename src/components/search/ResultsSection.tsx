@@ -12,7 +12,7 @@ export function ResultsSection () {
   const query = useProductsStore((state) => state.search)
   const thereAreResults = useProductsStore((state) => state.thereAreResults)
   
-  const [xs] = useMediaCheck('(width >= 412px)')
+  const [xs] = useMediaCheck('(width >= 640px)')
 
   return (
     <section class='flex flex-col gap-3'>
