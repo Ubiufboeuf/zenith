@@ -80,7 +80,7 @@ export function SearchBar () {
   }, [products])
   
   return (
-    <label class='mobile:not-xs:col-span-full h-10 w-full flex items-center rounded-md line-clamp-1 border border-border'>
+    <label class='mobile:not-xs:col-span-full h-10 w-full flex items-center rounded-md line-clamp-1 border transition-colors border-border has-focus-within:border-primary'>
       <div class='h-full aspect-square flex items-center justify-center'>
         <Icon class='size-4 stroke-2 text-neutral-500'>
           <IconSearch />
