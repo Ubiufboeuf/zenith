@@ -5,6 +5,9 @@ import { IconChart2 } from '../ui/Icons'
 export function StockStatus () {
   const lowStockVisible = useProductsStore((state) => state.lowStockVisible)
   const setLowStockVisible = useProductsStore((state) => state.setLowStockVisible)
+  const products = useProductsStore((state) => state.products)
+
+  const lowStockProducts = products?.filter(({ stock }) => stock.current < stock.min)
   
   function toggleLowStockVisibility () {
     setLowStockVisible(!lowStockVisible)
@@ -19,6 +22,7 @@ export function StockStatus () {
         <IconChart2 />
       </Icon>
       <strong>Stock bajo</strong>
+      { lowStockProducts && <span class='absolute right-0 top-0 translate-x-1/2 -translate-y-1/4 min-h-5 min-w-5 h-fit w-fit flex items-center justify-center p-0.5 rounded-full text-xs bg-destructive text-light'>{lowStockProducts.length}</span> }
     </button>
   )
 }
