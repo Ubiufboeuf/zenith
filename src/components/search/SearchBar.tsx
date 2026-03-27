@@ -4,7 +4,7 @@ import { IconSearch } from '../ui/Icons'
 import { search } from '@/lib/search'
 import { useProductsStore } from '@/stores/useProductsStore'
 import type { IFuseOptions } from 'fuse.js'
-import type { Product } from '@/db/dbTypes'
+import type { Product } from '@/types/dbTypes'
 import { useEffect, useRef, useState } from 'preact/hooks'
 
 const searchOptions: IFuseOptions<Product> = {

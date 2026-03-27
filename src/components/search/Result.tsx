@@ -1,4 +1,4 @@
-import type { Product } from '@/db/dbTypes'
+import type { Product } from '@/types/dbTypes'
 import { capitalize } from '@/lib/capitalize'
 import { Icon } from '../ui/Icon'
 import { IconBox } from '../ui/Icons'

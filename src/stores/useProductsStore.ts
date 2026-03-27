@@ -1,4 +1,4 @@
-import type { Product } from '@/db/dbTypes'
+import type { Product } from '@/types/dbTypes'
 import { create } from 'zustand'
 
 type Result = Product

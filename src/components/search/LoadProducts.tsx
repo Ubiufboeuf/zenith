@@ -1,5 +1,5 @@
 import { useEffect } from 'preact/hooks'
-import { getProducts } from '@/services/productsServices'
+import { getProducts } from '@/services/productsService'
 import { useProductsStore } from '@/stores/useProductsStore'
 
 export function LoadProducts () {
