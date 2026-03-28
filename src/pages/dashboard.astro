@@ -5,7 +5,7 @@ import { capitalize } from '@/lib/capitalize'
 import { Clock } from '@/components/dashboard/Clock'
 import { TerminalInfo } from '@/components/dashboard/TerminalInfo'
 import { DashboardLink } from '@/components/dashboard/DashboardLink'
-import { IconBox, IconCart, IconTicket } from '@/components/ui/Icons'
+import { IconCart, IconSearch, IconTicket } from '@/components/ui/Icons'
 import { DashboardMetrics } from '@/components/dashboard/DashboardMetrics'
 
 const timestamp = new Date().getTime()
@@ -26,7 +26,7 @@ const timestamp = new Date().getTime()
 		<section class='h-40 sm:h-32 w-full grid not-sm:grid-rows-3 sm:grid-cols-3 gap-2 sm:gap-4'>
 			<DashboardLink to='/new_sale' icon={IconCart} class='h-full min-h-fit w-full' main>Nueva Venta</DashboardLink>
 			<DashboardLink to='/history' icon={IconTicket} class='h-full min-h-fit w-full'>Ver Historial</DashboardLink>
-			<DashboardLink to='/search' icon={IconBox} class='h-full min-h-fit w-full'>Buscar Producto</DashboardLink>
+			<DashboardLink to='/search' icon={() => IconSearch({ active: false })} class='h-full min-h-fit w-full'>Buscar Producto</DashboardLink>
 		</section>	
 		<DashboardMetrics client:load />
 	</section>
