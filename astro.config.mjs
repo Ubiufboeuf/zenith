@@ -39,6 +39,10 @@ export default defineConfig({
     } : {}
   },
 
+  redirects: {
+    '/': '/dashboard'
+  },
+
   output: 'server',
   adapter: adapters[adapterKey]
 })

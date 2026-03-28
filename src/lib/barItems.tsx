@@ -25,7 +25,7 @@ export type TabBarItem = TabBarLink | TabBarButton
 export type BarButtonId = TabBarButton['id']
 
 export const barItems: TabBarItem[] = [
-  { id: 'home', type: 'link', title: 'Inicio', href: '/', icon: ({ active }: { active?: boolean }) => <IconCollection active={active} /> },
+  { id: 'dashboard', type: 'link', title: 'Panel', href: '/dashboard', icon: ({ active }: { active?: boolean }) => <IconCollection active={active} /> },
   { id: 'new_sale', type: 'link', title: 'Venta', href: '/new_sale', icon: ({ active }: { active?: boolean }) => <IconCart active={active} /> },
   { id: 'search', type: 'link', title: 'Buscar', href: '/search', icon: ({ active }: { active?: boolean }) => <IconSearch active={active} /> },
   { id: 'history', type: 'link', title: 'Historial', href: '/history', icon: ({ active }: { active?: boolean }) => <IconHistory active={active} /> },

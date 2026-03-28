@@ -9,7 +9,7 @@ interface SidebarLink {
 
 export const sidebarLinks: Record<string, SidebarLink[]> = {
   principal: [
-    { title: 'Inicio', href: '/', icon: () => <IconCollection /> },
+    { title: 'Panel', href: '/dashboard', icon: () => <IconCollection /> },
     { title: 'Nueva Venta', href: '/new_sale', icon: () => <IconCart /> },
     { title: 'Buscar Productos', href: '/search', icon: () => <IconSearch /> },
     { title: 'Historial de Ventas', href: '/history', icon: () => <IconHistory /> },
