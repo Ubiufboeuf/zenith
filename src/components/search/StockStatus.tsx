@@ -15,7 +15,7 @@ export function StockStatus () {
   
   return (
     <button
-      class={`${lowStockVisible ? 'low-stock' : ''} relative h-10 w-fit flex items-center justify-center gap-2 text-sm px-3 rounded-lg cursor-pointer border transition-colors border-border text-light [.low-stock]:bg-primary [.low-stock]:text-accent shr:bg-border`}
+      class={`${lowStockVisible ? 'low-stock' : ''} relative h-10 w-fit flex items-center justify-center gap-2 text-sm px-3 rounded-lg cursor-pointer border transition-colors border-border text-light [.low-stock]:bg-primary [.low-stock]:border-primary [.low-stock]:text-accent shr:bg-border [.low-stock]:shr:bg-primary/80`}
       onClick={toggleLowStockVisibility}
     >
       <Icon class='size-5 stroke-2'>
