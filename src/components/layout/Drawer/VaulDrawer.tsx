@@ -3,6 +3,9 @@ import { Drawer } from 'vaul'
 import { DrawerUserCard } from './DrawerUserCard'
 import { DrawerTitle } from './DrawerTitle'
 import { useUIStore } from '@/stores/useUIStore'
+import { DrawerItems } from './DrawerItems'
+
+const snapPoints = ['400px', 1]
 
 export function VaulDrawer () {
   const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen)
@@ -10,19 +13,17 @@ export function VaulDrawer () {
   const isMobile = useUIStore((state) => state.deviceType === 'mobile')
   
   return isMobile && (
-    <Drawer.Root open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+    <Drawer.Root snapPoints={snapPoints} open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
       <Drawer.Portal>
-        <Drawer.Overlay className='fixed inset-0 bg-black/40' />
+        <Drawer.Overlay className='fixed inset-0 bg-black/40 backdrop-blur-xs' />
         <Drawer.Content className='h-fit fixed bottom-0 left-0 right-0 outline-none'>
           <Drawer.Title><DrawerTitle /></Drawer.Title>
-          <div className='h-fit w-full p-4 bg-card rounded-t-xl'>
+          <div className='flex flex-col gap-2 h-fit w-full bg-dark rounded-t-xl'>
             <DrawerUserCard />
-            <div class='w-full h-4 flex items-center justify-center px-1'>
+            <div class='w-full h-2 flex items-center justify-center px-4'>
               <div class='w-full h-px bg-border' />
             </div>
-            <section>
-              aaaa
-            </section>
+            <DrawerItems />
           </div>
         </Drawer.Content>
       </Drawer.Portal>

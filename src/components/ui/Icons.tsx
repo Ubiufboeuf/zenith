@@ -193,3 +193,73 @@ export const IconChart2 = () => (
     <path d='M8 17v-3' />
   </Svg>
 )
+
+export const IconHelp = ({ active }: { active?: boolean }) => (
+  <Svg stroke='currentColor'>
+    { active ? <>
+      <path d='M17 3.34a10 10 0 1 1 -10 17.32a10 10 0 0 1 10 -17.32m-5 12.66a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1m1.173 -9.856a3.6 3.6 0 0 0 -3.97 1.252a1 1 0 0 0 1.512 1.304l.082 -.096a1.6 1.6 0 1 1 1.846 2.462a2.49 2.49 0 0 0 -1.641 2.49a1 1 0 0 0 1.996 .004v-.117a.5 .5 0 0 1 .259 -.466l.075 -.034a3.61 3.61 0 0 0 2.338 -3.47a3.6 3.6 0 0 0 -2.497 -3.329' />
+    </> : <>
+      <path d='M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0' />
+      <path d='M12 17l0 .01' strokeLinecap='round' />
+      <path d='M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4' />
+    </> }
+  </Svg>
+)
+
+export const IconNews = () => (
+  <Svg stroke='currentColor'>
+    <path d='M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11' />
+    <path d='M8 8l4 0' />
+    <path d='M8 12l4 0' />
+    <path d='M8 16l4 0' />
+  </Svg>
+)
+
+export const IconTruck = () => (
+  <Svg>
+    <path d='M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' />
+    <path d='M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' />
+    <path d='M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5' />
+  </Svg>
+)
+
+export const IconCamera = () => (
+  <Svg>
+    <path d='M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2' />
+    <path d='M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0' />
+  </Svg>
+)
+
+export const IconCalculator = () => (
+  <Svg strokeLinecap='round'>
+    <path d='M4 5a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -14' />
+    <path d='M8 8a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1l0 -1' />
+    <path d='M8 14l0 .01' />
+    <path d='M12 14l0 .01' />
+    <path d='M16 14l0 .01' />
+    <path d='M8 17l0 .01' />
+    <path d='M12 17l0 .01' />
+    <path d='M16 17l0 .01' />
+  </Svg>
+)
+
+export const IconTheme = ({ mode }: { mode: 'auto' | 'dark' | 'light' }) => (
+  <Svg>
+    { mode === 'auto' && <path d='M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008' /> }
+  </Svg>
+)
+
+export const IconRefresh = () => (
+  <Svg>
+    <path d='M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4' />
+    <path d='M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4' />
+  </Svg>
+)
+
+export const IconCash = () => (
+  <Svg>
+    <path d='M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3' />
+    <path d='M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8' />
+    <path d='M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0' />
+  </Svg>
+)
