@@ -13,7 +13,7 @@ export function VaulDrawer () {
   const isMobile = useUIStore((state) => state.deviceType === 'mobile')
   
   return isMobile && (
-    <Drawer.Root snapPoints={snapPoints} open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+    <Drawer.Root snapPoints={snapPoints} fadeFromIndex={0} open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
       <Drawer.Portal>
         <Drawer.Overlay className='fixed inset-0 bg-black/40 backdrop-blur-xs' />
         <Drawer.Content className='h-fit fixed bottom-0 left-0 right-0 outline-none'>
