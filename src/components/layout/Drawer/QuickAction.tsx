@@ -9,7 +9,7 @@ export function QuickAction ({ title, color, icon: LinkIcon, onClick }: DrawerQu
       onClick={onClick}
     >
       <div class='h-fit w-fit bg-card rounded-xl'>
-        <div class='size-12 flex items-center justify-center rounded-xl bg-(--color)/8 group-shr:bg-(--color)/15'>
+        <div class='size-12 flex items-center justify-center rounded-xl bg-(--color)/8 group-shr:bg-(--color)/25'>
           <Icon class='size-6 stroke-2'>
             <LinkIcon />
           </Icon>
