@@ -12,6 +12,7 @@
     "drawer",
     "ts",
     "search",
-    "hook"
+    "hook",
+    "scanner"
   ]
 }
