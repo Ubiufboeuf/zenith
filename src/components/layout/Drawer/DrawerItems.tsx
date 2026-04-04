@@ -1,14 +1,12 @@
 import { DrawerGridLink } from '@/components/layout/Drawer/DrawerGridLink'
 import { DrawerListLink } from '@/components/layout/Drawer/DrawerListLink'
-import { drawerGridLinks, drawerListLinks, quickActions } from '@/lib/drawerItems'
-import { QuickAction } from './QuickAction'
+import { drawerGridLinks, drawerListLinks } from '@/lib/drawerItems'
+import { QuickActions } from './QuickActions'
 
 export function DrawerItems () {
   return (
     <section class='flex flex-col gap-2 pb-2'>
-      <div class='grid grid-cols-4 gap-2 px-4'>
-        { quickActions.map((link) => <QuickAction key={link.id} {...link} /> )}
-      </div>
+      <QuickActions />
       <div class='grid grid-cols-2 gap-2 px-4'>
         { drawerGridLinks.map((link) => <DrawerGridLink key={link.id} {...link} /> )}
       </div>
