@@ -4,12 +4,14 @@ import { DrawerUserCard } from './DrawerUserCard'
 import { DrawerTitle } from './DrawerTitle'
 import { useUIStore } from '@/stores/useUIStore'
 import { DrawerItems } from './DrawerItems'
+import { ScannerDrawer } from './ScannerDrawer'
 
 const snapPoints = ['400px', 1]
 
 export function VaulDrawer () {
   const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen)
   const setIsDrawerOpen = useDrawerStore((state) => state.setIsDrawerOpen)
+  const isScannerVisible = useDrawerStore((state) => state.isScannerVisible)
   const isMobile = useUIStore((state) => state.deviceType === 'mobile')
   
   return isMobile && (
@@ -24,6 +26,7 @@ export function VaulDrawer () {
               <div class='w-full h-px bg-border' />
             </div>
             <DrawerItems />
+            { isScannerVisible && <ScannerDrawer /> }
           </div>
         </Drawer.Content>
       </Drawer.Portal>

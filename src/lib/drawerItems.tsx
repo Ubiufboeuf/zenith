@@ -28,7 +28,7 @@ export interface DrawerListLink {
 }
 
 export const quickActions: QuickAction[] = [
-  { id: 'scan-items', title: 'Escanear', color: '#11ad32', icon: () => <IconCamera /> },
+  { id: 'scan', title: 'Escanear', color: '#11ad32', icon: () => <IconCamera /> },
   { id: 'convert', title: 'Convertir', color: '#0097a2', icon: () => <IconCalculator /> },
   { id: 'change-theme', title: 'Tema', color: '#e67e40', icon: () => <IconTheme mode='auto' /> },
   { id: 'sync', title: 'Sincronizar', color: '#e0e0e0', icon: () => <IconRefresh /> }
