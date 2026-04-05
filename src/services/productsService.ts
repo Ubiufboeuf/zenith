@@ -31,6 +31,15 @@ export async function loadProducts () {
   return loadedProducts
 }
 
+export async function getProductById (id: string): Promise<Product | undefined> {
+  const products = useProductsStore.getState().products ?? await loadProducts()
+
+  if (!products || !products.length) return
+
+  const product = products.find((p) => p.id === id)
+  return product
+}
+
 export async function getProductByScanner (result: string): Promise<Product | undefined> {
   const products = useProductsStore.getState().products ?? await loadProducts()
 

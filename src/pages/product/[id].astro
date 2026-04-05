@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { ProductInfo } from '@/components/product/ProductInfo'
+
+const { id } = Astro.params
+if (!id) return Astro.redirect('/dashboard')
+---
+
+<Layout tabBar>
+  <ProductInfo id={id} client:load />
+</Layout>
