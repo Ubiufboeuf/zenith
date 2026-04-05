@@ -2,13 +2,13 @@ import { Icon } from '../../ui/Icon'
 import { IconBox } from '../../ui/Icons'
 import type { Product } from '@/types/dbTypes'
 
-export function DesktopResult ({ name, code, category, prices, priceId, stock }: Product) {
+export function DesktopResult ({ id, name, code, category, prices, priceId, stock }: Product) {
   const price = prices[priceId as keyof typeof prices]
   const enoughStock = stock.current >= stock.min
   const minStockMsg = (`${stock.current}`.length + `${stock.min}`.length) >= 8 ? `/ ${stock.min}` : `min: ${stock.min}`
 
   return (
-    <article class={`${enoughStock ? 's' : 'ns'} group w-full h-fit grid grid-cols-[auto_1fr_auto_62px] grid-rows-[1fr_auto] items-center gap-x-3 gap-y-2 p-4 grow-0 overflow-hidden rounded-xl border [.ns]:border-l-2 transition-colors border-border [.ns]:border-l-destructive text-light bg-card shr:border-primary/40`}>
+    <a href={`/product/${id}`} class={`${enoughStock ? 's' : 'ns'} group w-full h-fit grid grid-cols-[auto_1fr_auto_62px] grid-rows-[1fr_auto] items-center gap-x-3 gap-y-2 p-4 grow-0 overflow-hidden rounded-xl border [.ns]:border-l-2 transition-colors border-border [.ns]:border-l-destructive text-light bg-card shr:border-primary/40`}>
       <div class='row-span-full size-10 flex items-center justify-center rounded-lg bg-border group-[.ns]:bg-destructive/20'>
         <Icon class='size-5 stroke-2 text-neutral-500 group-[.ns]:text-destructive'>
           <IconBox />
@@ -28,6 +28,6 @@ export function DesktopResult ({ name, code, category, prices, priceId, stock }:
         <span class='font-semibold group-[.ns]:text-destructive'>{stock.current}</span>
         <span class='uppercase text-xs text-neutral-400'>{ enoughStock ? 'En stock' : minStockMsg }</span>
       </div>
-    </article>
+    </a>
   )
 }
