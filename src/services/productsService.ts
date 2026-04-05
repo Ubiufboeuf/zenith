@@ -1,3 +1,4 @@
+import { useProductsStore } from '@/stores/useProductsStore'
 import type { Product } from '@/types/dbTypes'
 
 export async function getProducts (): Promise<Product[] | undefined> {
@@ -20,4 +21,12 @@ export async function getProducts (): Promise<Product[] | undefined> {
   if (!json) return
 
   return json
+}
+
+export async function loadProducts () {
+  const loadedProducts = await getProducts()
+  if (!loadedProducts) return
+
+  useProductsStore.setState({ products: loadedProducts })
+  return loadedProducts
 }
