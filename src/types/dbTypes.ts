@@ -1,6 +1,8 @@
 export interface Product {
   id:       string
   code:     string
+  barcode:  string
+  qrcode:   string
   name:     string
   category: string
   priceId:  PriceID

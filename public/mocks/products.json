@@ -14,6 +14,8 @@
   {
     "id": "prod-2",
     "code": "CAF-NES-500",
+    "barcode": "7613037062694",
+    "qrcode": "7613037062694",
     "name": "Café Molido 500g - Nescafé Tradición",
     "category": "Cocina",
     "priceId": "price-1",

@@ -1,30 +1,62 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { getProductByScanner } from '@/services/productsService'
 import { useEffect, useRef, useState } from 'preact/hooks'
-import { readBarcodes } from 'zxing-wasm/reader'
 
 const FPS = 5
 const TIMEOUT = 1000 / FPS
-const WIDTH = 480
-const HEIGHT = 270
+const WIDTH = 640
+const HEIGHT = 360
 
 export function Scanner () {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
   const [result, setResult] = useState('')
+  
+  const scanningActive = useRef(true)
+  const startScanRef = useRef<() => void>()
 
-  function onResult (result: string) {
-    setResult(result)
+  async function navigateToProduct () {
+    if (!result) return
+
+    const product = await getProductByScanner(result)
+    if (!product) return
+
+    location.href = origin + `/product/${product.id}`
+  }
+
+  function resetScanner () {
+    setResult('')
+    scanningActive.current = true
+    if (startScanRef.current) {
+      startScanRef.current()
+    }
+  }
+
+  function onResult (text: string) {
+    setResult(text)
+    scanningActive.current = false
   }
 
   useEffect(() => {
-    let isScanning = true
+    let isUnmounted = false
     let timeoutId: number
+    let detector: any
+    
+    // 2. Verificamos soporte e inicializamos el detector
+    if ('BarcodeDetector' in window) {
+      detector = new (window.BarcodeDetector as any)({
+        // Puedes agregar más formatos según lo que necesites
+        formats: ['qr_code', 'ean_13', 'ean_8', 'code_128', 'upc_a', 'upc_e']
+      })
+    } else {
+      console.error('El navegador no soporta BarcodeDetector API nativa')
+      // Aquí podrías mostrar un mensaje en la UI avisando al usuario
+    }
 
     async function setupCamera () {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: { 
             facingMode: 'environment',
-            // Bajamos la resolución ideal para procesar menos píxeles
             width: { ideal: WIDTH }, 
             height: { ideal: HEIGHT }
           }
@@ -36,62 +68,50 @@ export function Scanner () {
     }
 
     async function scanFrame () {
-      if (!isScanning || !videoRef.current || !canvasRef.current) return
+      if (isUnmounted || !scanningActive.current || !videoRef.current || !detector) return
 
       const video = videoRef.current
-      const canvas = canvasRef.current
-      const context = canvas.getContext('2d', { alpha: false }) // Optimización de context
 
-      if (context && video.readyState === video.HAVE_ENOUGH_DATA) {
-        // Dibujamos en un canvas más chico para que WASM trabaje menos
-        canvas.width = WIDTH
-        canvas.height = HEIGHT
-        context.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-        const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
-        
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
         try {
-          const results = await readBarcodes(imageData, {
-            formats: ['EAN13', 'Code128', 'QRCode'], // Solo lo necesario para Zenith
-            tryHarder: false, // ¡IMPORTANTE! False consume mucha menos CPU
-            maxNumberOfSymbols: 1
-          })
+          // 3. Le pasamos el elemento video DIRECTAMENTE. ¡Adiós canvas!
+          const results = await detector.detect(video)
 
           if (results.length > 0) {
             if (navigator.vibrate) navigator.vibrate(100)
-            onResult(results[0].text)
+            // 4. La API nativa devuelve el texto en la propiedad "rawValue"
+            onResult(results[0].rawValue)
             return 
           }
-        } catch (err) { /* No barcode found */ }
+        } catch {
+          // Ignoramos los errores de frame sin código
+        }
       }
       
-      // En lugar de requestAnimationFrame directo, metemos un delay.
-      // 200ms = 5 escaneos por segundo. Es rapidísimo para el usuario 
-      // pero baja el uso de CPU un 90%.
       timeoutId = window.setTimeout(() => {
         requestAnimationFrame(scanFrame)
       }, TIMEOUT) 
     }
 
-    setupCamera().then(() => requestAnimationFrame(scanFrame))
+    startScanRef.current = () => requestAnimationFrame(scanFrame)
+
+    setupCamera().then(() => {
+      if (startScanRef.current) startScanRef.current()
+    })
 
     return () => {
-      isScanning = false
+      isUnmounted = true
+      scanningActive.current = false
       clearTimeout(timeoutId)
 
-      // Accedemos al stream que guardamos en el video
       const stream = videoRef.current?.srcObject as MediaStream
 
       if (stream) {
-        // 1. Obtenemos todos los 'tracks' (video, y audio si hubiera)
         const tracks = stream.getTracks()
-
         tracks.forEach(track => {
-          track.stop() // 2. Apaga físicamente el hardware de la cámara
-          stream.removeTrack(track) // 3. Desvincula el track del stream
+          track.stop() 
+          stream.removeTrack(track) 
         })
-
-        // 4. Limpiamos la referencia en el elemento de video
         if (videoRef.current) {
           videoRef.current.srcObject = null
         }
@@ -99,21 +119,26 @@ export function Scanner () {
     }
   }, [])
 
+  useEffect(() => {
+    if (!result) return
+    navigateToProduct()
+  }, [result])
+
   return (
-    <div>
+    <div class='w-full h-fit flex flex-col gap-6'>
       <div className='relative w-full h-64 bg-black overflow-hidden rounded-xl'>
+        {/* 5. El canvas desapareció por completo de la estructura */}
         <video ref={videoRef} autoPlay playsInline className='w-full h-full object-cover' />
-        <canvas ref={canvasRef} className='hidden' />
-        {/* Guía visual para el usuario */}
-        <div
-          className='absolute left-1/2 top-1/2 -translate-1/2 max-w-8/10 max-h-8/10 border-2 border-primary/50 rounded-lg pointer-events-none'
-          style={{
-            height: HEIGHT,
-            width: WIDTH
-          }}
-        />
       </div>
-      {result}
+      <div class='w-full h-fit flex flex-col gap-2'>
+        <button
+          class='p-2 px-4 rounded-lg transition-colors bg-neutral-800 shr:bg-neutral-700/70'
+          onClick={resetScanner}
+          >
+          Reiniciar
+        </button>
+        <span>Contenido: {result || '-'}</span>
+      </div>
     </div>
   )
 }
