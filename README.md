@@ -1,4 +1,4 @@
-# Zenith
+# Zenith - Sistema de Gestión y Ventas
 
 ![Zenith Dashboard](/public/assets/dashboard.webp)
 
