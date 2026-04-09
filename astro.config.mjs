@@ -40,7 +40,8 @@ export default defineConfig({
   },
 
   redirects: {
-    '/': '/dashboard'
+    '/': '/dashboard',
+    '/product': '/dashboard'
   },
 
   output: 'server',
