@@ -17,6 +17,7 @@
     "products",
     "vault",
     "db",
-    "api"
+    "api",
+    "services"
   ]
 }
