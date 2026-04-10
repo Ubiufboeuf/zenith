@@ -32,7 +32,7 @@ export async function loadProducts () {
 }
 
 export async function getProductById (id: string): Promise<Product | undefined> {
-  const products = useProductsStore.getState().products ?? await loadProducts()
+  const products = await loadProducts()
 
   if (!products || !products.length) return
 
