@@ -268,3 +268,60 @@ export const IconCash = () => (
     <path d='M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0' />
   </Svg>
 )
+
+export const IconWarning = () => (
+  <Svg strokeLinecap='round' strokeLinejoin='round'>
+    <path d='M12 9v4' />
+    <path d='M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0' />
+    <path d='M12 16h.01' />
+  </Svg>
+)
+
+export const IconAlert = () => (
+  <Svg>
+    <path d='M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0' />
+    <path d='M12 8v4' />
+    <path d='M12 16h.01' />
+  </Svg>
+)
+
+export const IconTag = () => (
+  <Svg>
+    <path d='M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' />
+    <path d='M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3' />
+  </Svg>
+)
+
+export const IconPrint = () => (
+  <Svg>
+    <path d='M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2' />
+    <path d='M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4' />
+    <path d='M7 15a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2l0 -4' />
+  </Svg>
+)
+
+export const IconDownload = () => (
+  <Svg>
+    <path d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2' />
+    <path d='M7 11l5 5l5 -5' />
+    <path d='M12 4l0 12' />
+  </Svg>
+)
+
+export const IconEdit = () => (
+  <Svg>
+    <path d='M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1' />
+    <path d='M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415' />
+    <path d='M16 5l3 3' />
+  </Svg>
+)
+
+export const IconTrash = () => (
+  <Svg>
+    <path d='M4 7l16 0' />
+    <path d='M10 11l0 6' />
+    <path d='M14 11l0 6' />
+    <path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12' />
+    <path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' />
+  </Svg>
+)

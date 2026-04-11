@@ -1,10 +1,23 @@
 ---
+import Header from '@/components/products/Header.astro'
+import { db } from '@/database/db'
 import Layout from '@/layouts/Layout.astro'
 
 const { id } = Astro.params
 if (!id) return Astro.redirect('/dashboard')
+
+let product
+try {
+  product = await db.getProductById(id)
+} catch (err) {
+  console.error('Error consiguiendo los productos:', err)
+}
+
+if (!product) {
+  return Astro.redirect('/dashboard', 301)
+}
 ---
 
 <Layout tabBar>
-  {id}
+  <Header product={product} />
 </Layout>
