@@ -49,7 +49,7 @@ export const IconCart = ({ active }: { active?: boolean } = { active: false }) =
 )
 
 export const IconCollection = ({ active }: { active?: boolean }) => (
-  <Svg fill={active ? 'currentColor' : ''}>
+  <Svg fill={active ? 'currentColor' : 'transparent'}>
     <rect width='7' height='9' x='3' y='3' rx='1' />
     <rect width='7' height='5' x='14' y='3' rx='1' />
     <rect width='7' height='9' x='14' y='12' rx='1' />
@@ -244,8 +244,13 @@ export const IconCalculator = () => (
 )
 
 export const IconTheme = ({ mode }: { mode: 'auto' | 'dark' | 'light' }) => (
-  <Svg>
+  <Svg strokeLinecap='round' strokeLinejoin='round'>
     { mode === 'auto' && <path d='M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008' /> }
+    { mode === 'light' && <path d='M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008' /> }
+    { mode === 'dark' && <>
+      <path d='M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0' />
+      <path d='M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7' />  
+    </> }
   </Svg>
 )
 
