@@ -23,7 +23,44 @@
       "price-1": { "currency": "$", "currency_name": "Peso", "value": 340 },
       "price-2": { "currency": "U$S", "currency_name": "Dólar", "value": 8.5 }
     },
-    "stock": { "current": 15, "min": 20 }
+    "stock": { "current": 15, "min": 20 },
+    "images": [
+      {
+        "id": "prod-1-img-1",
+        "src": "/mocks/coffee bag.webp",
+        "alt": "Bolsa de café"
+      },
+      {
+        "id": "prod-1-img-2",
+        "src": "/mocks/coffee bag.webp",
+        "alt": "Bolsa de café"
+      },
+      {
+        "id": "prod-1-img-3",
+        "src": "/mocks/coffee bag.webp",
+        "alt": "Bolsa de café"
+      },
+      {
+        "id": "prod-1-img-4",
+        "src": "/mocks/coffee bag.webp",
+        "alt": "Bolsa de café"
+      },
+      {
+        "id": "prod-1-img-5",
+        "src": "/mocks/coffee bag.webp",
+        "alt": "Bolsa de café"
+      },
+      {
+        "id": "prod-1-img-6",
+        "src": "/mocks/coffee bag.webp",
+        "alt": "Bolsa de café"
+      },
+      {
+        "id": "prod-1-img-7",
+        "src": "/mocks/coffee bag.webp",
+        "alt": "Bolsa de café"
+      }
+    ]
   },
   {
     "id": "prod-3",

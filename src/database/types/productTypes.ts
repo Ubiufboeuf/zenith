@@ -1,3 +1,5 @@
+import type { SliderImage } from '@/database/types/uiComponentsTypes'
+
 export interface Product {
   id:       string
   code:     string
@@ -8,6 +10,7 @@ export interface Product {
   priceId:  PriceID
   prices:   Prices
   stock:    Stock
+  images:   SliderImage[]
 }
 
 export type PriceID = 'price-1' | 'price-2'

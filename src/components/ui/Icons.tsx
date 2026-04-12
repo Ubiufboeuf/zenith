@@ -325,3 +325,9 @@ export const IconTrash = () => (
     <path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' />
   </Svg>
 )
+
+export const IconChevron = () => (
+  <Svg>
+    <path d='M9 6l6 6l-6 6' />
+  </Svg>
+)
