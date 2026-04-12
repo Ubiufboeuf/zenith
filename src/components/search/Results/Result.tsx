@@ -1,4 +1,4 @@
-import type { Product } from '@/types/dbTypes'
+import type { Product } from '@/database/types/productTypes'
 import { MobileResult } from './MobileResult'
 import { DesktopResult } from './DesktopResult'
 

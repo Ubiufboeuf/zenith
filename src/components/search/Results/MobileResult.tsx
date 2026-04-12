@@ -1,6 +1,6 @@
 import { Icon } from '../../ui/Icon'
 import { IconBox } from '../../ui/Icons'
-import type { Product } from '@/types/dbTypes'
+import type { Product } from '@/database/types/productTypes'
 
 export function MobileResult ({ id, name, code, category, prices, priceId, stock }: Product) {
   const price = prices[priceId as keyof typeof prices]

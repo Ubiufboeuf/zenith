@@ -1,4 +1,4 @@
-import type { Product } from '@/types/dbTypes'
+import type { Product } from '@/database/types/productTypes'
 import { readFile } from 'node:fs/promises'
 import { cwd } from 'node:process'
 import { vault } from './vault'

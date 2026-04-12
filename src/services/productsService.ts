@@ -1,5 +1,5 @@
 import { useProductsStore } from '@/stores/useProductsStore'
-import type { Product } from '@/types/dbTypes'
+import type { Product } from '@/database/types/productTypes'
 
 export async function getProducts (): Promise<Product[] | undefined> {
   let res
