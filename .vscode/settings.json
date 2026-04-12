@@ -18,6 +18,7 @@
     "vault",
     "db",
     "api",
-    "services"
+    "services",
+    "fs"
   ]
 }
