@@ -1,5 +1,7 @@
 ---
 import Header from '@/components/products/Header.astro'
+import { Icon } from '@/components/ui/Icon'
+import { IconBox, IconTag } from '@/components/ui/Icons'
 import { db } from '@/database/db'
 import Layout from '@/layouts/Layout.astro'
 
@@ -16,8 +18,29 @@ try {
 if (!product) {
   return Astro.redirect('/dashboard', 301)
 }
+
+const { name, code, category } = product
 ---
 
 <Layout tabBar>
   <Header product={product} />
+  <section class='md:not-sidebar-open:hidden lg:sidebar-open:hidden w-fit mx-auto mt-4 px-4'>
+    <div class='p-2 px-8 text-center rounded-xl text-neutral-400 bg-card'>
+      <h1 class='text-lg font-semibold text-center text-pretty text-light'>{name}</h1>
+      <div class='flex items-center justify-center gap-2'>
+        <span class='text-sm'>{code}</span>
+        <span class='w-fit text-xs font-medium p-0.25 px-1 rounded-sm border border-border bg-dark'>{category}</span>
+        <div title='Stock bajo' class='flex items-center gap-1 text-xs text-orange-500/70'>
+          <Icon class='stroke-2 size-5'>
+            <IconBox />
+          </Icon>
+        </div>
+        <div title='Etiqueta desactualizada' class='flex items-center gap-1 text-xs text-orange-500/70'>
+          <Icon class='stroke-2 size-5'>
+            <IconTag />
+          </Icon>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
