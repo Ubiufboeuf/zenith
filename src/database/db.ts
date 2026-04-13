@@ -1,9 +1,6 @@
 import type { Product } from '@/database/types/productTypes'
-import { readFile } from 'node:fs/promises'
-import { cwd } from 'node:process'
 import { vault } from './vault'
-
-const mocksFile = `${cwd()}/public/mocks/products.json`
+import products from '@/../public/mocks/products.json'
 
 // getProducts: ({ limit = L }: { limit?: number }) => Promise<Product[] | undefined>
 async function getProducts (): Promise<Product[] | undefined> {
@@ -11,19 +8,8 @@ async function getProducts (): Promise<Product[] | undefined> {
     return vault.products
   }
   
-  // mocks
-  const res = await readFile(mocksFile, 'utf8')
-  if (!res) {
-    throw new Error('No se encontraron los mocks de los productos')
-  }
-
-  const data = JSON.parse(res)
-  if (!data) {
-    throw new Error('Hubo un error manejando los productos')
-  }
-
-  vault.products = [...data]
-  return [...data]
+  vault.products = [...(products as Product[])]
+  return [...vault.products]
 }
 
 async function getProductById (id: string): Promise<Product | undefined> {
