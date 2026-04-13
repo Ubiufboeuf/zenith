@@ -27,37 +27,37 @@
     "images": [
       {
         "id": "prod-1-img-1",
-        "src": "/mocks/coffee bag.webp",
+        "src": "/mocks/coffee-bag.webp",
         "alt": "Bolsa de café"
       },
       {
         "id": "prod-1-img-2",
-        "src": "/mocks/coffee bag.webp",
+        "src": "/mocks/coffee-bag.webp",
         "alt": "Bolsa de café"
       },
       {
         "id": "prod-1-img-3",
-        "src": "/mocks/coffee bag.webp",
+        "src": "/mocks/coffee-bag.webp",
         "alt": "Bolsa de café"
       },
       {
         "id": "prod-1-img-4",
-        "src": "/mocks/coffee bag.webp",
+        "src": "/mocks/coffee-bag.webp",
         "alt": "Bolsa de café"
       },
       {
         "id": "prod-1-img-5",
-        "src": "/mocks/coffee bag.webp",
+        "src": "/mocks/coffee-bag.webp",
         "alt": "Bolsa de café"
       },
       {
         "id": "prod-1-img-6",
-        "src": "/mocks/coffee bag.webp",
+        "src": "/mocks/coffee-bag.webp",
         "alt": "Bolsa de café"
       },
       {
         "id": "prod-1-img-7",
-        "src": "/mocks/coffee bag.webp",
+        "src": "/mocks/coffee-bag.webp",
         "alt": "Bolsa de café"
       }
     ]
