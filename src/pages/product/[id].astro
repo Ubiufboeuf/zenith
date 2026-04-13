@@ -26,7 +26,7 @@ const { name, code, category, images } = product
 <Layout tabBar>
   <Header product={product} />
   <section class='md:not-sidebar-open:hidden lg:sidebar-open:hidden w-fit mx-auto mt-4 px-4'>
-    <div class='p-2 px-8 text-center rounded-xl text-neutral-400 bg-card'>
+    <div class='flex flex-col items-center gap-2 p-3 px-8 rounded-xl text-neutral-400 bg-card'>
       <h1 class='text-lg font-semibold text-center text-pretty text-light'>{name}</h1>
       <div class='flex items-center justify-center gap-2'>
         <span class='text-sm'>{code}</span>
