@@ -4,6 +4,8 @@ import Layout from '@/layouts/Layout.astro'
 export const prerender = false
 
 const { id } = Astro.params
+
+if (Astro.originPathname.startsWith('/product')) return Astro.redirect('/dashboard', 301)
 ---
 
 <Layout tabBar>
