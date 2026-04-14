@@ -10,6 +10,7 @@ const HEIGHT = 360
 export function Scanner () {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [result, setResult] = useState('')
+  const [torchOn, setTorchOn] = useState(false)
   
   const scanningActive = useRef(true)
   const startScanRef = useRef<() => void>()
@@ -36,20 +37,51 @@ export function Scanner () {
     scanningActive.current = false
   }
 
+  async function toggleTorch () {
+    const stream = videoRef.current?.srcObject as MediaStream
+    if (!stream) return
+
+    const track = stream.getVideoTracks()[0]
+    
+    try {
+      // Algunos navegadores requieren refrescar las capacidades
+      const capabilities = track.getCapabilities() as any
+
+      if (track) {
+        console.log('Capabilities:', track.getCapabilities())
+        console.log('Settings:', track.getSettings())
+      }
+
+      // Si 'torch' no aparece, puede que el navegador no lo soporte o 
+      // no esté usando la cámara trasera con permisos completos
+      if (!capabilities || !('torch' in capabilities)) {
+        alert('Tu navegador no permite controlar la linterna en esta cámara.')
+        return
+      }
+
+      const newState = !torchOn
+      await track.applyConstraints({
+        advanced: [{ torch: newState }]
+      } as any)
+      
+      setTorchOn(newState)
+    } catch (err) {
+      console.error('Error al aplicar torch:', err)
+      alert('No se pudo activar la linterna.')
+    }
+  }
+
   useEffect(() => {
     let isUnmounted = false
     let timeoutId: number
     let detector: any
     
-    // 2. Verificamos soporte e inicializamos el detector
     if ('BarcodeDetector' in window) {
       detector = new (window.BarcodeDetector as any)({
-        // Puedes agregar más formatos según lo que necesites
         formats: ['qr_code', 'ean_13', 'ean_8', 'code_128', 'upc_a', 'upc_e']
       })
     } else {
       console.error('El navegador no soporta BarcodeDetector API nativa')
-      // Aquí podrías mostrar un mensaje en la UI avisando al usuario
     }
 
     async function setupCamera () {
@@ -74,17 +106,15 @@ export function Scanner () {
 
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
         try {
-          // 3. Le pasamos el elemento video DIRECTAMENTE. ¡Adiós canvas!
           const results = await detector.detect(video)
 
           if (results.length > 0) {
             if (navigator.vibrate) navigator.vibrate(100)
-            // 4. La API nativa devuelve el texto en la propiedad "rawValue"
             onResult(results[0].rawValue)
             return 
           }
         } catch {
-          // Ignoramos los errores de frame sin código
+          // Ignoramos errores de frames vacíos
         }
       }
       
@@ -105,16 +135,14 @@ export function Scanner () {
       clearTimeout(timeoutId)
 
       const stream = videoRef.current?.srcObject as MediaStream
-
       if (stream) {
-        const tracks = stream.getTracks()
-        tracks.forEach(track => {
-          track.stop() 
-          stream.removeTrack(track) 
+        stream.getTracks().forEach(track => {
+          // Intentamos apagar la linterna antes de cerrar la cámara
+          track.applyConstraints({ advanced: [{ torch: false }] } as any).finally(() => {
+            track.stop()
+          })
         })
-        if (videoRef.current) {
-          videoRef.current.srcObject = null
-        }
+        if (videoRef.current) videoRef.current.srcObject = null
       }
     }
   }, [])
@@ -127,17 +155,39 @@ export function Scanner () {
   return (
     <div class='w-full h-fit flex flex-col gap-6'>
       <div className='relative w-full h-64 bg-black overflow-hidden rounded-xl'>
-        {/* 5. El canvas desapareció por completo de la estructura */}
-        <video ref={videoRef} autoPlay playsInline className='w-full h-full object-cover' />
+        <video 
+          ref={videoRef} 
+          autoPlay 
+          playsInline 
+          className='w-full h-full object-cover' 
+        />
       </div>
+
       <div class='w-full h-fit flex flex-col gap-2'>
-        <button
-          class='p-2 px-4 rounded-lg transition-colors bg-neutral-800 shr:bg-neutral-700/70'
-          onClick={resetScanner}
+        <div class='w-full h-fit flex items-center gap-2'>
+          <button
+            type='button'
+            class='flex-1 p-2 px-4 rounded-lg transition-colors bg-neutral-800 hover:bg-neutral-700 text-white'
+            onClick={resetScanner}
           >
-          Reiniciar
-        </button>
-        <span>Contenido: {result || '-'}</span>
+            Reiniciar
+          </button>
+          
+          <button
+            type='button'
+            onClick={toggleTorch}
+            class={`h-fit w-fit p-2 px-4 rounded-lg transition-all duration-200 border border-transparent ${
+              torchOn 
+                ? 'bg-yellow-500 text-black shadow-lg shadow-yellow-500/20' 
+                : 'bg-neutral-800 text-white hover:bg-neutral-700'
+            }`}
+          >
+            {torchOn ? '🔦 Apagar' : '🔦 Linterna'}
+          </button>
+        </div>
+        <span class='text-sm text-neutral-400'>
+          Contenido: <strong class='text-white'>{result || '-'}</strong>
+        </span>
       </div>
     </div>
   )
