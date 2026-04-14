@@ -3,13 +3,14 @@ import { useSwiper } from 'swiper/react'
 
 interface Props {
   move?: 'prev' | 'next'
+  default?: 'enabled' | 'disabled'
   class?: string
   children?: ReactNode
 }
 
-export function SliderButton ({ move, class: className, children }: Props) {
+export function SliderButton ({ move, default: defaultState, class: className, children }: Props) {
   const swiper = useSwiper()
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(defaultState ? defaultState === 'disabled' : undefined)
 
   function handleClick () {
     if (!move) return

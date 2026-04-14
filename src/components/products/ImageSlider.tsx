@@ -23,7 +23,7 @@ export function ImageSlider ({ name, images, class: className }: Props) {
         slidesPerView={1}
         onSlideChange={({ activeIndex }: { activeIndex?: number }) => activeIndex !== undefined && setActiveIndex(activeIndex)}
       >
-        <SliderButton move='prev' class='left-4 top-1/2 -translate-y-1/2 size-10 rounded-full bg-neutral-800/70 disabled:*:text-neutral-500 disabled:bg-neutral-800/50 shr:not-disabled:bg-neutral-900/80'>
+        <SliderButton move='prev' default='disabled' class='left-4 top-1/2 -translate-y-1/2 size-10 rounded-full bg-neutral-800/70 disabled:*:text-neutral-500 disabled:bg-neutral-800/50 shr:not-disabled:bg-neutral-900/80'>
           <Icon class='rotate-180 size-6 stroke-2 text-neutral-300'>
             <IconChevron />
           </Icon>
