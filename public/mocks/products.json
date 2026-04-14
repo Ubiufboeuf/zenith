@@ -64,15 +64,38 @@
   },
   {
     "id": "prod-3",
-    "code": "MOU-LOG-G203",
-    "name": "Mouse Logitech G203 Lightsync RGB White",
-    "category": "Periféricos",
-    "priceId": "price-2",
+    "code": "POW-COL-600",
+    "barcode": "7730197009519",
+    "name": "Powerade Frutas Tropicales 600ml - CocaCola Bebida Isotónica",
+    "category": "Bebidas",
+    "priceId": "price-1",
     "prices": {
-      "price-1": { "currency": "$", "currency_name": "Peso", "value": 1160 },
+      "price-1": { "currency": "$", "currency_name": "Peso", "value": 54 },
       "price-2": { "currency": "U$S", "currency_name": "Dólar", "value": 29 }
     },
-    "stock": { "current": 8, "min": 5 }
+    "stock": { "current": 22, "min": 8 },
+    "images": [
+      {
+        "id": "prod-2-img-1",
+        "src": "/mocks/powerade.webp"
+      },
+      {
+        "id": "prod-2-img-2",
+        "src": "/mocks/powerade.webp"
+      },
+      {
+        "id": "prod-2-img-3",
+        "src": "/mocks/powerade.webp"
+      },
+      {
+        "id": "prod-2-img-4",
+        "src": "/mocks/powerade.webp"
+      },
+      {
+        "id": "prod-2-img-5",
+        "src": "/mocks/powerade.webp"
+      }
+    ]
   },
   {
     "id": "prod-4",
