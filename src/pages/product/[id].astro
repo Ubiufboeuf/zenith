@@ -20,7 +20,7 @@ if (!product) {
   return Astro.redirect('/dashboard', 301)
 }
 
-const { name, code, category, images } = product
+const { name, code, category, images = [] } = product
 ---
 
 <Layout tabBar>
@@ -45,6 +45,6 @@ const { name, code, category, images } = product
     </div>
   </section>
   <section class='relative z-0 h-fit w-full py-4 pb-6 flex flex-col items-center justify-center'>
-    <ImageSlider images={images} client:load />
+    <ImageSlider name={name} images={images} client:load />
   </section>
 </Layout>

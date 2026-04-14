@@ -8,11 +8,12 @@ import { IconChevron } from '../ui/Icons'
 import { useState } from 'preact/hooks'
 
 interface Props {
+  name: string
   images: SliderImage[]
   class?: string
 }
 
-export function ImageSlider ({ images, class: className }: Props) {
+export function ImageSlider ({ name, images, class: className }: Props) {
   const [activeIndex, setActiveIndex] = useState(0)
   
   return (
@@ -30,7 +31,7 @@ export function ImageSlider ({ images, class: className }: Props) {
         { images?.map(({ id, src, alt }) => (
           <SwiperSlide key={id}>
             <div class='rounded-xl overflow-hidden'>
-              <img src={src} alt={alt} />
+              <img src={src} alt={alt ?? name} />
             </div>
           </SwiperSlide>
         )) }
