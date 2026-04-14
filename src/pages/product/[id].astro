@@ -20,7 +20,8 @@ if (!product) {
   return Astro.redirect('/dashboard', 301)
 }
 
-const { name, code, category, images = [] } = product
+const { name, code, category, images = [], stock } = product
+const enoughStock = stock.current > stock.min
 ---
 
 <Layout tabBar>
@@ -31,7 +32,7 @@ const { name, code, category, images = [] } = product
       <div class='flex items-center justify-center gap-2'>
         <span class='text-sm'>{code}</span>
         <span class='w-fit text-xs font-medium p-0.25 px-1 rounded-sm border border-border bg-dark'>{category}</span>
-        <div title='Stock bajo' class='flex items-center gap-1 text-xs text-orange-500/70'>
+        <div hidden={enoughStock} title='Stock bajo' class='flex items-center gap-1 text-xs text-orange-500/70'>
           <Icon class='stroke-2 size-5'>
             <IconBox />
           </Icon>
