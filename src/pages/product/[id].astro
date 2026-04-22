@@ -2,7 +2,7 @@
 import Header from '@/components/products/Header.astro'
 import { ImageSlider } from '@/components/products/ImageSlider'
 import { Icon } from '@/components/ui/Icon'
-import { IconBox, IconTag } from '@/components/ui/Icons'
+import { IconPackages, IconTag } from '@/components/ui/Icons'
 import { db } from '@/database/db'
 import Layout from '@/layouts/Layout.astro'
 
@@ -34,7 +34,7 @@ const enoughStock = stock.current > stock.min
         <span class='w-fit text-xs font-medium p-0.25 px-1 rounded-sm border border-border bg-dark'>{category}</span>
         <div hidden={enoughStock} title='Stock bajo' class='flex items-center gap-1 text-xs text-orange-500/70'>
           <Icon class='stroke-2 size-5'>
-            <IconBox />
+            <IconPackages />
           </Icon>
         </div>
         <div title='Etiqueta desactualizada' class='flex items-center gap-1 text-xs text-orange-500/70'>

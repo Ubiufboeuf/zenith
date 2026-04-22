@@ -1,7 +1,7 @@
 ---
 import type { Product } from '@/database/types/productTypes'
 import { Icon } from '../ui/Icon'
-import { IconArrow, IconTag, IconBox } from '../ui/Icons'
+import { IconArrow, IconTag, IconPackages } from '../ui/Icons'
 import { HeaderActions } from './HeaderActions'
 
 interface Props {
@@ -27,7 +27,7 @@ const { name, code, category } = product
       ·
       <div class='flex items-center gap-1 text-xs text-orange-400'>
         <Icon class='size-5'>
-          <IconBox />
+          <IconPackages />
         </Icon>
         <span class='not-lg:hidden not-xl:sidebar-open:hidden'>Stock bajo</span>
       </div>
