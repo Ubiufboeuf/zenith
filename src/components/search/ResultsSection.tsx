@@ -1,36 +1,23 @@
+import type { Product } from '@/database/types/productTypes'
 import { useProductsStore } from '@/stores/useProductsStore'
+import { useState } from 'preact/hooks'
 import { Result } from './Results/Result'
 import { useMediaCheck } from '@/hooks/useMediaCheck'
-import { useEffect, useState } from 'preact/hooks'
 
 const sortOptions = [
   { id: 'name', label: 'Nombre', selected: true },
   { id: 'price', label: 'Precio', selected: false },
   { id: 'stock', label: 'Stock', selected: false }
 ]
-export function ResultsSection () {
-  const allResults = useProductsStore((state) => state.results)
+
+export function ResultsSection ({ firstResults }: { firstResults?: Product[] }) {
+  const [results] = useState<Product[] | undefined>(firstResults)
+  const [thereAreResults] = useState(Boolean(results?.length))
+
   const query = useProductsStore((state) => state.search)
-  const thereAreResults = useProductsStore((state) => state.thereAreResults)
-  const lowStockVisible = useProductsStore((state) => state.lowStockVisible)
-  
+
   const [xs] = useMediaCheck('(width >= 640px)')
-
-  const [results, setResults] = useState(allResults)
-
-  useEffect(() => {
-    if (!allResults) return
-    setResults(allResults)
-  }, [allResults])
-
-  useEffect(() => {
-    const visibleResults = (lowStockVisible)
-      ? allResults?.filter(({ stock }) => stock.current < stock.min)
-      : allResults
-
-    setResults(visibleResults)
-  }, [lowStockVisible, query])
-
+  
   return (
     <section class='flex flex-col gap-3'>
       <span class='text-sm text-neutral-500'>{results?.length ?? 0} produtos encontrados</span>

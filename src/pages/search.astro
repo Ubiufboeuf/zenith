@@ -2,17 +2,18 @@
 import Layout from '@/layouts/Layout.astro'
 import { SearchBarSection } from '@/components/search/SearchBarSection'
 import { ResultsSection } from '@/components/search/ResultsSection'
-import { LoadProducts } from '@/components/search/LoadProducts'
+import { getProducts } from '@/services/productsService'
+
+const firstResults = await getProducts()
 ---
 
 <Layout tabBar>
-	<LoadProducts client:load />
   <div class='h-fit w-full min-h-full flex flex-col p-6 gap-5'>
 		<header class='mobile:not-xs:hidden h-fit sm:h-18 flex flex-col justify-center gap-1'>
 			<h1 class='text-2xl font-semibold text-light'>Buscar Productos</h1>
 			<span class='text-sm text-neutral-400'>Consulta rápida de productos por código, nombre o categoría</span>
 		</header>
 		<SearchBarSection client:load />
-		<ResultsSection client:load />
+		<ResultsSection firstResults={firstResults} client:load />
 	</div>
 </Layout>
