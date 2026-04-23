@@ -2,25 +2,30 @@ import { useProductsStore } from '@/stores/useProductsStore'
 import type { Product } from '@/database/types/productTypes'
 
 export async function getProducts (): Promise<Product[] | undefined> {
+  const isServer = typeof window === 'undefined'
+  
+  if (isServer) {
+    const { db } = await import('@/database/provider')
+    return db.getProducts()
+  }
+
   let res
   try {
-    res = await fetch(`${origin}/mocks/products.json`)
+    res = await fetch('/api/products')
   } catch {
-    console.error('Error consiguiendo los productos')
+    console.error('Error pidiendo los productos al servidor')
   }
 
   if (!res) return
 
-  let json
+  let products
   try {
-    json = await res.json()
+    products = await res.json()
   } catch {
-    console.error('Error convirtiendo los productos a un formato manejable')
+    console.error('Error leyendo los productos pedidos al servidor')
   }
 
-  if (!json) return
-
-  return json
+  return products
 }
 
 export async function loadProducts () {
