@@ -1,4 +1,4 @@
-import { db } from '@/database/db'
+import { db } from '@/database/provider'
 import type { APIRoute } from 'astro'
 
 export async function GET ({ params }: Parameters<APIRoute>[0]) {
