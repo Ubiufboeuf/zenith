@@ -21,7 +21,7 @@ export function HeaderActions () {
         </Icon>
         <span class='not-lg:hidden'>Editar</span>
       </HeaderAction>
-      <HeaderAction title='Eliminar etiqueta' class='group h-10 min-w-10 w-fit lg:px-3 gap-2 text-sm border border-destructive/90 text-destructive/90! shr:bg-destructive/30!'>
+      <HeaderAction title='Eliminar etiqueta' class='group h-10 min-w-10 w-fit lg:px-3 gap-2 text-sm border border-destructive/80 text-destructive/80! shr:bg-destructive/40! shr:text-light!'>
         <Icon class='size-5 stroke-2'>
           <IconTrash />
         </Icon>
