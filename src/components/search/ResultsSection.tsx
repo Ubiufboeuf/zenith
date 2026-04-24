@@ -1,8 +1,7 @@
 import type { Product } from '@/database/types/productTypes'
 import { useProductsStore } from '@/stores/useProductsStore'
 import { useState } from 'preact/hooks'
-import { Result } from './Results/Result'
-import { useMediaCheck } from '@/hooks/useMediaCheck'
+import { Result } from './Result'
 
 const sortOptions = [
   { id: 'name', label: 'Nombre', selected: true },
@@ -16,8 +15,6 @@ export function ResultsSection ({ firstResults }: { firstResults?: Product[] }) 
 
   const query = useProductsStore((state) => state.search)
 
-  const [xs] = useMediaCheck('(width >= 640px)')
-  
   return (
     <section class='flex flex-col gap-3'>
       <span class='text-sm text-neutral-500'>{results?.length ?? 0} produtos encontrados</span>
@@ -37,7 +34,7 @@ export function ResultsSection ({ firstResults }: { firstResults?: Product[] }) 
         { (thereAreResults === false) ? (
           <h1>No se encontraron resulados para la búsqueda{query ? `: "${query}"` : ''}</h1>
         ) : (
-          results?.map((result) => <Result key={`search-result:${result.id}`} result={result} xs={xs} /> )
+          results?.map((result) => <Result key={`search-result:${result.id}`} result={result} /> )
         ) }
       </div>
     </section>
