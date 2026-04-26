@@ -10,8 +10,8 @@ export function HeaderInfo () {
   
   return (
     <>
-      <h1 class='col-2 text-lg font-semibold not-md:hidden not-lg:sidebar-open:hidden text-light'>{name}</h1>
-      <div class='not-xs:hidden not-sm:sidebar-open:hidden col-2 not-md:row-span-full not-lg:sidebar-open:row-span-full w-full flex items-center gap-2 text-neutral-400'>
+      <h1 class='col-2 text-lg font-semibold text-light not-roomy-lg:hidden'>{name}</h1>
+      <div class='col-2 w-full flex items-center gap-2 text-neutral-400 not-roomy-lg:row-span-full not-roomy-ml:hidden'>
         <span class='text-sm'>{code}</span>
         ·
         <span class='w-fit text-xs font-medium p-0.25 px-1 rounded-sm border border-border bg-dark'>{category}</span>

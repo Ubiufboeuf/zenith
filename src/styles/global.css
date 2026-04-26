@@ -69,6 +69,12 @@
   }
 }
 
+@custom-variant roomy-lg { @container page (width >= calc(1024px - 260px)) { @slot; } }
+@custom-variant roomy-ml { @container page (width >= calc(792px - 260px)) { @slot; } }
+@custom-variant roomy-md { @container page (width >= calc(768px - 260px)) { @slot; } }
+@custom-variant roomy-sm { @container page (width >= calc(640px - 260px)) { @slot; } }
+@custom-variant roomy-xs { @container page (width >= calc(412px - 260px)) { @slot; } }
+
 :root {
   font-family: Inter, system-ui;
   color-scheme: dark;

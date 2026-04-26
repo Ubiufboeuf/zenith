@@ -10,9 +10,9 @@ export function ProductInfo () {
   const enoughStock = stock.current > stock.min
   
   return (
-    <div class='flex flex-col items-center gap-2 p-3 px-8 rounded-xl text-neutral-400 bg-card'>
-      <h1 class='text-lg font-semibold text-center text-pretty text-light'>{name}</h1>
-      <div class='flex items-center justify-center gap-2'>
+    <div class='flex flex-col items-center gap-2 p-3 px-6 rounded-xl text-neutral-400'>
+      <h1 class='text-lg font-semibold text-center text-pretty text-light roomy-lg:hidden'>{name}</h1>
+      <div class='flex items-center justify-center gap-2 roomy-ml:hidden'>
         <span class='text-sm'>{code}</span>
         <span class='w-fit text-xs font-medium p-0.25 px-1 rounded-sm border border-border bg-dark'>{category}</span>
         <div hidden={enoughStock} title='Stock bajo' class='flex items-center gap-1 text-xs text-orange-500/70'>

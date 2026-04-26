@@ -14,7 +14,7 @@ if (!id) return Astro.redirect('/dashboard')
 
 <Layout tabBar>
   <LoadProduct id={id} client:load />
-  <header class='h-16 md:not-sidebar-open:h-20 lg:h-20 flex items-center justify-between p-3 px-4 border-b border-border'>
+  <header class='h-16 roomy-lg:h-20 flex items-center justify-between p-3 px-4 border-b border-border'>
     <div class='grid grid-cols-[auto_1fr] grid-flow-row items-center grid-rows-2 gap-x-4'>
       <a href='/search' class='row-span-full size-10 flex items-center justify-center rounded-lg transition-colors text-neutral-400 shr:text-light shr:bg-neutral-700/70'>
         <Icon class='size-5 stroke-2 rotate-180'>
@@ -25,10 +25,10 @@ if (!id) return Astro.redirect('/dashboard')
     </div>
     <HeaderActions client:idle />
   </header>
-  <section class='md:not-sidebar-open:hidden lg:sidebar-open:hidden w-fit mx-auto mt-4 px-4'>
+  <section class='w-fit mx-auto not-roomy-lg:mt-4 roomy-lg:hidden'>
     <ProductInfo client:load />
   </section>
-  <section class='relative z-0 h-fit w-full py-4 pb-6 flex flex-col items-center justify-center'>
+  <section class='relative z-0 h-fit w-full p-6 flex flex-col not-roomy-lg:items-center'>
     <ImageSlider client:load />
   </section>
 </Layout>
