@@ -1,19 +1,22 @@
-import type { SliderImage } from '@/types/uiTypes'
 import { Swiper, SwiperSlide } from 'swiper/react'
-// @ts-expect-error shut up ts
+// @ts-expect-error ts shhh
 import 'swiper/css'
 import { SliderButton } from './SliderButton'
 import { Icon } from '../ui/Icon'
 import { IconChevron } from '../ui/Icons'
 import { useState } from 'preact/hooks'
+import { useProductStore } from '@/stores/useProductStore'
 
 interface Props {
-  name: string
-  images: SliderImage[]
   class?: string
 }
 
-export function ImageSlider ({ name, images, class: className }: Props) {
+export function ImageSlider ({ class: className }: Props) {
+  const product = useProductStore((state) => state.product)
+  if (!product) return
+
+  const { name, images } = product
+  
   const [activeIndex, setActiveIndex] = useState(0)
   
   return (

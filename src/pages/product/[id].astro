@@ -2,50 +2,34 @@
 import Header from '@/components/products/Header.astro'
 import { ImageSlider } from '@/components/products/ImageSlider'
 import { Icon } from '@/components/ui/Icon'
-import { IconPackages, IconTag } from '@/components/ui/Icons'
+import { IconArrow } from '@/components/ui/Icons'
 import Layout from '@/layouts/Layout.astro'
-import { getProductById } from '@/services/productsService'
+import { LoadProduct } from '@/components/product/LoadProduct'
+import { HeaderActions } from '@/components/products/HeaderActions'
+import { HeaderInfo } from '@/components/product/HeaderInfo'
+import { ProductInfo } from '@/components/product/ProductInfo'
 
 const { id } = Astro.params
 if (!id) return Astro.redirect('/dashboard')
-
-let product
-try {
-  product = await getProductById(id)
-} catch (err) {
-  console.error('Error consiguiendo los productos:', err)
-}
-
-if (!product) {
-  return Astro.redirect('/dashboard', 301)
-}
-
-const { name, code, category, images = [], stock } = product
-const enoughStock = stock.current > stock.min
 ---
 
 <Layout tabBar>
-  <Header product={product} />
-  <section class='md:not-sidebar-open:hidden lg:sidebar-open:hidden w-fit mx-auto mt-4 px-4'>
-    <div class='flex flex-col items-center gap-2 p-3 px-8 rounded-xl text-neutral-400 bg-card'>
-      <h1 class='text-lg font-semibold text-center text-pretty text-light'>{name}</h1>
-      <div class='flex items-center justify-center gap-2'>
-        <span class='text-sm'>{code}</span>
-        <span class='w-fit text-xs font-medium p-0.25 px-1 rounded-sm border border-border bg-dark'>{category}</span>
-        <div hidden={enoughStock} title='Stock bajo' class='flex items-center gap-1 text-xs text-orange-500/70'>
-          <Icon class='stroke-2 size-5'>
-            <IconPackages />
-          </Icon>
-        </div>
-        <div title='Etiqueta desactualizada' class='flex items-center gap-1 text-xs text-orange-500/70'>
-          <Icon class='stroke-2 size-5'>
-            <IconTag />
-          </Icon>
-        </div>
-      </div>
+  <LoadProduct id={id} client:load />
+  <header class='h-16 md:not-sidebar-open:h-20 lg:h-20 flex items-center justify-between p-3 px-4 border-b border-border'>
+    <div class='grid grid-cols-[auto_1fr] grid-flow-row items-center grid-rows-2 gap-x-4'>
+      <a href='/search' class='row-span-full size-10 flex items-center justify-center rounded-lg transition-colors text-neutral-400 shr:text-light shr:bg-neutral-700/70'>
+        <Icon class='size-5 stroke-2 rotate-180'>
+          <IconArrow />
+        </Icon>
+      </a>
+      <HeaderInfo client:idle />
     </div>
+    <HeaderActions client:idle />
+  </header>
+  <section class='md:not-sidebar-open:hidden lg:sidebar-open:hidden w-fit mx-auto mt-4 px-4'>
+    <ProductInfo client:idle />
   </section>
   <section class='relative z-0 h-fit w-full py-4 pb-6 flex flex-col items-center justify-center'>
-    <ImageSlider name={name} images={images} client:load />
+    <ImageSlider client:idle />
   </section>
 </Layout>
