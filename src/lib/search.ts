@@ -1,4 +1,4 @@
-import type { Product } from '@/database/types/productTypes'
+import type { Product } from '@/types/productTypes'
 import { useProductsStore } from '@/stores/useProductsStore'
 import Fuse, { type IFuseOptions } from 'fuse.js'
 

@@ -3,15 +3,15 @@ import Header from '@/components/products/Header.astro'
 import { ImageSlider } from '@/components/products/ImageSlider'
 import { Icon } from '@/components/ui/Icon'
 import { IconPackages, IconTag } from '@/components/ui/Icons'
-import { db } from '@/database/provider'
 import Layout from '@/layouts/Layout.astro'
+import { getProductById } from '@/services/productsService'
 
 const { id } = Astro.params
 if (!id) return Astro.redirect('/dashboard')
 
 let product
 try {
-  product = await db.getProductById(id)
+  product = await getProductById(id)
 } catch (err) {
   console.error('Error consiguiendo los productos:', err)
 }

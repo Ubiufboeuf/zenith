@@ -1,4 +1,4 @@
-import type { SliderImage } from '@/database/types/uiComponentsTypes'
+import type { SliderImage } from './uiTypes'
 
 export interface Product {
   id:       string

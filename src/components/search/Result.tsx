@@ -1,6 +1,6 @@
 import { Icon } from '@/components/ui/Icon'
 import { IconBox } from '@/components/ui/Icons'
-import type { Product } from '@/database/types/productTypes'
+import type { Product } from '@/types/productTypes'
 
 export function Result ({ result: { id, name, code, category, prices, priceId, stock } }: { result: Product }) {
   const price = prices[priceId as keyof typeof prices]

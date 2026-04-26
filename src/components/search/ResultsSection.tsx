@@ -1,6 +1,5 @@
-import type { Product } from '@/database/types/productTypes'
 import { useProductsStore } from '@/stores/useProductsStore'
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import { Result } from './Result'
 
 const sortOptions = [
@@ -8,12 +7,26 @@ const sortOptions = [
   { id: 'price', label: 'Precio', selected: false },
   { id: 'stock', label: 'Stock', selected: false }
 ]
-
-export function ResultsSection ({ firstResults }: { firstResults?: Product[] }) {
-  const [results] = useState<Product[] | undefined>(firstResults)
-  const [thereAreResults] = useState(Boolean(results?.length))
-
+export function ResultsSection () {
+  const allResults = useProductsStore((state) => state.results)
   const query = useProductsStore((state) => state.search)
+  const thereAreResults = useProductsStore((state) => state.thereAreResults)
+  const lowStockVisible = useProductsStore((state) => state.lowStockVisible)
+  
+  const [results, setResults] = useState(allResults)
+
+  useEffect(() => {
+    if (!allResults) return
+    setResults(allResults)
+  }, [allResults])
+
+  useEffect(() => {
+    const visibleResults = (lowStockVisible)
+      ? allResults?.filter(({ stock }) => stock.current < stock.min)
+      : allResults
+
+    setResults(visibleResults)
+  }, [lowStockVisible, query])
 
   return (
     <section class='flex flex-col gap-3'>

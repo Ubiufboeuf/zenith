@@ -1,17 +1,11 @@
+import { ENDPOINTS } from '@/lib/constants'
 import { useProductsStore } from '@/stores/useProductsStore'
-import type { Product } from '@/database/types/productTypes'
+import type { Product } from '@/types/productTypes'
 
 export async function getProducts (): Promise<Product[] | undefined> {
-  const isServer = typeof window === 'undefined'
-  
-  if (isServer) {
-    const { db } = await import('@/database/provider')
-    return db.getProducts()
-  }
-
   let res
   try {
-    res = await fetch('/api/products')
+    res = await fetch(ENDPOINTS.PRODUCTS)
   } catch {
     console.error('Error pidiendo los productos al servidor')
   }

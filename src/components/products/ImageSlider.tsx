@@ -1,4 +1,4 @@
-import type { SliderImage } from '@/database/types/uiComponentsTypes'
+import type { SliderImage } from '@/types/uiTypes'
 import { Swiper, SwiperSlide } from 'swiper/react'
 // @ts-expect-error shut up ts
 import 'swiper/css'
