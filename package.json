@@ -11,7 +11,22 @@
     "preview": "astro preview",
     "astro": "astro"
   },
+  "devDependencies": {
+    "@eslint/css": "^1.4.0",
+    "@eslint/js": "^10.0.1",
+    "@eslint/json": "^2.0.1",
+    "@eslint/markdown": "^8.0.3",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "astro": "7.0.5",
+    "eslint": "^10.6.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.7.0",
+    "typescript-eslint": "^8.62.1"
+  },
   "dependencies": {
-    "astro": "^7.0.5"
+    "@astrojs/preact": "6.0.0",
+    "@tailwindcss/vite": "4.3.2",
+    "preact": "10.29.3",
+    "tailwindcss": "4.3.2"
   }
 }
