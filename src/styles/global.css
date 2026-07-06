@@ -1,2 +1,27 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@font-face {
+  font-family: Inter;
+  font-display: swap;
+  src:
+    local('Inter'),
+    url('/Inter.woff2') format('woff2')
+  ;
+}
+
+:root {
+  color-scheme: dark light;
+  font-family: Inter, system-ui;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
