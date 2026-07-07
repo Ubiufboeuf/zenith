@@ -28,6 +28,8 @@
     "@astrojs/preact": "6.0.1",
     "@tailwindcss/vite": "4.3.2",
     "preact": "10.29.4",
+    "shiki": "4.3.1",
+    "snarkdown": "2.0.0",
     "tailwindcss": "4.3.2"
   }
 }

@@ -8,15 +8,15 @@ interface Props {
 const { title } = Astro.props
 ---
 
-<html lang='es'>
+<html lang='es' class='flex justify-center'>
 	<head>
 		<meta charset='utf-8' />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 		<link rel='icon' href='/favicon.ico' />
 		<meta name='viewport' content='width=device-width' />
-		<title>{title ? `${title} | UI` : 'UI'}</title>
+		<title>{title ? `${title} | Docs` : 'Docs'}</title>
 	</head>
-	<body>
+	<body class='min-h-fit max-w-4xl flex flex-col items-center p-8 md:p-16 gap-2 bg-base-100'>
 		<slot />
 	</body>
 </html>
