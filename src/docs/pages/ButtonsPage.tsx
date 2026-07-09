@@ -1,5 +1,5 @@
 import { useId } from 'preact/hooks'
-import * as Examples from '@/docs/examples/Buttons'
+import * as Examples from '@/docs/examples/ButtonsExamples'
 import { Demo } from '../components/Demo'
 
 export function Buttons () {

@@ -1,5 +1,5 @@
 import type { ButtonProps } from '@/types/ui/buttonTypes'
-import { BUTTON_SIZES, BUTTON_VARIANTS } from '@/constants/ui/button'
+import { BUTTON_SIZES, BUTTON_VARIANTS } from '@/constants/ui/buttonConstants'
 
 export function Button ({ children, label, variant, size, soft, outline }: ButtonProps) {
   if (outline && soft) soft = false

@@ -10,7 +10,7 @@ const { component } = Astro.params
 if (!component) return Astro.redirect('/', 400)
 
 const componentName = component.charAt(0).toUpperCase() + component.slice(1)
-const key = `/src/docs/pages/${componentName}.tsx`
+const key = `/src/docs/pages/${componentName}Page.tsx`
 const module = modules[key] as any
 const ComponentPage = module?.[componentName]
 ---
