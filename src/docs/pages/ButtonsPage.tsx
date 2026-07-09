@@ -15,11 +15,11 @@ export function Buttons () {
 
     const id = useId()
 
-    const { code, title, description } = Example
+    const { tabs, title, description } = Example
     
     return (
       <Demo key={title} title={title} description={description}>
-        {code.map(({ tab, code, Component }) => (
+        {tabs.map(({ tab, code, Component }) => (
           <Demo.Panel key={id} title={tab} code={code}>
             {Component}
           </Demo.Panel>

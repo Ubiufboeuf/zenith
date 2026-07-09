@@ -1,14 +1,20 @@
 import type { ButtonProps } from '@/types/ui/buttonTypes'
-import { BUTTON_SIZES, BUTTON_VARIANTS } from '@/constants/ui/buttonConstants'
+import { BUTTON_FILL_MODES, BUTTON_SHAPES, BUTTON_SIZES, BUTTON_COLORS, BUTTON_WIDTHS } from '@/constants/ui/buttonConstants'
 
-export function Button ({ children, label, variant, size, soft, outline }: ButtonProps) {
-  if (outline && soft) soft = false
-
-  const btnVariant = variant ? BUTTON_VARIANTS[variant] : ''
+export function Button ({ children, label, color, size, fill, shape, width, selected, disabled }: ButtonProps) {
+  const btnColor = color ? BUTTON_COLORS[color] : ''
   const btnSize = size ? BUTTON_SIZES[size] : ''
+  const btnFill = fill ? BUTTON_FILL_MODES[fill] : ''
+  const btnShape = shape ? BUTTON_SHAPES[shape] : ''
+  const btnWidth = width ? BUTTON_WIDTHS[width] : ''
+  const btnSelected = selected ? 'btn-active' : ''
+  const btnDisabled = disabled ? 'btn-disabled' : ''
 
   return (
-    <button class={`btn ${btnVariant} ${btnSize} ${soft && 'btn-soft'} ${outline && 'btn-outline'}`}>
+    <button
+      class={`btn ${btnColor} ${btnSize} ${btnFill} ${btnShape} ${btnWidth} ${btnSelected} ${btnDisabled}`}
+      disabled={disabled}
+    >
       { children || <span>
         {label}
       </span> }

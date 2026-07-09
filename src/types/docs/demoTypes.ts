@@ -17,7 +17,7 @@ export type Example = {
 } | {
   title: string
   description?: string
-  code: {
+  tabs: {
     tab: string
     code: string
     Component: ReactNode
