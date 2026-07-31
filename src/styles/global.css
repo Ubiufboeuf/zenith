@@ -10,6 +10,10 @@
   ;
 }
 
+@theme {
+  --spacing-sidebar: calc(var(--spacing) * 72);
+}
+
 :root {
   color-scheme: dark light;
   font-family: Inter, system-ui;
