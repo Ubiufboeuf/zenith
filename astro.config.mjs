@@ -12,9 +12,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  output: 'server',
-
-  redirects: {
-    '/components': '/'
-  }
+  output: 'server'
 })
