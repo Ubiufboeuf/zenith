@@ -1,0 +1,14 @@
+---
+import { Button } from '../Button'
+import { SIDEBAR_SECTIONS } from '@/constants/ui/sidebarConstants'
+import SidebarSection from './SidebarSection.astro'
+---
+
+<aside class='fixed left-0 top-0 h-full w-sidebar overflow-y-auto scrollbar-gutter-stable border-r border-r-neutral-700 bg-base-100'>
+  <div class='h-full min-h-fit w-full flex flex-col gap-2 p-3 py-4'>
+    <div class='pb-4'>
+      <Button width='block' color='primary'>Nueva venta</Button>
+    </div>
+    { SIDEBAR_SECTIONS.map((section) => <SidebarSection {...section} />) }
+  </div>
+</aside>

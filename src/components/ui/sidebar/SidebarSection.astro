@@ -1,0 +1,15 @@
+---
+import type { SidebarSection } from '@/types/ui/sidebarTypes'
+import SidebarLink from '@/components/ui/sidebar/SidebarLink.astro'
+
+type Props = SidebarSection
+
+const { name, links } = Astro.props
+---
+
+<div>
+  <strong class='px-3 text-xs text-[11px] font-semibold tracking-wide text-primary-content/50 uppercase'>{name}</strong>
+  <div>
+    { links.map((link) => <SidebarLink {...link} />) }
+  </div>
+</div>

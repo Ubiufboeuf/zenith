@@ -1,0 +1,19 @@
+---
+import type { SidebarLink } from '@/types/ui/sidebarTypes'
+import { Icon } from '../Icon'
+
+type Props = SidebarLink
+
+const { name, path, icon: LinkIcon } = Astro.props
+---
+
+<a href={path} class='w-full h-9 flex items-center px-3 gap-2 rounded transition-colors text-primary-content shr:bg-base-content/10'>
+  { LinkIcon && (
+    <Icon class='size-5 stroke-2' style={{ strokeLinecap: 'round', strokeLinejoin: 'round' }}>
+      <LinkIcon />
+    </Icon>
+  ) }
+  <span class='text-sm'>
+    {name}
+  </span>
+</a>
