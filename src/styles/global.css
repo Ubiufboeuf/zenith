@@ -14,6 +14,19 @@
   --spacing-sidebar: calc(var(--spacing) * 72);
 }
 
+@custom-variant shr {
+  @media (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+  @media (pointer: coarse) {
+    &:active {
+      @slot;
+    }
+  }
+}
+
 :root {
   color-scheme: dark light;
   font-family: Inter, system-ui;
