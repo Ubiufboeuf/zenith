@@ -5,12 +5,13 @@ import Header from '@/components/ui/header/Header.astro'
 
 interface Props {
 	title?: string
+	scrollbarGutter?: 'auto' | 'both' | 'stable'
 }
 
-const { title } = Astro.props
+const { title, scrollbarGutter = 'auto' } = Astro.props
 ---
 
-<html lang='es'>
+<html lang='es' style={`scrollbar-gutter: ${scrollbarGutter}`}>
 	<head>
 		<meta charset='utf-8' />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
@@ -21,9 +22,9 @@ const { title } = Astro.props
 	</head>
 	<body>
 		<Sidebar />
-		<div class='w-full h-full min-h-[2000px] pl-sidebar bg-base-200'>
+		<div class='w-full h-full md:pl-sidebar bg-base-200'>
 			<Header />
-			<main class='flex flex-col w-full'>
+			<main class='flex flex-col w-full max-w-6xl h-[calc(100%-64px)] mx-auto'>
 				<slot />
 			</main>
 		</div>

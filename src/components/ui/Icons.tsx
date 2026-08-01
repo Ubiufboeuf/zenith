@@ -96,3 +96,11 @@ export const IconBell = () => (
     <path d='M9 17v1a3 3 0 0 0 6 0v-1' />
   </Svg>
 )
+
+export const IconMenu = () => (
+  <Svg>
+    <path d='M4 6l16 0' />
+    <path d='M4 12l16 0' />
+    <path d='M4 18l16 0' />
+  </Svg>
+)
