@@ -1,0 +1,16 @@
+---
+import { Notifications } from '@/components/notifications/Notifications'
+import { UserProfile } from '../../user/UserProfile'
+import { ServerStatusBadge } from './ServerStatusBadge'
+---
+
+<header class='sticky top-0 right-0 h-16 w-full px-4 flex items-center justify-between border-b border-b-neutral-700 bg-base-100'>
+  <div>
+    Buscador
+  </div>
+  <div class='w-fit flex items-center gap-2'>
+    <ServerStatusBadge />
+    <Notifications client:load />
+    <UserProfile client:load />
+  </div>
+</header>
