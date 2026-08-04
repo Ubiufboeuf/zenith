@@ -6,9 +6,10 @@ import Header from '@/components/ui/header/Header.astro'
 interface Props {
 	title?: string
 	scrollbarGutter?: 'auto' | 'both' | 'stable'
+	class?: string
 }
 
-const { title, scrollbarGutter = 'auto' } = Astro.props
+const { title, scrollbarGutter = 'auto', class: className = '' } = Astro.props
 ---
 
 <html lang='es' style={`scrollbar-gutter: ${scrollbarGutter}`}>
@@ -24,7 +25,7 @@ const { title, scrollbarGutter = 'auto' } = Astro.props
 		<Sidebar />
 		<div class='w-full h-full md:pl-sidebar bg-base-200'>
 			<Header />
-			<main class='flex flex-col w-full max-w-6xl h-[calc(100%-64px)] mx-auto'>
+			<main class={`${className} flex flex-col w-full max-w-6xl h-[calc(100%-64px)] mx-auto`}>
 				<slot />
 			</main>
 		</div>

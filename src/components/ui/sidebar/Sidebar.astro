@@ -5,7 +5,7 @@ import SidebarSection from './SidebarSection.astro'
 ---
 
 <input id='sidebar-checkbox' type='checkbox' class='peer' hidden />
-<aside class='z-10 fixed not-md:-left-sidebar peer-checked:left-0 top-16 md:top-0 h-[calc(100%-64px)] md:h-full w-sidebar overflow-y-auto scrollbar-gutter-stable border-r border-r-neutral-700 bg-base-100 transition-[left]'>
+<aside class='z-2 fixed not-md:-left-sidebar peer-checked:left-0 top-16 md:top-0 h-[calc(100%-64px)] md:h-full w-sidebar overflow-y-auto scrollbar-gutter-stable border-r border-r-neutral-700 bg-base-100 transition-[left]'>
   <div class='h-full min-h-fit w-full flex flex-col gap-2 p-3 py-4'>
     <div class='pb-4'>
       <Button width='block' color='primary'>Nueva venta</Button>
@@ -13,7 +13,7 @@ import SidebarSection from './SidebarSection.astro'
     { SIDEBAR_SECTIONS.map((section) => <SidebarSection {...section} />) }
   </div>
 </aside>
-<button id='close-sidebar' class='peer-checked:not-md:block hidden fixed w-full h-full bg-black/50' />
+<button id='close-sidebar' class='z-1 peer-checked:not-md:block hidden fixed w-full h-full bg-black/50' />
 
 <script>
   const button = document.querySelector('#close-sidebar')

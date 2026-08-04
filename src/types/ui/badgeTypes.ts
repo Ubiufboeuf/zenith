@@ -5,3 +5,8 @@ export interface StatusBadgeProps {
   status: UIStatus
   children?: ReactNode
 }
+
+export interface TrendBadgeProps {
+  value: string | number
+  class?: string
+}

@@ -104,3 +104,11 @@ export const IconMenu = () => (
     <path d='M4 18l16 0' />
   </Svg>
 )
+
+export const IconTrending = ({ trending }: { trending: 'up' | 'idle' | 'down' }) => (
+  <Svg>
+    { trending === 'up' && <><path d='M3 17l6 -6l4 4l8 -8' /><path d='M14 7l7 0l0 7' /></> }
+    { trending === 'idle' && <><path d='M5 12l14 0' /><path d='M15 16l4 -4' /><path d='M15 8l4 4' /></> }
+    { trending === 'down' && <><path d='M3 7l6 6l4 -4l8 8' /><path d='M21 10l0 7l-7 0' /></> }
+  </Svg>
+)
