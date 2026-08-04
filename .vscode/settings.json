@@ -1,6 +1,20 @@
 {
   "conventionalCommits.scopes": [
-    "ui",
-    "dashboard"
+    "config",
+    "component",
+    "layout",
+    "page",
+    "route",
+    "hook",
+    "state",
+    "api",
+    "schema",
+    "type",
+    "style",
+    "asset",
+    "lib",
+    "utils",
+    "deps",
+    "dx"
   ]
 }
