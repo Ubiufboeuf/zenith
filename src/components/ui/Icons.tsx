@@ -5,7 +5,7 @@ const Svg = ({
   children, id, viewBox = '0 0 24 24',
   class: className, hidden,
   width = '24', height = '24',
-  fill = 'transparent', stroke = 'currentColor', strokeWidth, strokeLinecap, strokeLinejoin
+  fill = 'transparent', stroke = 'currentColor', strokeWidth = '2', strokeLinecap = 'round', strokeLinejoin = 'round'
 }:
   SVGProps
 ) => (
@@ -91,7 +91,7 @@ export const IconMail = () => (
 )
 
 export const IconBell = () => (
-  <Svg strokeLinecap='round' strokeLinejoin='round'>
+  <Svg>
     <path d='M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6' />
     <path d='M9 17v1a3 3 0 0 0 6 0v-1' />
   </Svg>
@@ -107,8 +107,45 @@ export const IconMenu = () => (
 
 export const IconTrending = ({ trending }: { trending: 'up' | 'idle' | 'down' }) => (
   <Svg>
-    { trending === 'up' && <><path d='M3 17l6 -6l4 4l8 -8' /><path d='M14 7l7 0l0 7' /></> }
-    { trending === 'idle' && <><path d='M5 12l14 0' /><path d='M15 16l4 -4' /><path d='M15 8l4 4' /></> }
-    { trending === 'down' && <><path d='M3 7l6 6l4 -4l8 8' /><path d='M21 10l0 7l-7 0' /></> }
+    { trending === 'up' && <>
+    <path d='M3 17l6 -6l4 4l8 -8' />
+    <path d='M14 7l7 0l0 7' />
+    </> }
+    { trending === 'idle' && <>
+    <path d='M5 12l14 0' />
+    <path d='M15 16l4 -4' />
+    <path d='M15 8l4 4' />
+    </> }
+    { trending === 'down' && <>
+    <path d='M3 7l6 6l4 -4l8 8' />
+    <path d='M21 10l0 7l-7 0' />
+    </> }
+  </Svg>
+)
+
+export const IconSearch = () => (
+  <Svg>
+    <path d='M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0' />
+    <path d='M21 21l-6 -6' />
+  </Svg>
+)
+
+export const IconX = () => (
+  <Svg>
+    <path d='M18 6l-12 12' />
+    <path d='M6 6l12 12' />
+  </Svg>
+)
+
+export const IconMath = () => (
+  <Svg>
+    <path d='M4 5a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2l0 -14' />
+    <path d='M8 8a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-6a1 1 0 0 1 -1 -1l0 -1' />
+    <path d='M8 14l0 .01' />
+    <path d='M12 14l0 .01' />
+    <path d='M16 14l0 .01' />
+    <path d='M8 17l0 .01' />
+    <path d='M12 17l0 .01' />
+    <path d='M16 17l0 .01' />
   </Svg>
 )
