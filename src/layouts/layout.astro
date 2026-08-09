@@ -23,9 +23,9 @@ const { title, scrollbarGutter = 'auto', class: className = '' } = Astro.props
 	</head>
 	<body>
 		<Sidebar />
-		<div class='w-full h-full md:pl-sidebar bg-base-200'>
+		<div class='w-full h-full min-h-fit md:pl-sidebar bg-base-200'>
 			<Header />
-			<main class={`${className} flex flex-col w-full max-w-6xl h-[calc(100%-64px)] mx-auto`}>
+			<main class={`${className} flex flex-col w-full max-w-6xl h-[calc(100%-64px)] min-h-fit mx-auto`}>
 				<slot />
 			</main>
 		</div>
