@@ -105,18 +105,18 @@ export const IconMenu = () => (
   </Svg>
 )
 
-export const IconTrending = ({ trending }: { trending: 'up' | 'idle' | 'down' }) => (
+export const IconTrending = ({ trending }: { trending: 'positive' | 'neutral' | 'negative' }) => (
   <Svg>
-    { trending === 'up' && <>
+    { trending === 'positive' && <>
     <path d='M3 17l6 -6l4 4l8 -8' />
     <path d='M14 7l7 0l0 7' />
     </> }
-    { trending === 'idle' && <>
+    { trending === 'neutral' && <>
     <path d='M5 12l14 0' />
     <path d='M15 16l4 -4' />
     <path d='M15 8l4 4' />
     </> }
-    { trending === 'down' && <>
+    { trending === 'negative' && <>
     <path d='M3 7l6 6l4 -4l8 8' />
     <path d='M21 10l0 7l-7 0' />
     </> }
@@ -147,5 +147,20 @@ export const IconMath = () => (
     <path d='M8 17l0 .01' />
     <path d='M12 17l0 .01' />
     <path d='M16 17l0 .01' />
+  </Svg>
+)
+
+export const IconAlert = () => (
+  <Svg>
+    <path d='M12 9v4' />
+    <path d='M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0' />
+    <path d='M12 16h.01' />
+  </Svg>
+)
+
+export const IconDollar = () => (
+  <Svg>
+    <path d='M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2' />
+    <path d='M12 3v3m0 12v3' />
   </Svg>
 )
