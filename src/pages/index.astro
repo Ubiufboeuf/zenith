@@ -1,21 +1,21 @@
 ---
 import { BranchesSelector } from '@/components/dashboard/BranchesSelector'
+import { KPIs } from '@/components/dashboard/KPIs'
 import { TodaySalesCard } from '@/components/dashboard/TodaySalesCard'
 import { WeeklySalesChart } from '@/components/dashboard/WeeklySalesChart'
 import Layout from '@/layouts/layout.astro'
 ---
 
-<Layout title='Inicio' class='p-4'>
-  <section class='h-80 w-full grid grid-cols-[1fr_3fr] grid-rows-[1fr_5fr] gap-6 *:card'>
-    <div class='h-full w-full'>
-      <BranchesSelector client:load />
-    </div>
-    <div class='col-1 overflow-hidden border border-neutral-700 bg-base-100'>
+<Layout title='Inicio' class='p-4 gap-6'>
+  <section class='h-fit w-full'>
+    <KPIs client:load />
+  </section>
+  <section class='h-80 w-full grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-6 *:card'>
+    <div class='col-1 h-full overflow-hidden border border-neutral-700 bg-base-100'>
       <TodaySalesCard client:load />
     </div>
-    <div class='col-2 row-span-full border border-neutral-700 bg-base-100'>
+    <div class='col-[2/-1] h-full border border-neutral-700 bg-base-100 overflow-hidden'>
       <WeeklySalesChart client:load />
     </div>
   </section>
-  <!-- <h1 class='text-xl font-bold'>Antes de subir commit faltan 2 cosas en el chart, el tamaño inicial del viewport y el observer para cuando cambie de tamaño. Y de ser posible, la sombra para el scroll de las monedas</h1> -->
 </Layout>
