@@ -30,7 +30,7 @@ export const kpis: KpiItem[] = [
   },
   {
     id: 'clients',
-    title: 'Clientes nuevos',
+    title: 'Clientes',
     value: '6',
     trend: { label: '+0 esta semana', sentiment: 'neutral' },
     color: 'info',
