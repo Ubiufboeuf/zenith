@@ -1,7 +1,8 @@
 ---
-import { BranchesSelector } from '@/components/dashboard/BranchesSelector'
 import { KPIs } from '@/components/dashboard/KPIs'
+import { LowStock } from '@/components/dashboard/LowStock'
 import { TodaySalesCard } from '@/components/dashboard/TodaySalesCard'
+import { TopProductsCard } from '@/components/dashboard/TopProductsCard'
 import { WeeklySalesChart } from '@/components/dashboard/WeeklySalesChart'
 import Layout from '@/layouts/layout.astro'
 ---
@@ -17,5 +18,9 @@ import Layout from '@/layouts/layout.astro'
     <div class='col-[2/-1] h-full border border-neutral-700 bg-base-100 overflow-hidden'>
       <WeeklySalesChart client:load />
     </div>
+  </section>
+  <section class='h-80 w-full grid grid-cols-2 items-center gap-6'>
+    <LowStock client:load />
+    <TopProductsCard client:load />
   </section>
 </Layout>

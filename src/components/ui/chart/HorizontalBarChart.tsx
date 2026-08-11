@@ -21,7 +21,7 @@ export function HorizontalBarChart ({ items, class: className = '' }: Horizontal
                 <span class='text-sm font-semibold text-primary-content/50'>{val ? ` ${subText}` : subText}</span>
               </div>
             </div>
-            <Progress class='h-2 w-full rounded-full text-primary bg-base-200' progress={`${progress}%`} />
+            <Progress class='h-2 w-full rounded-full text-primary bg-primary/20' progress={`${progress}%`} />
           </div>
         )
       }) }

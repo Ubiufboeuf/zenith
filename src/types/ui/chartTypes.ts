@@ -17,3 +17,17 @@ export interface LineChartProps {
   pointSize: string
   pointStrokeWidth: string
 }
+
+export interface HorizontalBarItem {
+  id: string | number
+  label: string
+  value: number
+  formattedValue?: string
+  subText?: string
+  barColorClass?: string
+}
+
+export interface HorizontalBarChartProps {
+  items: HorizontalBarItem[]
+  class?: string
+}

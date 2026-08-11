@@ -7,3 +7,13 @@ export interface CurrencySalesBreakdown {
   percentage: number
   color: string
 }
+
+export interface TopProductItem {
+  id: string
+  name: string
+  totalRevenue: number
+  unitsSold: number
+  currency: string
+  category?: string
+  stock?: number
+}

@@ -6,6 +6,10 @@ export interface StatusBadgeProps {
   children?: ReactNode
 }
 
+export interface StatusNumberBadgeProps extends StatusBadgeProps {
+  value: number
+}
+
 export type TrendSentiment = 'positive' | 'negative' | 'warning' | 'neutral'
 
 export interface TrendBadgeProps {
