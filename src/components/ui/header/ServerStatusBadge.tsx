@@ -1,4 +1,4 @@
-import { StatusBadge } from '../Badge'
+import { StatusBadge } from '../badges/StatusBadge'
 
 export function ServerStatusBadge () {
   return (

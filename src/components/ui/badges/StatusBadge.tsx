@@ -1,5 +1,5 @@
 import type { StatusBadgeProps } from '@/types/ui/badgeTypes'
-import { Dot } from './Dot'
+import { Dot } from '../Dot'
 import type { UIStatus } from '@/types/uiTypes'
 
 const BADGE_STATUS: Record<UIStatus, string> = {

@@ -1,4 +1,4 @@
-import { StatusBadge } from '../ui/Badge'
+import { StatusBadge } from '../ui/badges/StatusBadge'
 import { Icon } from '../ui/Icon'
 import { IconAlert, IconCritical, IconPackage } from '../ui/Icons'
 
