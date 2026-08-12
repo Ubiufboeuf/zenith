@@ -172,3 +172,10 @@ export const IconCritical = () => (
     <path d='M12 16h.01' />
   </Svg>
 )
+
+export const IconPlus = () => (
+  <Svg>
+    <path d='M12 5l0 14' />
+    <path d='M5 12l14 0' />
+  </Svg>
+)

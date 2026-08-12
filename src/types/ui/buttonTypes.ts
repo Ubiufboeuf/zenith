@@ -15,3 +15,16 @@ export interface ButtonProps extends UIProps {
 
   onClick?: (event: TargetedMouseEvent<HTMLButtonElement>) => void
 }
+
+export interface ButtonLinkProps extends UIProps {
+  href?: string
+  label?: string
+  
+  color?: UIColors
+  size?: UISizes
+  width?: UIWidths
+  fill?: UIFillMode
+  shape?: UIShapes
+  
+  selected?: boolean
+}
