@@ -1,5 +1,5 @@
 import type { SearchFetchParams, SearchItem } from '@/types/ui/searchTypes'
-import { SearchBox } from '../search/SearchBox'
+import { SearchBox } from '../search/box/SearchBox'
 
 const initialResults: SearchItem[] = [
   {

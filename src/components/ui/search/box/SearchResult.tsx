@@ -1,5 +1,5 @@
 import type { NoResult, SearchItemData, SearchItemType } from '@/types/ui/searchTypes'
-import { Icon } from '../Icon'
+import { Icon } from '../../Icon'
 import { icons } from '@/constants/ui/searchConstants'
 
 function getSearchItemIcon (itemType: SearchItemType | undefined) {

@@ -1,12 +1,12 @@
 import type { SearchBoxProps, SearchFetchParams, SearchItem } from '@/types/ui/searchTypes'
-import { Icon } from '../Icon'
-import { IconSearch } from '../Icons'
+import { Icon } from '../../Icon'
+import { IconSearch } from '../../Icons'
 import type { TargetedInputEvent } from 'preact'
 import { debounceAsync, sleep } from '@/utils/time'
 import { getErrorDetails } from '@/errors'
 import { useMemo, useRef, useState } from 'preact/hooks'
-import { SearchSection } from './SearchSection'
-import { Dot } from '../Dot'
+import { SearchSection } from './ResultsSection'
+import { Dot } from '../../Dot'
 
 const DEFAULT_DEBOUNCE = 300
 
