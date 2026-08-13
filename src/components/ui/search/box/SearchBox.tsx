@@ -1,4 +1,4 @@
-import type { SearchBoxProps, SearchFetchParams, SearchItem } from '@/types/ui/searchTypes'
+import type { SearchBoxProps, SearchFetchParams, SearchItem } from '@/types/ui/search/searchBoxTypes'
 import { Icon } from '../../Icon'
 import { IconSearch } from '../../Icons'
 import type { TargetedInputEvent } from 'preact'

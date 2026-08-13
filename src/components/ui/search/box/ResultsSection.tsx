@@ -1,4 +1,4 @@
-import type { SearchItem } from '@/types/ui/searchTypes'
+import type { SearchItem } from '@/types/ui/search/searchBoxTypes'
 import { SearchResult } from './SearchResult'
 import type { ReactNode } from 'preact/compat'
 

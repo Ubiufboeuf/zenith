@@ -1,4 +1,4 @@
-import type { NoResult, SearchItemData, SearchItemType } from '@/types/ui/searchTypes'
+import type { NoResult, SearchItemData, SearchItemType } from '@/types/ui/search/searchBoxTypes'
 import { Icon } from '../../Icon'
 import { icons } from '@/constants/ui/searchConstants'
 
