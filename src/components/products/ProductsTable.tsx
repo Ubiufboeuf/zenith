@@ -1,14 +1,8 @@
 import type { TableColumn } from '@/types/ui/tableTypes'
 import { Table } from '../ui/table/Table'
 import { formatCurrency } from '@/utils/currencies'
-
-interface Product {
-  id: string
-  title: string
-  subtitle: string
-  status: 'active' | 'inactive'
-  price: number
-}
+import type { Product } from '@/types/products/productTypes'
+import { useEffect, useState } from 'preact/hooks'
 
 const columns: TableColumn<Product>[] = [
   {
@@ -52,17 +46,41 @@ const columns: TableColumn<Product>[] = [
   }
 ]
 
-const data: Product[] = [
-  {
-    id: 'prod-a',
-    title: 'AMD Ryzen 7 7800X3D',
-    subtitle: '8-Core, 16-Thread Desktop Processor',
-    price: 320,
-    status: 'active'
-  }
-]
+// Interfaz temporal hasta implementar una store en vez de pasar por parámetros
+interface Props {
+  products: Product[]
+  query: string
+  results: Product[] | null
+}
 
-export function ProductsTable () {
+// query puede servir para un highlight en los resultados
+export function ProductsTable ({ products, results }: Props) {
+  const [data, setData] = useState(products)
+  
+  function handleResults (results: Product[] | null) {
+    const resultsDefined = results
+    console.log({ resultsDefined })
+    
+    if (!resultsDefined) {
+      setData(products)
+      return
+    }
+    
+    const hasResults = results.length > 0
+    console.log({ hasResults })
+
+    if (!hasResults) {
+      setData([])
+      return
+    }
+    
+    setData(results)
+  }
+
+  useEffect(() => {
+    handleResults(results)
+  }, [results])
+  
   return (
     <Table
       id='products-table'

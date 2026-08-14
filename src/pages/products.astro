@@ -1,10 +1,8 @@
 ---
 import Layout from '@/layouts/layout.astro'
-import { SearchProducts } from '@/components/products/SearchProducts'
-import { ProductsTable } from '@/components/products/ProductsTable'
+import { ProductsView } from '@/components/products/ProductsView'
 ---
 
 <Layout title='Productos' class='p-4 gap-6'>
-  <SearchProducts client:load />
-  <ProductsTable client:load />
+  <ProductsView client:load />
 </Layout>
