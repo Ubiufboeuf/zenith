@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'preact'
 import type { ReactNode } from 'preact/compat'
 
 export interface UIProps {
@@ -5,6 +6,7 @@ export interface UIProps {
   id?: string
   name?: string
   className?: string
+  style?: CSSProperties
   disabled?: boolean
 }
 
