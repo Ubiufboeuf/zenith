@@ -12,6 +12,7 @@ export interface ButtonProps extends UIProps {
   
   selected?: boolean
   disabled?: boolean
+  focusable?: boolean
 
   onClick?: (event: TargetedMouseEvent<HTMLButtonElement>) => void
 }

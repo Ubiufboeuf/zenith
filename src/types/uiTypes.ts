@@ -5,7 +5,7 @@ export interface UIProps {
   children?: ReactNode
   id?: string
   name?: string
-  className?: string
+  class?: string
   style?: CSSProperties
   disabled?: boolean
 }

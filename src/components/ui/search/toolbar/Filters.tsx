@@ -10,7 +10,7 @@ export function Filters () {
   }
 
   return (
-    <Button fill='outline' className='not-hover:border-base-content/20' onClick={showFiltersModal}>
+    <Button fill='outline' class='not-hover:border-base-content/20' onClick={showFiltersModal}>
       <Icon class='size-4'>
         <IconFilter />
       </Icon>
