@@ -200,3 +200,54 @@ export const IconDots = ({ vertical = false }: { vertical?: boolean }) => (
     </> }
   </Svg>
 )
+
+export const IconReload = () => (
+  <Svg>
+    <path d='M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1 7.935 1.007 9.425 4.747' />
+    <path d='M20 4v5h-5' />
+  </Svg>
+)
+
+export const IconCheck = () => (
+  <Svg>
+    <path d='M5 12l5 5l10 -10' />
+  </Svg>
+)
+
+export const IconTag = () => (
+  <Svg>
+    <path d='M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0' />
+    <path d='M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3' />
+  </Svg>
+)
+
+export const IconScan = () => (
+  <Svg>
+    <path d='M5 12h14' />
+    <path d='M3 7v-2a2 2 0 0 1 2 -2h2' />
+    <path d='M3 17v2a2 2 0 0 0 2 2h2' />
+    <path d='M17 3h2a2 2 0 0 1 2 2v2' />
+    <path d='M17 21h2a2 2 0 0 0 2 -2v-2' />
+  </Svg>
+)
+
+export const IconHistory = () => (
+  <Svg>
+    <path d='M12 8l0 4l2 2' />
+    <path d='M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5' />
+  </Svg>
+)
+
+export const IconBoxes = () => (
+  <Svg>
+    <path d='M7 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5' />
+    <path d='M2 13.5v5.5l5 3' />
+    <path d='M7 16.545l5 -3.03' />
+    <path d='M17 16.5l-5 -3l5 -3l5 3v5.5l-5 3l0 -5.5' />
+    <path d='M12 19l5 3' />
+    <path d='M17 16.5l5 -3' />
+    <path d='M12 13.5v-5.5l-5 -3l5 -3l5 3v5.5' />
+    <path d='M7 5.03v5.455' />
+    <path d='M12 8l5 -3' />
+  </Svg>
+)
