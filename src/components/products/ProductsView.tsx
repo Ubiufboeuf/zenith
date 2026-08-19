@@ -2,7 +2,7 @@ import { useState } from 'preact/hooks'
 import { ProductsTable } from './ProductsTable'
 import { SearchProducts } from './SearchProducts'
 import type { Product } from '@/types/products/productTypes'
-import { FiltersModal } from '../ui/search/toolbar/FiltersModal'
+import { FilterProductsModal } from './FilterProductsModal'
 
 const products: Product[] = [
   {
@@ -31,7 +31,7 @@ export function ProductsView () {
         query={searchQuery}
         results={results}
       />
-      <FiltersModal />
+      <FilterProductsModal />
     </>
   )
 }

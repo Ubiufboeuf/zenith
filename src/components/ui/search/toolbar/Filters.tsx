@@ -6,7 +6,7 @@ import { IconFilter } from '../../Icons'
 export function Filters () {
   function showFiltersModal () {
     closeAllModals()
-    openModal(MODALS.FILTERS)
+    openModal(MODALS.FILTER_PRODUCTS)
   }
 
   return (

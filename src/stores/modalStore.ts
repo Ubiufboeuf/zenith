@@ -1,5 +1,5 @@
 export const MODALS = {
-  FILTERS: 'filters'
+  FILTER_PRODUCTS: 'filter-products'
 }
 
 const modals = new Map<string, HTMLDialogElement>()
