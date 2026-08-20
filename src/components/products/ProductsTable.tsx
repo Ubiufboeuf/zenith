@@ -6,17 +6,20 @@ import { Icon } from '../ui/Icon'
 import { IconScan, IconTable } from '../ui/Icons'
 import { formatCurrency } from '@/utils/currencies'
 import { Button } from '../ui/Button'
+import { Tooltip } from '../ui/Tooltip'
 
 const columns: TableColumn<Product>[] = [
   {
     key: 'code',
     header: 'Códigos',
     align: 'center',
-    render: () => <Button fill='soft' shape='square' size='sm'>
-      <Icon class='size-4'>
-        <IconScan />
-      </Icon>
-    </Button>
+    render: () => <Tooltip tooltip='Ver códigos' tooltip-position='right'>
+      <Button fill='soft' shape='square' size='sm'>
+        <Icon class='size-4'>
+          <IconScan />
+        </Icon>
+      </Button>
+    </Tooltip>
   },
   {
     key: 'product',
