@@ -30,14 +30,6 @@ const columns: TableColumn<Product>[] = [
     )
   },
   {
-    key: 'brand',
-    header: 'Marca',
-    width: 'minmax(auto, 240px)',
-    render: ({ brand }) => (
-      <span class='h-fit w-fit badge not-group-hover:badge-soft transition-colors'>{brand}</span>
-    )
-  },
-  {
     key: 'category',
     header: 'Categoría',
     width: 'minmax(auto, 240px)',
@@ -46,11 +38,12 @@ const columns: TableColumn<Product>[] = [
     )
   },
   {
-    key: 'stock',
-    header: 'Stock',
+    key: 'brand',
+    header: 'Marca',
     width: 'minmax(auto, 240px)',
-    align: 'center',
-    render: ({ stock }) => <strong>{stock}</strong>
+    render: ({ brand }) => (
+      <span>{brand}</span>
+    )
   },
   {
     key: 'cost',
@@ -58,9 +51,9 @@ const columns: TableColumn<Product>[] = [
     width: 'minmax(auto, 240px)',
     align: 'end',
     render: ({ costCurrency, costPrice }) => (
-      <strong>
+      <span>
         {formatCurrency(costPrice, costCurrency)}
-      </strong>
+      </span>
     )
   },
   {
@@ -75,6 +68,13 @@ const columns: TableColumn<Product>[] = [
         </strong>
       )
     }
+  },
+  {
+    key: 'stock',
+    header: 'Stock',
+    width: 'minmax(auto, 240px)',
+    align: 'center',
+    render: ({ stock }) => <span class='badge not-group-hover:badge-soft'>{stock}</span>
   }
 ]
 
