@@ -5,8 +5,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { Icon } from '../ui/Icon'
 import { IconTable } from '../ui/Icons'
 import { formatCurrency } from '@/utils/currencies'
-import { Button } from '../ui/Button'
-import { Tooltip } from '../ui/Tooltip'
+import { ProductCodes } from './ProductCodes'
 
 const columns: TableColumn<ProductWithCodes>[] = [
   {
@@ -33,17 +32,8 @@ const columns: TableColumn<ProductWithCodes>[] = [
   {
     key: 'code',
     header: 'Códigos',
-    render ({ codes }) {
-      const code = (codes.find((c) => c?.isMain) ?? codes[0])?.code
-
-      if (!code) return '—'
-      
-      return <Tooltip tooltip='Ver códigos' tooltip-position='left'>
-        <Button title={code} class='text-sm text-start font-normal text-base-content/70 line-clamp-2 bg-transparent'>
-          {code}
-        </Button>
-      </Tooltip>
-    }
+    align: 'center',
+    render: ({ codes }) => <ProductCodes codes={codes} />
   },
   {
     key: 'cost',

@@ -11,7 +11,7 @@ export function Table<T> ({ id: tableId, data, columns, getRowKey, class: classN
       { columns.map(({ key, header, align }) => (
         <div
           key={key}
-          class={`${stickyHeader ? 'sh' : ''} [.sh]:sticky top-0 z-1 cell header-row p-4 py-3 bg-inherit`}
+          class={`${stickyHeader ? 'sh' : ''} [.sh]:sticky top-0 z-3 cell header-row p-4 py-3 bg-inherit`}
           style={{ textAlign: align ?? undefined }}
         >
           <strong class='text-base-content/60'>{header}</strong>
@@ -32,7 +32,7 @@ export function Table<T> ({ id: tableId, data, columns, getRowKey, class: classN
               return (
                 <div
                   key={`${rowKey}-${key}`}
-                  class={`${className} ${lastRow ? 'last-row' : ''} cell body-row p-4 flex flex-col justify-center text-base-content/70`}
+                  class={`${className} ${lastRow ? 'last-row' : ''} cell body-row group/cell p-4 flex flex-col justify-center text-base-content/70`}
                   style={{ placeItems: align ?? undefined, justifySelf: align ?? undefined }}
                 >
                   { render

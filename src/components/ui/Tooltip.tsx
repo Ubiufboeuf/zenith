@@ -7,6 +7,7 @@ export type TooltipPosition = TooltipSide | TooltipAlignment | `${TooltipSide} $
 interface Props {
   tooltip: string
   'tooltip-position'?: TooltipPosition
+  tabIndex?: string | number
   class?: string
   children?: ComponentChildren
 }
@@ -31,11 +32,11 @@ function getTooltipPosition (tooltipPosition: TooltipPosition): string {
     .join(' ')
 }
 
-export function Tooltip ({ tooltip, 'tooltip-position': tp = 'bottom', class: className = '', children }: Props) {
+export function Tooltip ({ tooltip, 'tooltip-position': tp = 'bottom', tabIndex,  class: className = '', children }: Props) {
   const tooltipPosition = getTooltipPosition(tp)
   
   return (
-    <div class={`${className} tooltip ${tooltipPosition}`} data-tip={tooltip}>
+    <div tabIndex={Number(tabIndex)} class={`${className} tooltip ${tooltipPosition}`} data-tip={tooltip}>
       {children}
     </div>
   )
