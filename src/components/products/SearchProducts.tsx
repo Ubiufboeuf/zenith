@@ -27,7 +27,7 @@ export function SearchProducts ({ products, query, setResults, onSearch }: Props
       const p = {
         title: product.title.toLowerCase(),
         subtitle: product.subtitle.toLowerCase(),
-        price: formatCurrency(product.price)
+        price: formatCurrency(product.salePrice)
       }
 
       const isResult = Object.values(p).some((value) => value.includes(search))

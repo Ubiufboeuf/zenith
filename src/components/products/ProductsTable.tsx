@@ -1,46 +1,78 @@
 import type { TableColumn } from '@/types/ui/tableTypes'
 import { Table } from '../ui/table/Table'
-import { formatCurrency } from '@/utils/currencies'
 import type { Product } from '@/types/products/productTypes'
 import { useEffect, useState } from 'preact/hooks'
+import { Icon } from '../ui/Icon'
+import { IconScan, IconTable } from '../ui/Icons'
+import { formatCurrency } from '@/utils/currencies'
+import { Button } from '../ui/Button'
 
 const columns: TableColumn<Product>[] = [
   {
-    key: 'product',
-    header: 'Producto',
-    width: 'auto',
-    render: ({ id, title, subtitle }) => {
-      return (
-        <div class='flex flex-col items-start overflow-hidden'>
-          <a href={`/products/${id}`} class='link link-hover font-semibold line-clamp-2 wrap-anywhere text-base-content'>{title}</a>
-          <span class='text-xs text-base-content/50 line-clamp-2 wrap-anywhere'>{subtitle}</span>
-        </div>
-      )
-    }
+    key: 'code',
+    header: 'Códigos',
+    align: 'center',
+    render: () => <Button fill='soft' shape='square' size='sm'>
+      <Icon class='size-4'>
+        <IconScan />
+      </Icon>
+    </Button>
   },
   {
-    key: 'category',
-    header: 'Categoría'
+    key: 'product',
+    header: 'Producto',
+    width: '240px',
+    render: ({ id, title, subtitle }) => (
+      <div class='flex flex-col items-start'>
+        <a href={`/products/${id}`} class='link link-hover font-semibold line-clamp-2 wrap-anywhere text-base-content'>{title}</a>
+        <span class='text-xs text-base-content/50 line-clamp-2 wrap-anywhere'>{subtitle}</span>
+      </div>
+    )
   },
   {
     key: 'brand',
-    header: 'Marca'
+    header: 'Marca',
+    width: 'minmax(auto, 240px)',
+    render: ({ brand }) => (
+      <span class='h-fit w-fit badge not-group-hover:badge-soft transition-colors'>{brand}</span>
+    )
   },
   {
-    key: 'code',
-    header: 'Códigos'
+    key: 'category',
+    header: 'Categoría',
+    width: 'minmax(auto, 240px)',
+    render: ({ category }) => (
+      <span class='h-fit w-fit badge not-group-hover:badge-soft transition-colors'>{category}</span>
+    )
   },
   {
     key: 'stock',
-    header: 'Stock'
+    header: 'Stock',
+    width: 'minmax(auto, 240px)',
+    align: 'center',
+    render: ({ stock }) => <strong>{stock}</strong>
   },
   {
-    key: 'price',
-    header: 'Precio',
+    key: 'cost',
+    header: 'Costo',
+    width: 'minmax(auto, 240px)',
     align: 'end',
-    render ({ price }) {
+    render: ({ costCurrency, costPrice }) => (
+      <strong>
+        {formatCurrency(costPrice, costCurrency)}
+      </strong>
+    )
+  },
+  {
+    key: 'sale',
+    header: 'Venta',
+    width: 'minmax(auto, 240px)',
+    align: 'end',
+    render ({ saleCurrency, salePrice }) {
       return (
-        <span class='w-fit font-semibold text-base-content'>{formatCurrency(price)}</span>
+        <strong>
+          {formatCurrency(salePrice, saleCurrency)}
+        </strong>
       )
     }
   }
@@ -54,9 +86,15 @@ interface Props {
 }
 
 // query puede servir para un highlight en los resultados
-export function ProductsTable ({ products, results }: Props) {
+export function ProductsTable ({ products, results }: Props) {  
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true)
   const [data, setData] = useState(products)
-  
+
+  async function loadProducts (products: Product[]) {    
+    setIsLoadingProducts(false)
+    setData(products)
+  }
+
   function handleResults (results: Product[] | null) {
     const resultsDefined = results
     console.log({ resultsDefined })
@@ -78,15 +116,30 @@ export function ProductsTable ({ products, results }: Props) {
   }
 
   useEffect(() => {
+    if (!products.length) return
+    
+    loadProducts(products)
+  }, [products])
+
+  useEffect(() => {
     handleResults(results)
   }, [results])
   
-  return (
+  return <div class='relative w-full flex-1 overflow-hidden'>
+    <div
+      class={`${isLoadingProducts ? '' : 'hide'} absolute z-1 h-full w-full flex items-center justify-center flex-1 rounded-lg border border-base-content/10 bg-base-300 transition-all duration-300 transition-discrete opacity-100 [.hide]:opacity-0`}
+      hidden={!isLoadingProducts}
+    >
+      <Icon class='size-12 text-gray-400 animate-pulse'>
+        <IconTable />
+      </Icon>
+    </div>
     <Table
       id='products-table'
       columns={columns}
       data={data}
-      class='text-sm rounded-lg border border-base-content/10 bg-base-100 overflow-y-auto [&_.bodyRow]:w-fit [&_.bodyRow]:max-w-60'
+      class='h-full w-full text-sm rounded-lg border border-base-content/10 bg-base-100 overflow-auto [&_.group:hover_.body-row]:bg-base-content/10 [&_.body-row]:transition-colors [&_.body-row]:w-full'
+      stickyHeader
     />
-  )
+  </div>
 }
