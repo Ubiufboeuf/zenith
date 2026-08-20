@@ -33,7 +33,7 @@ export interface ProductEvent {
 }
 
 export interface ProductWithCodes extends Product {
-  codes: ProductCode[]
+  codes: (ProductCode | undefined)[]
 }
 
 export interface ProductWithEvents extends Product {

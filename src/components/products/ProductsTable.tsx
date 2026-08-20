@@ -1,26 +1,14 @@
 import type { TableColumn } from '@/types/ui/tableTypes'
 import { Table } from '../ui/table/Table'
-import type { Product } from '@/types/products/productTypes'
+import type { ProductWithCodes } from '@/types/products/productTypes'
 import { useEffect, useState } from 'preact/hooks'
 import { Icon } from '../ui/Icon'
-import { IconScan, IconTable } from '../ui/Icons'
+import { IconTable } from '../ui/Icons'
 import { formatCurrency } from '@/utils/currencies'
 import { Button } from '../ui/Button'
 import { Tooltip } from '../ui/Tooltip'
 
-const columns: TableColumn<Product>[] = [
-  {
-    key: 'code',
-    header: 'Códigos',
-    align: 'center',
-    render: () => <Tooltip tooltip='Ver códigos' tooltip-position='right'>
-      <Button fill='soft' shape='square' size='sm'>
-        <Icon class='size-4'>
-          <IconScan />
-        </Icon>
-      </Button>
-    </Tooltip>
-  },
+const columns: TableColumn<ProductWithCodes>[] = [
   {
     key: 'product',
     header: 'Producto',
@@ -41,6 +29,21 @@ const columns: TableColumn<Product>[] = [
     key: 'brand',
     header: 'Marca',
     width: 'minmax(auto, 240px)'
+  },
+  {
+    key: 'code',
+    header: 'Códigos',
+    render ({ codes }) {
+      const code = (codes.find((c) => c?.isMain) ?? codes[0])?.code
+
+      if (!code) return '—'
+      
+      return <Tooltip tooltip='Ver códigos' tooltip-position='left'>
+        <Button title={code} class='text-sm text-start font-normal text-base-content/70 line-clamp-2 bg-transparent'>
+          {code}
+        </Button>
+      </Tooltip>
+    }
   },
   {
     key: 'cost',
@@ -77,9 +80,9 @@ const columns: TableColumn<Product>[] = [
 
 // Interfaz temporal hasta implementar una store en vez de pasar por parámetros
 interface Props {
-  products: Product[]
+  products: ProductWithCodes[]
   query: string
-  results: Product[] | null
+  results: ProductWithCodes[] | null
 }
 
 // query puede servir para un highlight en los resultados
@@ -87,12 +90,12 @@ export function ProductsTable ({ products, results }: Props) {
   const [isLoadingProducts, setIsLoadingProducts] = useState(true)
   const [data, setData] = useState(products)
 
-  async function loadProducts (products: Product[]) {    
+  async function loadProducts (products: ProductWithCodes[]) {    
     setIsLoadingProducts(false)
     setData(products)
   }
 
-  function handleResults (results: Product[] | null) {
+  function handleResults (results: ProductWithCodes[] | null) {
     const resultsDefined = results
     console.log({ resultsDefined })
     
