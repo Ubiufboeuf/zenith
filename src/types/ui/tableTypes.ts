@@ -10,6 +10,7 @@ export interface TableProps<T> {
   data: T[]
   columns: TableColumn<T>[]
   class?: string
+  stickyHeader?: boolean
   getRowKey?: (item: T, index: number) => string | number // para el key que pide preact (sino, index)
 }
 
@@ -18,7 +19,7 @@ export interface TableColumn<T> {
   header: ComponentChildren
   align?: TableColumnAlign
   class?: string
-  width?: '1fr' | 'auto' | string & {}
+  width?: '1fr' | 'auto' | 'minmax()' | string & {}
   render?: (item: T, index: number) => ComponentChildren // para saber qué renderizar. Sino, usa item[key]
 }
 
