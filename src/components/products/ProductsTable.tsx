@@ -35,18 +35,12 @@ const columns: TableColumn<Product>[] = [
   {
     key: 'category',
     header: 'Categoría',
-    width: 'minmax(auto, 240px)',
-    render: ({ category }) => (
-      <span class='h-fit w-fit badge not-group-hover:badge-soft transition-colors'>{category}</span>
-    )
+    width: 'minmax(auto, 240px)'
   },
   {
     key: 'brand',
     header: 'Marca',
-    width: 'minmax(auto, 240px)',
-    render: ({ brand }) => (
-      <span>{brand}</span>
-    )
+    width: 'minmax(auto, 240px)'
   },
   {
     key: 'cost',
@@ -77,7 +71,7 @@ const columns: TableColumn<Product>[] = [
     header: 'Stock',
     width: 'minmax(auto, 240px)',
     align: 'center',
-    render: ({ stock }) => <span class='badge not-group-hover:badge-soft'>{stock}</span>
+    render: ({ stock }) => <span class='badge badge-soft'>{stock}</span>
   }
 ]
 
@@ -141,7 +135,7 @@ export function ProductsTable ({ products, results }: Props) {
       id='products-table'
       columns={columns}
       data={data}
-      class='h-full w-full text-sm rounded-lg border border-base-content/10 bg-base-100 overflow-auto [&_.group:hover_.body-row]:bg-base-content/10 [&_.body-row]:transition-colors [&_.body-row]:w-full'
+      class='h-full w-full text-sm rounded-lg border border-base-content/10 bg-base-100 overflow-auto [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors [&_.body-row]:w-full'
       stickyHeader
     />
   </div>
