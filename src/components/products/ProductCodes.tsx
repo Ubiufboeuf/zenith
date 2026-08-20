@@ -8,7 +8,7 @@ import { IconCheck, IconClipboard, IconX } from '../ui/Icons'
 import { Icon } from '../ui/Icon'
 
 interface Props {
-  codes: ProductCode[]
+  codes: (ProductCode | undefined)[]
 }
 
 export function ProductCodes ({ codes }: Props) {
