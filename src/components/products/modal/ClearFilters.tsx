@@ -13,8 +13,6 @@ export function ClearFilters ({ activeAction, clearer }: Props) {
   const state: ProcessState = activeAction.type === 'clearing' ? activeAction.state : 'none'
   const disabled = activeAction.type === 'applying' && activeAction.state !== 'none'
 
-  console.log('clearFilters', { activeAction })
-  
   return <>
     { state === 'none' && (
       <Button fill='ghost' onClick={clearer} disabled={disabled}>

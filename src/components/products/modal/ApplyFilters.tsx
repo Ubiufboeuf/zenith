@@ -13,8 +13,6 @@ export function ApplyFilters ({ activeAction, applier }: Props) {
   const state: ProcessState = activeAction.type === 'applying' ? activeAction.state : 'none'
   const disabled = activeAction.type === 'clearing' && activeAction.state !== 'none'
   
-  console.log('applyingFilters', { activeAction })
-
   return <>
     { state === 'none' && (
       <Button color='primary' onClick={applier} disabled={disabled}>
