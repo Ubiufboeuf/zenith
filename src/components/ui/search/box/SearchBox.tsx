@@ -139,7 +139,7 @@ export function SearchBox ({
       />
 
       { isOpen && hasResultsToShow && (
-        <div onMouseDown={(e) => e.preventDefault()} class='absolute z-10 left-0 right-0 top-full mt-2 p-2 pb-0 overflow-hidden rounded-lg border border-neutral-700 bg-base-300'>
+        <div onMouseDown={(e) => e.preventDefault()} class='absolute z-21 left-0 right-0 top-full mt-2 p-2 pb-0 overflow-hidden rounded-lg border border-neutral-700 bg-base-300'>
           <SearchSection title='Búsqueda local' items={localResults} isLoading={isFetchingLocal} fallback={
             <div class='flex flex-col gap-1'>
               <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
