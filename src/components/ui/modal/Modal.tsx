@@ -1,12 +1,15 @@
+import { waterfall } from '@/events/emitter'
 import { closeModal } from '@/stores/modalStore'
 import type { ComponentChildren, TargetedMouseEvent } from 'preact'
+import { useEffect } from 'preact/hooks'
 
 interface ModalProps {
   modal: string
   children?: ComponentChildren
+  onOpen?: () => void
 }
 
-export function Modal ({ modal: modalName, children }: ModalProps) {
+export function Modal ({ modal: modalName, children, onOpen }: ModalProps) {
   function hideModal (event: TargetedMouseEvent<HTMLDialogElement>) {
     const modal = event.currentTarget
     const target = event.target
@@ -15,6 +18,14 @@ export function Modal ({ modal: modalName, children }: ModalProps) {
       closeModal(modalName)
     }
   }
+
+  useEffect(() => {
+    function open () {
+      onOpen?.()
+    }
+      
+    return waterfall.on(`open-modal:${modalName}`, open)
+  }, [modalName, onOpen])
   
   return (
     <dialog

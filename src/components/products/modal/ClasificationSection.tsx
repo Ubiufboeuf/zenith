@@ -60,8 +60,8 @@ export function ClasificationSection () {
         Clasificación
       </span>
       <div class='flex flex-wrap justify-between gap-2'>
-        { clasifications.map(({ id, label, options }) => (
-          <label key={id} class='flex flex-col gap-1 w-46'>
+        { clasifications.map(({ id, label, options }, idx) => (
+          <label key={id} class='flex flex-col gap-1 w-46' data-first-filter={idx === 0 ? 'firstFilterContainer:1' : undefined}>
             <span class='text-xs text-base-content/50 font-semibold'>{label}</span>
             <Select options={options} class='select-sm' />
           </label>

@@ -23,6 +23,7 @@ export function FilterProductsModal () {
   // para toasts o dejar esto en segundo plano, simplemente hay que mover este state a zustand
   const [activeAction, setActiveAction] = useState<ActiveAction>({ type: 'none' })
   const isExecutingRef = useRef(false)
+  const firstFilterRef = useRef<HTMLElement>()
 
   async function clearFilters () {
     if (isExecutingRef.current) return
@@ -54,8 +55,28 @@ export function FilterProductsModal () {
     }
   }
 
+  function focusFirstFilter () {
+    if (!firstFilterRef.current) {
+      let firstFilter = document.querySelector('[data-first-filter=firstFilter]')
+      if (!firstFilter) {
+        const firstFilterContainer = document.querySelector('[data-first-filter^=firstFilterContainer]')
+        if (!(firstFilterContainer instanceof HTMLElement)) return
+        
+        const [, index] = firstFilterContainer.dataset.firstFilter!.split(':')
+        firstFilter = firstFilterContainer.children[Number(index)]
+
+        if (firstFilter instanceof HTMLElement) firstFilterRef.current = firstFilter
+      }
+    }
+
+    const firstFilter = firstFilterRef.current
+    if (!(firstFilter instanceof HTMLElement)) return
+    
+    firstFilter.focus()
+  }
+
   return (
-    <Modal modal={modalName}>
+    <Modal modal={modalName} onOpen={focusFirstFilter}>
       <div class='relative h-full w-full max-h-120 max-w-160 rounded-lg bg-base-100 overflow-y-auto'> {/* p-5 px-6 */}
         <div class='relative h-full w-full min-h-fit min-w-fit flex flex-col'>
           <header class='sticky top-0 w-full h-fit flex items-center gap-2 p-4 px-6 border-b border-base-content/20 bg-base-100 z-1'>

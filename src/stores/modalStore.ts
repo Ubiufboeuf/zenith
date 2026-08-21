@@ -1,6 +1,8 @@
+import { waterfall } from '@/events/emitter'
+
 export const MODALS = {
   FILTER_PRODUCTS: 'filter-products'
-}
+} as const
 
 const modals = new Map<string, HTMLDialogElement>()
 
@@ -23,9 +25,13 @@ function getModal (name: string) {
 export function openModal (name: string) {
   const modal = modals.get(name) ?? getModal(name)
   modal?.showModal()
+  waterfall.emit('open-modal', name)
+  waterfall.emit(`open-modal:${name}`)
 }
 
 export function closeModal (name: string) {
   const modal = modals.get(name) ?? getModal(name)
   modal?.close()
+  waterfall.emit('close-modal', name)
+  waterfall.emit(`close-modal:${name}`)
 }
