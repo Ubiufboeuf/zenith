@@ -1,18 +1,18 @@
 import { useEffect } from 'preact/hooks'
 import { SearchSection } from '../ui/search/toolbar/SearchSection'
-import type { Product } from '@/types/products/productTypes'
+import type { ProductWithCodes } from '@/types/products/productTypes'
 import { formatCurrency } from '@/utils/currencies'
 
 // Interfaz temporal para pasar por parámetros hasta que haga una store
 interface Props {
-  products: Product[]
+  products: ProductWithCodes[]
   query: string
-  setResults: (results: Product[] | null) => void
+  setResults: (results: ProductWithCodes[] | null) => void
   onSearch: (newQuery: string) => void
 }
 
 export function SearchProducts ({ products, query, setResults, onSearch }: Props) {
-  async function handleSearch (query: string, setResults: (results: Product[] | null) => void) {
+  async function handleSearch (query: string, setResults: (results: ProductWithCodes[] | null) => void) {
     console.log('handleSearch()', { query, products })
 
     if (!query || !query.trim()) {
@@ -21,7 +21,7 @@ export function SearchProducts ({ products, query, setResults, onSearch }: Props
     }
 
     const search = query.trim().toLowerCase()
-    const results: Product[] = []
+    const results: ProductWithCodes[] = []
 
     for (const product of products) {
       const p = {

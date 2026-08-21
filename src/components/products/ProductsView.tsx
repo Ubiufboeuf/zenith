@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'preact/hooks'
 import { ProductsTable } from './ProductsTable'
 import { SearchProducts } from './SearchProducts'
-import type { Product } from '@/types/products/productTypes'
+import type { ProductWithCodes } from '@/types/products/productTypes'
 import { FilterProductsModal } from './FilterProductsModal'
 import { mockedProducts } from '@/mocks/products'
 
-async function getProducts (): Promise<Product[] | undefined> {
-  const products: Product[] = []
+async function getProducts (): Promise<ProductWithCodes[] | undefined> {
+  const products: ProductWithCodes[] = []
 
   for (const prod of mockedProducts) {
     products.push({
@@ -21,9 +21,9 @@ async function getProducts (): Promise<Product[] | undefined> {
 
 export function ProductsView () {
   const [searchQuery, setSearchQuery] = useState('')
-  const [results, setResults] = useState<Product[] | null>(null)
+  const [results, setResults] = useState<ProductWithCodes[] | null>(null)
   
-  const [products, setProducts] = useState<Product[]>([])
+  const [products, setProducts] = useState<ProductWithCodes[]>([])
 
   async function loadProducts () {
     const products = await getProducts()
