@@ -1,7 +1,7 @@
 import { useEffect } from 'preact/hooks'
 import { SearchSection } from '../ui/search/toolbar/SearchSection'
 import type { ProductWithCodes } from '@/types/products/productTypes'
-import { formatCurrency } from '@/utils/currencies'
+import { searchLake } from '@/lib/search/lake'
 
 // Interfaz temporal para pasar por parámetros hasta que haga una store
 interface Props {
@@ -20,23 +20,7 @@ export function SearchProducts ({ products, query, setResults, onSearch }: Props
       return
     }
 
-    const search = query.trim().toLowerCase()
-    const results: ProductWithCodes[] = []
-
-    for (const product of products) {
-      const p = {
-        title: product.title.toLowerCase(),
-        subtitle: product.subtitle.toLowerCase(),
-        price: formatCurrency(product.salePrice)
-      }
-
-      const isResult = Object.values(p).some((value) => value.includes(search))
-
-      if (isResult) results.push(product)
-    }
-
-    console.log(results)
-    
+    const results = searchLake(products, query)
     setResults(results)
   }
   

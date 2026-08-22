@@ -11,7 +11,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
   {
     key: 'product',
     header: 'Producto',
-    width: '240px',
+    width: 'minmax(240px, 0.25fr)',
     render: ({ id, title, subtitle }) => (
       <div class='flex flex-col items-start'>
         <a href={`/products/${id}`} class='link link-hover font-semibold line-clamp-2 wrap-anywhere text-base-content'>{title}</a>
@@ -22,23 +22,24 @@ const columns: TableColumn<ProductWithCodes>[] = [
   {
     key: 'category',
     header: 'Categoría',
-    width: 'minmax(auto, 240px)'
+    width: 'minmax(120px, 0.125fr)'
   },
   {
     key: 'brand',
     header: 'Marca',
-    width: 'minmax(auto, 240px)'
+    width: 'minmax(120px, 0.125fr)'
   },
   {
     key: 'code',
     header: 'Códigos',
     align: 'center',
+    width: 'minmax(170px, 0.177fr)',
     render: ({ codes }) => <ProductCodes codes={codes} />
   },
   {
     key: 'cost',
     header: 'Costo',
-    width: 'minmax(auto, 240px)',
+    width: 'minmax(144px, 0.150fr)',
     align: 'end',
     render: ({ costCurrency, costPrice }) => (
       <span>
@@ -49,7 +50,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
   {
     key: 'sale',
     header: 'Venta',
-    width: 'minmax(auto, 240px)',
+    width: 'minmax(144px, 0.150fr)',
     align: 'end',
     render ({ saleCurrency, salePrice }) {
       return (
@@ -62,7 +63,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
   {
     key: 'stock',
     header: 'Stock',
-    width: 'minmax(auto, 240px)',
+    width: 'minmax(96px, 0.1fr)',
     align: 'center',
     render: ({ stock }) => <span class='badge badge-soft'>{stock}</span>
   }
