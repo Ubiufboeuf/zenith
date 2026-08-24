@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import type { SVGProps } from '@/types/ui/iconTypes'
+import type { UIDirection } from '@/types/uiTypes'
 
 const Svg = ({
   children, id, viewBox = '0 0 24 24',
@@ -266,3 +267,18 @@ export const IconClipboard = () => (
     <path d='M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2' />
   </Svg>
 )
+
+export const IconChevron = ({ direction = 'up' }: { direction?:  UIDirection }) => {
+  const rotations: Record<UIDirection, number> = { up: 0, right: 90, down: 180, left: 270 }
+  const rotation = `${rotations[direction]}deg`
+
+  return (
+    <Svg>
+      <path
+        d='M6 15l6 -6l6 6'
+        class='origin-center transform-[rotate(var(--rotation))]'
+        style={{ '--rotation': rotation }}
+      />
+    </Svg>
+  )
+}

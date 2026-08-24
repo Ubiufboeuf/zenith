@@ -6,6 +6,7 @@ import { Icon } from '../ui/Icon'
 import { IconTable } from '../ui/Icons'
 import { formatCurrency } from '@/utils/currencies'
 import { ProductCodes } from './ProductCodes'
+import { Pagination } from './Pagination'
 
 const columns: TableColumn<ProductWithCodes>[] = [
   {
@@ -129,7 +130,8 @@ export function ProductsTable ({ products, results }: Props) {
       id='products-table'
       columns={columns}
       data={data}
-      class='h-fit max-h-full w-full text-sm rounded-lg border border-base-content/10 bg-base-100 overflow-auto [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors [&_.body-row]:w-full'
+      footer={Pagination}
+      class='h-full w-full text-sm rounded-lg border border-base-content/10 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
       stickyHeader
     />
   </div>

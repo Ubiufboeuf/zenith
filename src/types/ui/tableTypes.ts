@@ -11,6 +11,7 @@ export interface TableProps<T> {
   columns: TableColumn<T>[]
   class?: string
   stickyHeader?: boolean
+  footer?: () => ComponentChildren
   getRowKey?: (item: T, index: number) => string | number // para el key que pide preact (sino, index)
 }
 
