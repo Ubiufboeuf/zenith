@@ -49,8 +49,8 @@ export function TodaySalesCard () {
   return (
     <article class='py-6 px-3 h-full grid grid-rows-[1fr_2fr_7fr]'>
       <div class='h-full px-4 flex items-center justify-between'>
-        <span class='text-sm text-base-content/50'>Ventas por divisa</span>
-        <TrendBadge label='20.4%' sentiment='positive' class='badge-soft' />
+        <span class='text-sm font-semibold text-base-content'>Ventas por divisa</span>
+        <TrendBadge label='20.4%' sentiment='positive' class='border-none bg-transparent p-0' />
       </div>
       <div class='h-full flex flex-col px-4 py-3 gap-2.5'>
         <SegmentedBarChart segments={salesByCurrency} />

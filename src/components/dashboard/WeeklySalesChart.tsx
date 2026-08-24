@@ -11,10 +11,10 @@ export function WeeklySalesChart () {
   ))
 
   return (
-    <article class='py-6 px-4 h-full flex flex-col'>
+    <article class='p-4 h-full flex flex-col'>
       <div class='flex items-center justify-between'>
         <span class='px-2 text-md font-bold text-base-content'>Ventas de la semana</span>
-        <Select options={[{ id: 'last-week', label: 'Últimos 7 días' }]} />
+        <Select class='w-48 not-shr:select-ghost not-shr:text-base-content/50 transition-all' options={[{ id: 'last-week', label: 'Últimos 7 días' }]} />
       </div>
       <LineChart
         size={chartSize}

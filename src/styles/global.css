@@ -27,6 +27,19 @@
   }
 }
 
+@custom-variant not-shr {
+  @media (pointer: fine) {
+    &:not(:hover) {
+      @slot;
+    }
+  }
+  @media (pointer: coarse) {
+    &:not(:active) {
+      @slot;
+    }
+  }
+}
+
 :root {
   color-scheme: dark light;
   font-family: Inter, system-ui;

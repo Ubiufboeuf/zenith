@@ -151,8 +151,8 @@ export function LowStock () {
           <span class='px-2 text-md font-bold text-base-content group-[.critic]:text-error group-[.warning]:text-warning'>Inventario</span>
         </div>
         <div class='flex items-center gap-2 flex-wrap'>
-          { warning ? <span class='badge badge-soft badge-warning font-medium text-xs'>Bajo ({warning})</span> : '' }
-          { critic ? <span class='badge badge-soft badge-error font-medium text-xs'>Crítico ({critic})</span> : '' }
+          { warning ? <span class='badge badge-soft badge-warning font-medium text-xs'>Bajo · {warning}</span> : '' }
+          { critic ? <span class='badge badge-soft badge-error font-medium text-xs'>Crítico · {critic}</span> : '' }
         </div>
       </div>
       <div class='h-full w-full flex overflow-y-auto scrollbar-thin'>

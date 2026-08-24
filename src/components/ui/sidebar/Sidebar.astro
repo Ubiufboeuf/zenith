@@ -8,7 +8,7 @@ import SidebarSection from './SidebarSection.astro'
 <aside class='z-20 fixed not-md:-left-sidebar peer-checked:left-0 top-16 md:top-0 h-[calc(100%-64px)] md:h-full w-sidebar overflow-y-auto scrollbar-gutter-stable border-r border-r-neutral-700 bg-base-100 transition-[left]'>
   <div class='h-full min-h-fit w-full flex flex-col gap-2 p-3 py-4'>
     <div class='pb-4'>
-      <Button width='block' color='primary'>Nueva venta</Button>
+      <Button width='block' color='primary' fill='soft'>Nueva venta</Button>
     </div>
     { SIDEBAR_SECTIONS.map((section) => <SidebarSection {...section} />) }
   </div>
