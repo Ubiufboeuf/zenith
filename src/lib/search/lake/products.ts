@@ -91,7 +91,7 @@ export function weighProduct (product: ProductWithCodes, tokens: string[]): numb
   return totalScore
 }
 
-export function searchLake<T extends ProductWithCodes> (items: T[], query: string): T[] {
+export function lakeSearch<T extends ProductWithCodes> (items: T[], query: string): T[] {
   const tokens = tokenize(query)
   if (tokens.length === 0) return items
 

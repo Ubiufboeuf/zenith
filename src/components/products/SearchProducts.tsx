@@ -1,7 +1,7 @@
 import { useEffect } from 'preact/hooks'
 import { SearchSection } from '../ui/search/toolbar/SearchSection'
 import type { ProductWithCodes } from '@/types/products/productTypes'
-import { searchLake } from '@/lib/search/lake/products'
+import { lakeSearch } from '@/lib/search/lake/products'
 
 // Interfaz temporal para pasar por parámetros hasta que haga una store
 interface Props {
@@ -20,7 +20,7 @@ export function SearchProducts ({ products, query, setResults, onSearch }: Props
       return
     }
 
-    const results = searchLake(products, query)
+    const results = lakeSearch(products, query)
     setResults(results)
   }
   
