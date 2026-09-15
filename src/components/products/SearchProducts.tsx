@@ -1,7 +1,7 @@
 import { useEffect } from 'preact/hooks'
 import { SearchSection } from '../ui/search/toolbar/SearchSection'
 import type { ProductWithCodes } from '@/types/products/productTypes'
-import { searchLake } from '@/lib/search/lake'
+import { searchLake } from '@/lib/search/lake/products'
 
 // Interfaz temporal para pasar por parámetros hasta que haga una store
 interface Props {

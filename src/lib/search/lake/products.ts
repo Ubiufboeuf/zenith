@@ -1,6 +1,6 @@
 import type { ProductWithCodes } from '@/types/products/productTypes'
-import { tokenize } from './tokenizer'
-import { isFuzzyMatch } from './fuzzy'
+import { tokenize } from '../tokenizer'
+import { isFuzzyMatch } from '../fuzzy'
 
 export const MATCH_MULTIPLIERS = {
   EXACT: 1.0,
