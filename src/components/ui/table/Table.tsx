@@ -11,7 +11,7 @@ export function Table<T> ({ id: tableId, data, columns, getRowKey, class: classN
     >
       <div class='h-full w-full overflow-auto bg-inherit'>
         <div
-          class='h-fit w-fit grid [&_.cell]:not-[.last-row]:border-b [&_.cell]:border-b-base-content/10 bg-inherit'
+          class='h-fit w-full min-w-fit grid [&_.cell]:not-[.last-row]:border-b [&_.cell]:border-b-base-content/10 bg-inherit'
           style={{ gridTemplateColumns: cols }}
         >
 
