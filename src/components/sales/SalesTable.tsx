@@ -11,6 +11,8 @@ import { getPaymentStatusLabel, getSaleDocumentLabel, getSaleStatusLabel } from 
 
 interface Props {
   sales: Sale[]
+  query: string
+  results: Sale[] | null
 }
 
 const columns: TableColumn<Sale>[] = [
@@ -106,7 +108,7 @@ const columns: TableColumn<Sale>[] = [
   }
 ]
 
-export function SalesTable ({ sales }: Props) {
+export function SalesTable ({ sales, results }: Props) {
   const [isLoadingSales, setIsLoadingSales] = useState(true)
   const [data, setData] = useState(sales)
 
@@ -115,11 +117,35 @@ export function SalesTable ({ sales }: Props) {
     setData(sales)
   }
 
+  function handleResults (results: Sale[] | null) {
+    const resultsDefined = results
+    console.log({ resultsDefined })
+    
+    if (!resultsDefined) {
+      setData(sales)
+      return
+    }
+    
+    const hasResults = results.length > 0
+    console.log({ hasResults })
+
+    if (!hasResults) {
+      setData([])
+      return
+    }
+    
+    setData(results)
+  }
+
   useEffect(() => {
     if (!sales.length) return
 
     loadSales(sales)
   }, [sales])
+
+  useEffect(() => {
+    handleResults(results)
+  }, [results])
   
   return (
     <div class='relative w-full flex-1 overflow-hidden'>
