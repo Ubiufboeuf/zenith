@@ -1,7 +1,7 @@
 import type { Sale } from '@/types/sales/saleTypes'
 import { tokenize } from '../tokenizer'
 import { isFuzzyMatch } from '../fuzzy'
-import { getSaleDocumentLabel } from '@/utils/labels'
+import { getPaymentStatusLabel, getSaleDocumentLabel, getSaleStatusLabel } from '@/utils/labels'
 
 export const MATCH_MULTIPLIERS = {
   EXACT: 1.0,
@@ -54,13 +54,16 @@ export function weighSale (sale: Sale, tokens: string[]): number {
 
   let totalScore = 0
 
-  const label = getSaleDocumentLabel(sale.documentType, sale.saleType)
+  const documentLabel = getSaleDocumentLabel(sale.documentType, sale.saleType)
+  const statusLabel = getSaleStatusLabel(sale.status)
+  const paymentStatusLabel = getPaymentStatusLabel(sale.paymentStatus)
+  
   
   const normDocumentNumber = sale.documentNumber ? tokenize(sale.documentNumber).join(' ') : ''
   const normDocumentNumberWithHashtag = sale.documentNumber ? tokenize(`#${sale.documentNumber}`).join(' ') : ''
-  const normType = label ? tokenize(label).join(' ') : ''
-  const normStatus = sale.status ? tokenize(sale.status).join(' ') : ''
-  const normPayment = sale.paymentStatus ? tokenize(sale.paymentStatus).join(' ') : ''
+  const normType = documentLabel ? tokenize(documentLabel).join(' ') : ''
+  const normStatus = statusLabel ? tokenize(statusLabel).join(' ') : ''
+  const normPayment = paymentStatusLabel ? tokenize(paymentStatusLabel).join(' ') : ''
   const normTotal = sale.total ? tokenize(String(sale.total)).join(' ') : ''
   const normSubTotal = sale.subtotal ? tokenize(String(sale.subtotal)).join(' ') : ''
   const normCurrency = sale.currency ? tokenize(String(sale.currency)).join(' ') : ''
