@@ -40,3 +40,21 @@ export function debounceAsync<T extends (...args: any[]) => any> (cb: T, timeout
     })
   }
 }
+
+export function formatDate (dateString: string): string {
+  const date = new Date(dateString)
+
+  const dateFormatted = new Intl.DateTimeFormat('es-UY', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).format(date)
+
+  const timeFormatted = new Intl.DateTimeFormat('es-UY', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(date)
+
+  return `${dateFormatted}, ${timeFormatted}`
+}
