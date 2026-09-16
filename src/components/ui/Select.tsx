@@ -1,3 +1,4 @@
+import type { TargetedEvent } from 'preact'
 import { useId } from 'preact/hooks'
 
 export interface SelectOption {
@@ -13,11 +14,33 @@ interface SelectProps {
   onChange?: (option: SelectOption) => void
 }
 
-export function Select ({ options, class: className = '' }: SelectProps) {
+export function Select ({ options, onChange, class: className = '' }: SelectProps) {
   const selectId = useId()
 
+  function handleChange (event: TargetedEvent<HTMLSelectElement>) {
+    const select = event.currentTarget
+    const optionElement = select.selectedOptions[0]
+
+    const value = optionElement.value
+    let op
+
+    for (const option of options) {
+      if (typeof option === 'string' && option === value) {
+        op = { id: option, label: option }
+      }
+
+      if (typeof option !== 'string' && option.id === value) {
+        op = option
+      }
+    }
+    
+    if (!op) return
+    
+    onChange?.(op)
+  }
+
   return (
-    <select class={`${className} select cursor-pointer`}>
+    <select class={`${className} select cursor-pointer`} onChange={handleChange}>
       { options.map((option) => {
         if (typeof option === 'string') {
           return (
