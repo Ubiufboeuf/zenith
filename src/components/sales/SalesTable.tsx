@@ -53,8 +53,9 @@ const columns: TableColumn<Sale>[] = [
     key: 'clientId',
     header: 'Cliente',
     width: '1fr',
+    align: 'center',
     render: ({ clientId }) => {
-      if (!clientId) return <div class='h-0.5 w-full bg-base-content/20 rounded-full'></div>
+      if (!clientId) return '—'
 
       const [clientName, setClientName] = useState<string | undefined>()
 
