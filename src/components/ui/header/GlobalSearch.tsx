@@ -1,5 +1,7 @@
 import type { SearchFetchParams, SearchItem } from '@/types/ui/search/searchBoxTypes'
 import { SearchBox } from '../search/box/SearchBox'
+import { Keybinds } from '../Keybinds'
+import { useRef } from 'preact/hooks'
 
 const initialResults: SearchItem[] = [
   {
@@ -38,15 +40,51 @@ async function apiFetcher ({ query }: SearchFetchParams): Promise<SearchItem[]> 
 }
 
 export function GlobalSearch () {
-  return (
+  const inputRef = useRef<HTMLInputElement>(null)
+  
+  function focusGlobalSearch () {
+    const input = inputRef.current
+    if (!input) return
+
+    input.focus()
+  }
+
+  function blurGlobalSearch () {
+    const input = inputRef.current
+    if (!input) return
+
+    input.blur()
+  }
+
+  function whenToFocus () {
+    if (document.activeElement instanceof HTMLInputElement) return false
+    if (document.activeElement instanceof HTMLTextAreaElement) return false
+    return true
+  }
+  
+  return <>
     <SearchBox
       id='global-search'
+      inputRef={inputRef}
       placeholder='Buscar usuarios, pedidos, configuraciones...'
       initialResults={initialResults}
       localFetcher={localFetcher}
       apiFetcher={apiFetcher}
       debounceMs={300}
       class='h-8 w-80'
+      keybind={
+        <Keybinds
+          keys='/'
+          relax='any-special'
+          onBind={focusGlobalSearch}
+          when={whenToFocus}
+        />
+      }
     />
-  )
+    <Keybinds
+      keys='Escape'
+      onBind={blurGlobalSearch}
+      hidden
+    />
+  </>
 }

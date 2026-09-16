@@ -1,3 +1,5 @@
+import type { ComponentChildren, RefObject } from 'preact'
+
 export type SearchItem = {
   id: string
   data: SearchItemData
@@ -27,6 +29,8 @@ export interface SearchItemCalc {
 
 export interface SearchBoxProps {
   id: string
+  inputRef?: RefObject<HTMLInputElement>
+  keybind?: ComponentChildren
   placeholder?: string
   initialResults?: SearchItem[]
   localFetcher?: (params: SearchFetchParams) => Promise<SearchItem[]>

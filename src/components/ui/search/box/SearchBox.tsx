@@ -11,7 +11,7 @@ import { Dot } from '../../Dot'
 const DEFAULT_DEBOUNCE = 300
 
 export function SearchBox ({
-  id, class: className = '',
+  id, inputRef, class: className = '', keybind,
   placeholder, initialResults = [], debounceMs = DEFAULT_DEBOUNCE,
   localFetcher, apiFetcher
 }: SearchBoxProps) {
@@ -131,12 +131,14 @@ export function SearchBox ({
       </Icon>
       <input
         id={id}
+        ref={inputRef}
         placeholder={placeholder}
         onInput={handleInput}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
-        class='h-full w-full text-xs line-clamp-1 text-ellipsis'
+        class='h-full w-full min-w-fit text-xs line-clamp-1 text-ellipsis'
       />
+      {keybind}
 
       { isOpen && hasResultsToShow && (
         <div onMouseDown={(e) => e.preventDefault()} class='absolute z-21 left-0 right-0 top-full mt-2 p-2 pb-0 overflow-hidden rounded-lg border border-neutral-700 bg-base-300'>
