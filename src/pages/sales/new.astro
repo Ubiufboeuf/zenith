@@ -1,0 +1,10 @@
+---
+import { DetailsPanel } from '@/components/sales/new/DetailsPanel'
+import { ListView } from '@/components/sales/new/ListView'
+import Layout from '@/layouts/layout.astro'
+---
+
+<Layout title='Nueva venta' class='flex flex-row'>
+  <ListView client:load />
+  <DetailsPanel client:load />
+</Layout>
