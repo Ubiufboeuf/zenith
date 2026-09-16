@@ -30,7 +30,7 @@ export function LineChart ({ size, columns, rows, points, pointSize, pointStroke
 
   return (
     <article class='h-full w-full flex flex-col items-center overflow-hidden'>
-      <svg viewBox={viewBox} class='h-full w-full border-neutral-700 overflow-hidden'>
+      <svg viewBox={viewBox} class='h-full w-full border-base-content/20 overflow-hidden'>
         <defs>
           <linearGradient id={gradientId} x1='0' x2='0' y1='0' y2='1'>
             <stop offset='0%' stop-color='#6366f1' stop-opacity='0.35' />

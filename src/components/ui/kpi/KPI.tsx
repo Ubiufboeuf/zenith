@@ -13,7 +13,7 @@ export function KPI ({ title, value, subtext, trend, color, icon: KpiIcon }: Kpi
   const iconColor = (color ? COLORS[color] : '') || color
 
   return (
-    <article class='card h-full flex-1 flex flex-col justify-between p-4 px-5 gap-1 border border-neutral-700 bg-base-100'>
+    <article class='card h-full flex-1 flex flex-col justify-between p-4 px-5 gap-1 border border-base-content/20 bg-base-100'>
       <div class='w-full h-fit flex justify-between items-center'>
         <span class='text-sm text-base-content/50'>{title}</span>
         <Icon class={`${iconColor} size-5`}>

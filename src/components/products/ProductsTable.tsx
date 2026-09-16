@@ -119,7 +119,7 @@ export function ProductsTable ({ products, results }: Props) {
   
   return <div class='relative w-full flex-1 overflow-hidden'>
     <div
-      class={`${isLoadingProducts ? '' : 'hide'} absolute z-10 h-full w-full flex items-center justify-center flex-1 rounded-lg border border-base-content/10 bg-base-300 transition-all duration-300 transition-discrete opacity-100 [.hide]:opacity-0`}
+      class={`${isLoadingProducts ? '' : 'hide'} absolute z-10 h-full w-full flex items-center justify-center flex-1 rounded-lg border border-base-content/20 bg-base-300 transition-all duration-300 transition-discrete opacity-100 [.hide]:opacity-0`}
       hidden={!isLoadingProducts}
     >
       <Icon class='size-12 text-gray-400 animate-pulse'>
@@ -131,7 +131,7 @@ export function ProductsTable ({ products, results }: Props) {
       columns={columns}
       data={data}
       footer={Pagination}
-      class='h-full w-full text-sm rounded-lg border border-base-content/10 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
+      class='h-full w-full text-sm rounded-lg border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
       stickyHeader
     />
   </div>

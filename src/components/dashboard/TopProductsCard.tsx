@@ -63,7 +63,7 @@ export function TopProductsCard () {
   }))
   
   return (
-    <div class='card h-full w-full flex flex-col gap-4 p-6 border border-neutral-700 bg-base-100'>
+    <div class='card h-full w-full flex flex-col gap-4 p-6 border border-base-content/20 bg-base-100'>
       <div class='flex items-center justify-between gap-2 flex-wrap'>
         <span class='px-2 text-md font-bold text-base-content'>Productos más vendidos</span>
         <Select options={[{ id: 'last-week', label: 'Últimos 7 días' }]} class='select-sm w-40 not-shr:select-ghost not-shr:text-base-content/50 transition-all' />

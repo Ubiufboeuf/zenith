@@ -23,7 +23,7 @@ export function ProductCodes ({ codes }: Props) {
           <span class='absolute left-1/2 top-1/2 -translate-1/2 h-full w-full flex items-center justify-center opacity-0 group-shr/2:opacity-100'>Ver códigos</span>
         </Button>
       </Tooltip>
-      <div tabIndex={-1} class='dropdown-content menu absolute z-5 group-[:not(.last-row)]/cell:top-full group-[.last-row]/cell:bottom-full w-max max-w-80 h-fit rounded-lg border border-neutral-700 bg-base-300'>
+      <div tabIndex={-1} class='dropdown-content menu absolute z-5 group-[:not(.last-row)]/cell:top-full group-[.last-row]/cell:bottom-full w-max max-w-80 h-fit rounded-lg border border-base-content/20 bg-base-300'>
         { codes.map((c) => {
           if (!c) return
           

@@ -15,7 +15,7 @@ export function BranchesSelector () {
   
   return (
     <Select
-      class='h-full w-full appearance-none border-neutral-700 shadow-none'
+      class='h-full w-full appearance-none border-base-content/20 shadow-none'
       options={branches}
     />
   )

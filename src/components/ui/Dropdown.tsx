@@ -30,7 +30,7 @@ export function Dropdown ({ class: className, isOpen, hideWith, children }: Drop
   }, [isOpen])
   
   return (
-    <section ref={menuRef} class={`${className} ${isOpen ? 'open' : ''} dropdown absolute rounded-lg border border-neutral-700 bg-base-300 transition-[opacity,visibility] invisible [.open]:visible opacity-0 [.open]:opacity-100`}>
+    <section ref={menuRef} class={`${className} ${isOpen ? 'open' : ''} dropdown absolute rounded-lg border border-base-content/20 bg-base-300 transition-[opacity,visibility] invisible [.open]:visible opacity-0 [.open]:opacity-100`}>
       {children}
     </section>
   )

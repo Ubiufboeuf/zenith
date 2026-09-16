@@ -56,7 +56,7 @@ export function Table<T> ({ id: tableId, data, columns, getRowKey, class: classN
         </div>
       </div>
       { Footer && (
-        <footer class='h-fit w-full border-t border-base-content/10'>
+        <footer class='h-fit w-full border-t border-base-content/20'>
           <Footer />
         </footer>
       ) }

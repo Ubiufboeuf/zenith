@@ -140,7 +140,7 @@ const state =
 
 export function LowStock () {
   return (
-    <div class={`${state} group card h-full w-full flex flex-col overflow-hidden gap-4 p-6 border [.critic]:border-error/50 [.warning]:border-warning/50 border-neutral-700 bg-base-100`}>
+    <div class={`${state} group card h-full w-full flex flex-col overflow-hidden gap-4 p-6 border [.critic]:border-error/50 [.warning]:border-warning/50 border-base-content/20 bg-base-100`}>
       <div class='flex items-center justify-between gap-2 flex-wrap'>
         <div class='flex items-center gap-2 flex-wrap'>
           <Icon class='group-[.critic]:text-error group-[.warning]:text-warning text-neutral-500'>
