@@ -39,7 +39,7 @@ export function DetailsPanel () {
   }, [])
   
   return (
-    <section class='w-80 h-full flex flex-col gap-4 p-4 border-l border-base-content/20 bg-base-100'>
+    <section class='w-80 h-full flex flex-col gap-2 p-4 border-l border-base-content/20 bg-base-100'>
       <div class='flex flex-col gap-2'>
         <div class='flex gap-2'>
           <Button fill='soft' color='primary' class='flex-1'>Buscar cliente</Button>
@@ -55,7 +55,7 @@ export function DetailsPanel () {
           <Select options={documentOptions} onChange={handleChange} />
           <Select options={currencyOptions} class='w-32' />
         </div>
-        <Select options={cashierOptions} />
+        <Select options={cashierOptions} class='select-sm text-base-content/80' />
       </div>
       <div class='flex justify-between gap-2'>
         <label class='flex-1'>
@@ -71,6 +71,10 @@ export function DetailsPanel () {
         <div class='h-px w-full bg-base-content/20' />
       </div>
       <div class='flex flex-col justify-end gap-2 flex-1'>
+        <div class='flex justify-between items-center gap-4 pb-2 text-sm text-base-content/70'>
+          <span>UYU</span>
+          <input type='number' class='input input-sm' placeholder='Descuento general' />
+        </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Subtotal</span>
           <span class='text-base-content font-semibold'>UYU 16.000,20</span>
