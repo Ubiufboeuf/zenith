@@ -15,6 +15,7 @@
     "lib",
     "utils",
     "deps",
-    "dx"
+    "dx",
+    "a11y"
   ]
 }
