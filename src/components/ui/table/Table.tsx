@@ -16,10 +16,10 @@ export function Table<T> ({ id: tableId, data, columns, getRowKey, class: classN
         >
 
           {/* Cabecera */}
-          { columns.map(({ key, header, align }) => (
+          { columns.map(({ key, header, align, headerClass = '' }) => (
             <div
               key={key}
-              class={`${stickyHeader ? 'sh' : ''} [.sh]:sticky top-0 z-3 cell header-row p-4 py-3 bg-inherit`}
+              class={`${headerClass} ${stickyHeader ? 'sh' : ''} [.sh]:sticky top-0 z-3 cell header-row p-4 py-3 bg-inherit`}
               style={{ textAlign: align ?? undefined }}
             >
               <strong class='text-base-content/60'>{header}</strong>

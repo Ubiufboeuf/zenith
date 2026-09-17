@@ -20,6 +20,7 @@ export interface TableColumn<T> {
   header: ComponentChildren
   align?: TableColumnAlign
   class?: string
+  headerClass?: string
   width?: '1fr' | 'auto' | 'minmax()' | string & {}
   render?: (item: T, index: number) => ComponentChildren // para saber qué renderizar. Sino, usa item[key]
 }
