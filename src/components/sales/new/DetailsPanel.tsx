@@ -55,7 +55,7 @@ export function DetailsPanel () {
           <Select options={documentOptions} onChange={handleChange} />
           <Select options={currencyOptions} class='w-32' />
         </div>
-        <Select options={cashierOptions} class='select-sm text-base-content/80' />
+        <Select options={cashierOptions} class='select-sm text-base-content/80 [&_option]:shr:text-base-content [&_option:checked]:text-base-content [&_option:checked]:font-semibold' />
       </div>
       <div class='flex justify-between gap-2'>
         <label class='flex-1'>
@@ -71,8 +71,11 @@ export function DetailsPanel () {
         <div class='h-px w-full bg-base-content/20' />
       </div>
       <div class='flex flex-col justify-end gap-2 flex-1'>
-        <div class='flex justify-between items-center gap-4 pb-2 text-sm text-base-content/70'>
-          <span>UYU</span>
+        <div class='flex justify-between items-center gap-2 pb-2 text-sm text-base-content/70'>
+          <Select
+            options={['%', '$']}
+            class='select-sm w-16 font-semibold'
+          />
           <input type='number' class='input input-sm' placeholder='Descuento general' />
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
@@ -81,7 +84,7 @@ export function DetailsPanel () {
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Descuentos</span>
-          <span>UYU 16.000,20</span>
+          <span class='text-secondary'>- UYU 16.000,20</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Neto gravado</span>
@@ -91,9 +94,9 @@ export function DetailsPanel () {
           <span>IVA</span>
           <span>UYU 16.000,20</span>
         </div>
-        <div class='flex justify-between text-sm h-fit py-1 text-base-content/70'>
-          <strong class='flex h-full items-center'>Total</strong>
-          <span class='text-xl text-primary font-semibold'>UYU 16.000,20</span>
+        <div class='flex justify-between text-sm h-fit text-base-content/70'>
+          <strong class='flex h-full items-center pt-2'>Total</strong>
+          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>UYU 16.000,20</span>
         </div>
         <Button color='primary' width='block'>Cobrar</Button>
       </div>
