@@ -4,7 +4,7 @@ import { ListView } from '@/components/sales/new/ListView'
 import Layout from '@/layouts/layout.astro'
 ---
 
-<Layout title='Nueva venta' class='flex flex-row'>
+<Layout title='Nueva venta' class='flex flex-row' sidebar={false}>
   <ListView client:load />
   <DetailsPanel client:load />
 </Layout>

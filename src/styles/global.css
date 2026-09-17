@@ -40,6 +40,12 @@
   }
 }
 
+@custom-variant sidebar {
+  &:where([data-sidebar='true'] *) {
+    @slot;
+  }
+}
+
 :root {
   color-scheme: dark light;
   font-family: Inter, system-ui;
