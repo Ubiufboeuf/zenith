@@ -124,21 +124,23 @@ export function SearchBox ({
     apiResults.length > 0 || isFetchingApi
   
   return (
-    <div class={`${className} relative not-[[class*=h-]]:h-full not-[[class*=w-]]:w-full input transition-colors`}
+    <div class={`${className} relative not-[[class*=h-]]:h-full not-[[class*=w-]]:w-full transition-colors`}
     >
-      <Icon class='size-4 stroke-2 text-base-content opacity-50'>
-        <IconSearch />
-      </Icon>
-      <input
-        id={id}
-        ref={inputRef}
-        placeholder={placeholder}
-        onInput={handleInput}
-        onFocus={() => setIsOpen(true)}
-        onBlur={() => setIsOpen(false)}
-        class='h-full w-full min-w-fit text-xs line-clamp-1 text-ellipsis'
-      />
-      {keybind}
+      <label class='input h-full'>
+        <Icon class='size-4 stroke-2 text-base-content opacity-50'>
+          <IconSearch />
+        </Icon>
+        <input
+          id={id}
+          ref={inputRef}
+          placeholder={placeholder}
+          onInput={handleInput}
+          onFocus={() => setIsOpen(true)}
+          onBlur={() => setIsOpen(false)}
+          class='h-full w-full min-w-fit text-xs line-clamp-1 text-ellipsis'
+        />
+        {keybind}
+      </label>
 
       { isOpen && hasResultsToShow && (
         <div onMouseDown={(e) => e.preventDefault()} class='absolute z-21 left-0 right-0 top-full mt-2 p-2 pb-0 overflow-hidden rounded-lg border border-base-content/20 bg-base-300'>
