@@ -2,7 +2,7 @@ import type { ComponentChildren, RefObject } from 'preact'
 
 export type SearchItem = {
   id: string
-  data: SearchItemData
+  data: SearchItemData | SearchRenderData
 }
 
 export type SearchItemType = 'client' | 'operation'
@@ -16,6 +16,12 @@ export type SearchItemData = {
   itemType?: SearchItemType
   isMain?: boolean
 } & (SearchItemLink | SearchItemCalc)
+
+export interface SearchRenderData {
+  id: string
+  type: 'render'
+  render: () => ComponentChildren
+}
 
 export interface SearchItemLink {
   action: 'navigate'
@@ -35,6 +41,7 @@ export interface SearchBoxProps {
   initialResults?: SearchItem[]
   localFetcher?: (params: SearchFetchParams) => Promise<SearchItem[]>
   apiFetcher?: (params: SearchFetchParams) => Promise<SearchItem[]>
+  searchMethod?: SearchMethod
   debounceMs?: number
   class?: string
 }
@@ -48,3 +55,5 @@ export interface SearchParams {
   query: string
   dataFetcher?: (params: SearchFetchParams) => Promise<SearchItem[]>
 }
+
+export type SearchMethod = 'local' | 'api' | 'both'

@@ -1,4 +1,4 @@
-import type { NoResult, SearchItemData, SearchItemType } from '@/types/ui/search/searchBoxTypes'
+import type { NoResult, SearchItemData, SearchRenderData, SearchItemType } from '@/types/ui/search/searchBoxTypes'
 import { Icon } from '../../Icon'
 import { icons } from '@/constants/ui/searchConstants'
 
@@ -8,7 +8,7 @@ function getSearchItemIcon (itemType: SearchItemType | undefined) {
   return icon
 }
 
-export function SearchResult (data: SearchItemData | NoResult) {
+export function SearchResult (data: SearchItemData | SearchRenderData | NoResult) {
   if (data.type === 'no-result') {
     return (
       <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
@@ -16,6 +16,11 @@ export function SearchResult (data: SearchItemData | NoResult) {
       </span>
     )
   }
+  
+  if (data.type === 'render') {
+    return data.render()
+  }
+  
   const { label, action, itemType } = data
 
   if (action === 'navigate') {

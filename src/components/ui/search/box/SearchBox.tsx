@@ -13,7 +13,7 @@ const DEFAULT_DEBOUNCE = 300
 export function SearchBox ({
   id, inputRef, class: className = '', keybind,
   placeholder, initialResults = [], debounceMs = DEFAULT_DEBOUNCE,
-  localFetcher, apiFetcher
+  localFetcher, apiFetcher, searchMethod = 'both'
 }: SearchBoxProps) {
   const [localResults, setLocalResults] = useState<SearchItem[]>(initialResults)
   const [apiResults, setApiResults] = useState<SearchItem[]>([])
@@ -143,29 +143,36 @@ export function SearchBox ({
       </label>
 
       { isOpen && hasResultsToShow && (
-        <div onMouseDown={(e) => e.preventDefault()} class='absolute z-21 left-0 right-0 top-full mt-2 p-2 pb-0 overflow-hidden rounded-lg border border-base-content/20 bg-base-300'>
-          <SearchSection title='Búsqueda local' items={localResults} isLoading={isFetchingLocal} fallback={
-            <div class='flex flex-col gap-1'>
-              <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
-              <Dot class='flex flex-1 animate-pulse bg-base-content/80 size-2 invisible' />
-                <span class='flex flex-1'>Buscando...</span>
-                <div class='flex flex-1 justify-end'>
-                  <Dot class='animate-pulse bg-base-content/80 size-2.5' />
-                </div>
-              </span>
-            </div>
-          } />
-          <SearchSection title='Búsqueda en el servidor' items={uniqueApiResults} isLoading={isFetchingApi} fallback={
-            <div class='flex flex-col gap-1'>
-              <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
-              <Dot class='flex flex-1 animate-pulse bg-base-content/80 size-2 invisible' />
-                <span class='flex flex-1'>Buscando...</span>
-                <div class='flex flex-1 justify-end'>
-                  <Dot class='animate-pulse bg-base-content/80 size-2.5' />
-                </div>
-              </span>
-            </div>
-          } />
+        <div
+          onMouseDown={(e) => e.preventDefault()}
+          class={`${searchMethod !== 'both' ? 'no-title' : 'title' } absolute z-21 left-0 right-0 top-full mt-2 mb-2 p-2 pb-0 [.no-title]:py-0.5 overflow-hidden rounded-lg border border-base-content/20 bg-base-300`}
+        >
+          { searchMethod !== 'api' && (
+            <SearchSection title='Búsqueda local' searchMethod={searchMethod} items={localResults} isLoading={isFetchingLocal} fallback={
+              <div class='flex flex-col gap-1'>
+                <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
+                  <Dot class='flex flex-1 animate-pulse bg-base-content/80 size-2 invisible' />
+                  <span class='flex flex-1 justify-center'>Buscando...</span>
+                  <div class='flex flex-1 justify-end'>
+                    <Dot class='animate-pulse bg-base-content/80 size-2.5' />
+                  </div>
+                </span>
+              </div>
+            } />
+          ) }
+          { searchMethod !== 'local' && (
+            <SearchSection title='Búsqueda en el servidor' searchMethod={searchMethod} items={uniqueApiResults} isLoading={isFetchingApi} fallback={
+              <div class='flex flex-col gap-1'>
+                <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
+                <Dot class='flex flex-1 animate-pulse bg-base-content/80 size-2 invisible' />
+                  <span class='flex flex-1 justify-center'>Buscando...</span>
+                  <div class='flex flex-1 justify-end'>
+                    <Dot class='animate-pulse bg-base-content/80 size-2.5' />
+                  </div>
+                </span>
+              </div>
+            } />
+          ) }
         </div>
       ) }
     </div>
