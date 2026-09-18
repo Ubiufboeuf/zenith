@@ -5,6 +5,7 @@ import type { ProductWithCodes } from '@/types/products/productTypes'
 import type { TableColumn } from '@/types/ui/tableTypes'
 import { formatCurrency } from '@/utils/currencies'
 import { useState } from 'preact/hooks'
+import { SearchProducts } from './SearchProducts'
 
 const ivaOptions: SelectOption[] = [
   { id: '0', label: '0%' },
@@ -108,8 +109,18 @@ const columns: TableColumn<ProductWithCodes>[] = [
 ]
 
 export function ListView () {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [results, setResults] = useState<ProductWithCodes[] | null>(null)
+  
+  const [products, setProducts] = useState<ProductWithCodes[]>([])
+  
   return (
-    <section class='h-full flex flex-1 p-4 overflow-auto'>
+    <section class='h-full w-full flex flex-col gap-4 flex-1 p-4 overflow-auto'>
+      <SearchProducts
+        products={products}
+        query={searchQuery}
+        setResults={setResults}
+      />
       <Table
         id='loaded-products-in-new-sale'
         data={mockedProducts}
