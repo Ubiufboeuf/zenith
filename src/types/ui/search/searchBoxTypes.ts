@@ -42,6 +42,7 @@ export interface SearchBoxProps {
   localFetcher?: (params: SearchFetchParams) => Promise<SearchItem[]>
   apiFetcher?: (params: SearchFetchParams) => Promise<SearchItem[]>
   searchMethod?: SearchMethod
+  showLoadingState?: boolean
   debounceMs?: number
   class?: string
 }

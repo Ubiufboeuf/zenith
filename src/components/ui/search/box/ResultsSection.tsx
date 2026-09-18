@@ -16,10 +16,11 @@ interface Props {
   innerFallback?: boolean
   customContent?: ReactNode
   innerCustomContent?: boolean
+  showLoadingState?: boolean
 }
 
-export function SearchSection ({ title, searchMethod, items, isLoading, fallback, innerFallback = true, customContent, innerCustomContent = true }: Props) {
-  if (isLoading && fallback) {
+export function SearchSection ({ title, searchMethod, items, isLoading, fallback, innerFallback = true, customContent, innerCustomContent = true, showLoadingState = true }: Props) {
+  if (isLoading && fallback && showLoadingState) {
     if (!innerFallback) return fallback
     
     return (

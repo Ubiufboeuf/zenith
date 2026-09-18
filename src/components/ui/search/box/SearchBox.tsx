@@ -13,7 +13,7 @@ const DEFAULT_DEBOUNCE = 300
 export function SearchBox ({
   id, inputRef, class: className = '', keybind,
   placeholder, initialResults = [], debounceMs = DEFAULT_DEBOUNCE,
-  localFetcher, apiFetcher, searchMethod = 'both'
+  localFetcher, apiFetcher, searchMethod = 'both', showLoadingState = true
 }: SearchBoxProps) {
   const [localResults, setLocalResults] = useState<SearchItem[]>(initialResults)
   const [apiResults, setApiResults] = useState<SearchItem[]>([])
@@ -148,7 +148,7 @@ export function SearchBox ({
           class={`${searchMethod !== 'both' ? 'no-title' : 'title' } absolute z-21 left-0 right-0 top-full mt-2 mb-2 p-2 pb-0 [.no-title]:py-0.5 overflow-hidden rounded-lg border border-base-content/20 bg-base-300`}
         >
           { searchMethod !== 'api' && (
-            <SearchSection title='Búsqueda local' searchMethod={searchMethod} items={localResults} isLoading={isFetchingLocal} fallback={
+            <SearchSection title='Búsqueda local' searchMethod={searchMethod} showLoadingState={showLoadingState} items={localResults} isLoading={isFetchingLocal} fallback={
               <div class='flex flex-col gap-1'>
                 <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
                   <Dot class='flex flex-1 animate-pulse bg-base-content/80 size-2 invisible' />
@@ -161,7 +161,7 @@ export function SearchBox ({
             } />
           ) }
           { searchMethod !== 'local' && (
-            <SearchSection title='Búsqueda en el servidor' searchMethod={searchMethod} items={uniqueApiResults} isLoading={isFetchingApi} fallback={
+            <SearchSection title='Búsqueda en el servidor' searchMethod={searchMethod} showLoadingState={showLoadingState} items={uniqueApiResults} isLoading={isFetchingApi} fallback={
               <div class='flex flex-col gap-1'>
                 <span class='flex items-center justify-center gap-2 px-3 py-1.5 text-sm text-base-content/50'>
                 <Dot class='flex flex-1 animate-pulse bg-base-content/80 size-2 invisible' />
