@@ -5,7 +5,11 @@ import type { ProductWithCodes } from '@/types/products/productTypes'
 import type { TableColumn } from '@/types/ui/tableTypes'
 import { formatCurrency } from '@/utils/currencies'
 import { useState } from 'preact/hooks'
-import { SearchProducts } from './SearchProducts'
+import { Button } from '@/components/ui/Button'
+import { Icon } from '@/components/ui/Icon'
+import { IconList, IconPlus, IconSearch, IconX } from '@/components/ui/Icons'
+import { SearchBar } from '@/components/ui/search/simple/SearchBar'
+import { Keybinds } from '@/components/ui/Keybinds'
 
 const ivaOptions: SelectOption[] = [
   { id: '0', label: '0%' },
@@ -15,20 +19,18 @@ const ivaOptions: SelectOption[] = [
 
 const columns: TableColumn<ProductWithCodes>[] = [
   {
-    key: 'checkbox',
+    key: 'delete',
     header: '',
     width: '64px',
     align: 'center',
     class: 'p-0!',
     render: () => {
-      const [checked] = useState(true)
-
       return (
-        <input
-          type='checkbox'
-          checked={checked}
-          class='checkbox checkbox-accent'
-        />
+        <Button size='sm' shape='square' fill='soft' color='error' focusable={false}>
+          <Icon class='size-4'>
+            <IconX />
+          </Icon>
+        </Button>
       )
     }
   },
@@ -38,12 +40,16 @@ const columns: TableColumn<ProductWithCodes>[] = [
     width: 'minmax(240px, 1fr)',
     class: 'pl-0!',
     headerClass: 'pl-0!',
-    render: ({ title, subtitle }) => (
-      <div class='flex flex-col items-start'>
-        <strong class='font-semibold line-clamp-2 wrap-anywhere text-base-content'>{title}</strong>
-        <span class='text-xs text-base-content/50 line-clamp-2 wrap-anywhere'>{subtitle}</span>
-      </div>
-    )
+    render: ({ title, subtitle, codes }) => {
+      const mainCode = codes.find((c) => c?.isMain)?.code
+      
+      return (
+        <div class='flex flex-col items-start'>
+          <strong class='font-semibold line-clamp-2 wrap-anywhere text-base-content'>{mainCode} · {title}</strong>
+          <span class='text-xs text-base-content/50 line-clamp-2 wrap-anywhere'>{subtitle}</span>
+        </div>
+      )
+    }
   },
   {
     key: 'count',
@@ -62,14 +68,15 @@ const columns: TableColumn<ProductWithCodes>[] = [
     key: 'salePrice',
     header: 'Precio unitario',
     width: 'max-content',
-    render: () => (
+    render: ({ salePrice }) => <label class='input input-xs w-24 text-end text-base-content'>
+      $  
       <input
         type='number'
-        class='input input-xs w-24'
-        defaultValue='1'
+        defaultValue={salePrice}
+        placeholder={String(salePrice)}
         min='0'
       />
-    )
+    </label>
   },
   {
     key: 'iva',
@@ -78,7 +85,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
     render: () => (
       <Select
         options={ivaOptions}
-        class='select-xs w-16'
+        class='select-xs w-16 text-base-content'
       />
     )
   },
@@ -89,9 +96,10 @@ const columns: TableColumn<ProductWithCodes>[] = [
     render: () => (
       <input
         type='number'
-        class='input input-xs w-16'
-        defaultValue='1'
+        class='input input-xs w-16 text-base-content'
         min='0'
+        max='100'
+        placeholder='0%'
       />
     )
   },
@@ -105,29 +113,106 @@ const columns: TableColumn<ProductWithCodes>[] = [
 
       return <strong class='text-base-content'>{formatCurrency(price)}</strong>
     }
+  },
+  {
+    key: 'checkbox',
+    header: '',
+    width: '64px',
+    align: 'center',
+    class: 'p-0!',
+    render: () => {
+      const [checked] = useState(true)
+
+      return (
+        <input
+          type='checkbox'
+          checked={checked}
+          class='checkbox checkbox-accent checkbox-sm'
+        />
+      )
+    }
   }
 ]
 
 export function ListView () {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [results, setResults] = useState<ProductWithCodes[] | null>(null)
+  const [page, setPage] = useState(1)
+
+  // const [searchQuery, setSearchQuery] = useState('')
+  // const [results, setResults] = useState<ProductWithCodes[] | null>(null)
+  // const [products, setProducts] = useState<ProductWithCodes[]>([])
+  // const [isSearching, setIsSearching] = useState(false)
   
-  const [products, setProducts] = useState<ProductWithCodes[]>([])
+  function whenToFocus () {
+    if (document.activeElement instanceof HTMLInputElement) return false
+    if (document.activeElement instanceof HTMLTextAreaElement) return false
+    return true
+  }
   
-  return (
-    <section class='h-full w-full flex flex-col gap-4 flex-1 p-4 overflow-auto'>
-      <SearchProducts
-        products={products}
-        query={searchQuery}
-        setResults={setResults}
-      />
-      <Table
-        id='loaded-products-in-new-sale'
-        data={mockedProducts}
-        columns={columns}
-        class='h-full w-full text-sm rounded-lg overflow-hidden border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
-        stickyHeader
-      />
+  return <>
+    <section class='h-full w-full flex flex-col gap-2 flex-1 p-4'>
+      <div class='h-full overflow-auto' hidden={page !== 1}>
+        <Table
+          id='loaded-products-in-new-sale'
+          data={mockedProducts}
+          columns={columns}
+          class='h-full w-full text-sm rounded-lg [&_.cell]:p-2 overflow-hidden border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
+          stickyHeader
+        />
+      </div>
+      <div class='h-full overflow-auto flex flex-col gap-2' hidden={page !== 2}>
+        <div class='flex items-center justify-between gap-2'>
+          <SearchBar placeholder='Busca por nombre, proveedor, marca...' class='flex-1' />
+          <SearchBar placeholder='Busca por código' />
+        </div>
+        <div class='flex-1 w-full overflow-y-auto rounded-lg border border-base-content/20 bg-base-100'>
+          { mockedProducts.map(({ id, title, subtitle, brand, salePrice, codes, provider, stock }) => {
+            const mainCode = codes.find((c) => c?.isMain)?.code
+            return (
+              <Button key={`list-item-${id}`} class='w-full h-fit justify-start p-3 px-4 focus-visible:border-base-content focus-visible:outline-0'>
+                <div class='flex flex-col items-start flex-1'>
+                  <strong class='text-start font-semibold line-clamp-2 wrap-anywhere text-base-content'>
+                    {mainCode}
+                    &nbsp;·&nbsp;
+                    {title}
+                  </strong>
+                  <span class='text-xs text-start text-base-content/50 line-clamp-2 wrap-anywhere'>
+                    {subtitle}
+                    &nbsp;|&nbsp;
+                    {brand}
+                    &nbsp;·&nbsp;
+                    {provider}
+                    &nbsp;·&nbsp;
+                    stock {stock}
+                  </span>
+                </div>
+                <div>
+                  <strong class='text-base-content font-semibold'>{formatCurrency(salePrice)}</strong>
+                </div>
+                <Icon class='size-5 ml-3 text-base-content opacity-70'>
+                  <IconPlus />
+                </Icon>
+              </Button>
+            )
+          }) }
+        </div>
+      </div>
+      <div class='flex items-center gap-2'>
+        <Button fill={page !== 1 ? 'ghost' : 'soft'} class='gap-3' onClick={() => setPage(1)}>
+          <Icon class='size-5'>
+            <IconList />
+          </Icon>
+          <strong class='font-semibold'>Listado de productos</strong>
+          <Keybinds keys='1' onBind={() => setPage(1)} when={whenToFocus} />
+        </Button>
+
+        <Button fill={page !== 2 ? 'ghost' : 'soft'} class='gap-3' onClick={() => setPage(2)}>
+          <Icon class='size-4'>
+            <IconSearch />
+          </Icon>
+          <strong class='font-semibold text-base-content/80'>Buscar</strong>
+          <Keybinds keys='2' onBind={() => setPage(2)} when={whenToFocus} />
+        </Button>
+      </div>
     </section>
-  )
+  </>
 }
