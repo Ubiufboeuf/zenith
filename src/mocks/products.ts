@@ -15,6 +15,13 @@ export const mockedProducts: ProductWithCodes[] = [
     stock: 50,
     codes: [
       {
+        id: 'main-code-logitech',
+        productId: '239395d5-7679-462e-a640-73191e4b9ab1',
+        code: '1001',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      },
+      {
         id: '080b49e7-69b2-47f6-b1bb-3d0053b05916',
         productId: '239395d5-7679-462e-a640-73191e4b9ab1',
         code: '910-006628',
@@ -42,7 +49,15 @@ export const mockedProducts: ProductWithCodes[] = [
     salePrice: 23000,
     saleCurrency: 'EUR',
     stock: 30,
-    codes: []
+    codes: [
+      {
+        id: 'main-code-corsair',
+        productId: '32ef4694-08bb-42e3-b947-efc03378c1b0',
+        code: '1002',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      }
+    ]
   },
   {
     id: '48a37d96-be6a-4da1-bab1-5e9dbbf5e45f',
@@ -57,6 +72,13 @@ export const mockedProducts: ProductWithCodes[] = [
     saleCurrency: 'USD',
     stock: 5,
     codes: [
+      {
+        id: 'main-code-asus-4090',
+        productId: '48a37d96-be6a-4da1-bab1-5e9dbbf5e45f',
+        code: '1003',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      },
       {
         id: '75bac4b5-47e6-4117-84dd-ee49dc0e4a92',
         productId: '48a37d96-be6a-4da1-bab1-5e9dbbf5e45f',
@@ -85,7 +107,15 @@ export const mockedProducts: ProductWithCodes[] = [
     salePrice: 620000,
     saleCurrency: 'UYU',
     stock: 25,
-    codes: []
+    codes: [
+      {
+        id: 'main-code-thermaltake',
+        productId: '6751707d-6b78-4fc1-90c1-578d194e9531',
+        code: '1004',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      }
+    ]
   },
   {
     id: '68bb0c3d-e5a3-4da3-936c-0b4ff93ca683',
@@ -100,6 +130,13 @@ export const mockedProducts: ProductWithCodes[] = [
     saleCurrency: 'USD',
     stock: 3,
     codes: [
+      {
+        id: 'main-code-ibuypower',
+        productId: '68bb0c3d-e5a3-4da3-936c-0b4ff93ca683',
+        code: '1005',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      },
       {
         id: 'c57e9009-38fb-42f3-983c-3f47091cb48b',
         productId: '68bb0c3d-e5a3-4da3-936c-0b4ff93ca683',
@@ -136,6 +173,13 @@ export const mockedProducts: ProductWithCodes[] = [
     saleCurrency: 'USD',
     stock: 45,
     codes: [
+      {
+        id: 'main-code-amd',
+        productId: '6e2a9e11-7072-4aa1-94ee-1de8378408e7',
+        code: '1006',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      },
       {
         id: '598e530c-760e-41a5-9c73-41b31e41acc7',
         productId: '6e2a9e11-7072-4aa1-94ee-1de8378408e7',
@@ -178,7 +222,15 @@ export const mockedProducts: ProductWithCodes[] = [
     salePrice: 65000,
     saleCurrency: 'USD',
     stock: 10,
-    codes: []
+    codes: [
+      {
+        id: 'main-code-x670e',
+        productId: '81bcc9c9-290e-4295-ac61-e0fd8bee0007',
+        code: '1007',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      }
+    ]
   },
   {
     id: '86fc3996-094e-495f-a030-43c76bff7bfe',
@@ -192,7 +244,15 @@ export const mockedProducts: ProductWithCodes[] = [
     salePrice: 180000,
     saleCurrency: 'USD',
     stock: 8,
-    codes: []
+    codes: [
+      {
+        id: 'main-code-g14',
+        productId: '86fc3996-094e-495f-a030-43c76bff7bfe',
+        code: '1008',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      }
+    ]
   },
   {
     id: 'aa5a2a90-1321-491a-94db-5dddd54ce0f5',
@@ -207,6 +267,13 @@ export const mockedProducts: ProductWithCodes[] = [
     saleCurrency: 'USD',
     stock: 100,
     codes: [
+      {
+        id: 'main-code-samsung',
+        productId: 'aa5a2a90-1321-491a-94db-5dddd54ce0f5',
+        code: '1009',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      },
       {
         id: 'c4468e5f-7a54-4007-8fa4-6b972e073c1a',
         productId: 'aa5a2a90-1321-491a-94db-5dddd54ce0f5',
@@ -229,6 +296,13 @@ export const mockedProducts: ProductWithCodes[] = [
     saleCurrency: 'UYU',
     stock: 40,
     codes: [
+      {
+        id: 'main-code-hyperx',
+        productId: 'bb2a4da9-7d2c-4884-a565-3c4079ce9d3c',
+        code: '1010',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      },
       {
         id: 'ca2c9b36-bfa6-453b-bb75-81321f84de91',
         productId: 'bb2a4da9-7d2c-4884-a565-3c4079ce9d3c',
@@ -271,7 +345,15 @@ export const mockedProducts: ProductWithCodes[] = [
     salePrice: 100000,
     saleCurrency: 'USD',
     stock: 15,
-    codes: []
+    codes: [
+      {
+        id: 'main-code-alienware',
+        productId: 'dc331915-9271-49d7-87be-4474b2f72a0f',
+        code: '1011',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      }
+    ]
   },
   {
     id: 'ea259f8e-e7d0-47ee-b22d-31fc30db1f5f',
@@ -286,6 +368,13 @@ export const mockedProducts: ProductWithCodes[] = [
     saleCurrency: 'EUR',
     stock: 12,
     codes: [
+      {
+        id: 'main-code-intel',
+        productId: 'ea259f8e-e7d0-47ee-b22d-31fc30db1f5f',
+        code: '1012',
+        type: 'BARCODE_INTERNAL',
+        isMain: true
+      },
       {
         id: '2df4fa7e-b013-4fe0-b3a4-b844fea078f9',
         productId: 'ea259f8e-e7d0-47ee-b22d-31fc30db1f5f',
