@@ -172,30 +172,26 @@ export function ListView () {
           <SearchBar placeholder='Busca por código' />
         </div>
         <div class='flex-1 w-full overflow-y-auto rounded-lg border border-base-content/20 bg-base-100'>
-          { mockedProducts.map(({ id, title, subtitle, brand, salePrice, codes, provider, stock }) => {
+          { mockedProducts.map(({ id, title, subtitle, salePrice, codes, provider, stock }) => {
             const mainCode = codes.find((c) => c?.isMain)?.code
+            const unit = Math.random() > 0.5 ? 'un' : 'mts'
             return (
-              <Button key={`list-item-${id}`} class='w-full h-fit justify-start p-3 px-4 focus-visible:border-base-content focus-visible:outline-0'>
-                <div class='flex flex-col items-start flex-1'>
+              <Button key={`list-item-${id}`} class='w-full h-fit justify-start gap-4 p-3 px-4 focus-visible:border-base-content focus-visible:outline-0'>
+                <div class='max-w-md flex flex-col items-start flex-1'>
                   <strong class='text-start font-semibold line-clamp-2 wrap-anywhere text-base-content'>
                     {mainCode}
                     &nbsp;·&nbsp;
                     {title}
                   </strong>
                   <span class='text-xs text-start text-base-content/50 line-clamp-2 wrap-anywhere'>
-                    {subtitle}
-                    &nbsp;|&nbsp;
-                    {brand}
-                    &nbsp;·&nbsp;
-                    {provider}
-                    &nbsp;·&nbsp;
-                    stock {stock}
+                    ({provider}) {subtitle}
                   </span>
                 </div>
-                <div>
+                <div class='ml-auto flex items-center gap-4'>
+                  <span class='text-base-content/70'>{stock} {unit}</span>
                   <strong class='text-base-content font-semibold'>{formatCurrency(salePrice)}</strong>
                 </div>
-                <Icon class='size-5 ml-3 text-base-content opacity-70'>
+                <Icon class='size-5 text-base-content opacity-70'>
                   <IconPlus />
                 </Icon>
               </Button>
