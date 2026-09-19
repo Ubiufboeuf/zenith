@@ -1,89 +1,94 @@
-import type { ProductWithCodes } from '@/types/products/productTypes'
+import { useRef } from 'preact/hooks'
+import type { PaginationProps } from '@/types/ui/paginationTypes'
 import { Button } from '../ui/Button'
-import { useEffect, useState } from 'preact/hooks'
 import { Icon } from '../ui/Icon'
 import { IconChevron } from '../ui/Icons'
 
-interface Page<T> {
-  pageNumber: number
-  items: T[]
-}
+export function Pagination ({
+  showPerPage, pages: pagesCount, currentPage,
+  onClickPage,
+  buttons, resultsInfo,
+  size, fill, color,
+  id, class: className = '', hidden
+}: PaginationProps) {
+  const pagesRef = useRef<number[] | null>(null)
+  if (!pagesRef.current) pagesRef.current = Array(pagesCount).fill('').map((_,i) => i + 1)
 
-interface Pagination<T> {
-  pages: Page<T>[]
-  currentPageNumber?: number
-}
-
-interface PageButton {
-  pageNumber: number
-}
-
-const pagination: Pagination<ProductWithCodes> = {
-  pages: [
-    { pageNumber: 1, items: [] },
-    { pageNumber: 2, items: [] },
-    { pageNumber: 3, items: [] },
-    { pageNumber: 4, items: [] },
-    { pageNumber: 5, items: [] }
-  ]
-}
-
-export function Pagination () {
-  const { pages, currentPageNumber = pagination.pages[0].pageNumber } = pagination
-  const [pagesButtons, setPagesButtons] = useState<PageButton[]>([])
-  const [hasPreviousPage, setHasPreviousPage] = useState(currentPageNumber > 1)
-  const [hasNextPage, setHasNextPage] = useState(currentPageNumber < pages.length)
-
-  useEffect(() => {
-    if (!pages) return
-
-    const btns: PageButton[] = []
-
-    for (let i = currentPageNumber - 2; i <= currentPageNumber + 2; i++) {
-      if (i < 0 || i > pages.length) continue
-      btns.push({ pageNumber: i })
-    }
-
-    setHasPreviousPage(currentPageNumber > 1)
-    setHasNextPage(currentPageNumber < pages.length)
-    setPagesButtons(btns)
-  }, [pages])
+  const showPreviousButton =
+    buttons === 'always' ||
+    (buttons === 'dynamic' && currentPage > 1)
   
+  const showNextButton =
+    buttons === 'always' ||
+    (buttons === 'dynamic' && currentPage < pagesCount)
+
+  const showing = {
+    current: currentPage * showPerPage - showPerPage + 1,
+    of: currentPage * showPerPage
+  }
+
+  function handleClick (currentPage: number, newPage: number) {
+    if (newPage < 1 || newPage > pagesCount) return
+    onClickPage(currentPage, newPage)
+  }
+
   return (
-    <div class='h-12 flex flex-wrap items-center px-4'>
-      <span class='flex-1 text-base-content/60'>Mostrando <b>1-20</b></span>
+    <div class={`${className} h-12 flex flex-wrap items-center px-4 gap-2`} hidden={hidden}>
+      <span class='flex-1 text-base-content/60'>Mostrando <b>{showing.current}-{showing.of}</b></span>
+
       <div class='flex-1 join justify-center'>
-        { hasPreviousPage && (
-          <Button title='Página anterior' size='sm' fill='ghost' shape='square'>
+        {/* PreviousPageButton */}
+        { showPreviousButton && (
+          <Button
+            title='Página anterior'
+            size={size}
+            fill={buttons === 'always' && currentPage <= 1 ? 'ghost' : fill}
+            shape='square'
+            disabled={buttons === 'always' && currentPage <= 1}
+            onClick={() => handleClick(currentPage, currentPage - 1)}
+          >
             <Icon class='size-5'>
               <IconChevron direction='left' />
             </Icon>
           </Button>
         ) }
-        { pagesButtons.map(({ pageNumber }) => {
-          const isCurrentPage = currentPageNumber === pageNumber
-          if (!pageNumber) return
+
+        { pagesRef.current.map((pageNumber) => {
+          const isCurrentPage = currentPage === pageNumber
           return (
             <Button
-              key={`pagination-btn-${pageNumber}`}
-              size='sm'
-              fill='ghost'
-              class='join-item' {...isCurrentPage ? {color: 'primary'} : ''}
-              title={isCurrentPage ? `Página actual [${pageNumber}]` : ''}
+              key={`${id}-pagination-${pageNumber}`}
+              size={size}
+              fill={fill}
+              color={isCurrentPage ? color : undefined}
+              shape='square'
+              class='join-item'
+              title={isCurrentPage ? `Página actual (${pageNumber})` : ''}
+              onClick={() => handleClick(currentPage, pageNumber)}
             >
-              { pageNumber }
+              {pageNumber}
             </Button>
           )
         }) }
-        { hasNextPage && (
-          <Button title='Página siguiente' size='sm' fill='ghost' shape='square'>
+
+        {/* PreviousPageButton */}
+        { showNextButton && (
+          <Button
+            title='Página siguiente'
+            size={size}
+            fill={buttons === 'always' && currentPage >= pagesCount ? 'ghost' : fill}
+            shape='square'
+            disabled={buttons === 'always' && currentPage >= pagesCount}
+            onClick={() => handleClick(currentPage, currentPage + 1)}
+          >
             <Icon class='size-5'>
               <IconChevron direction='right' />
             </Icon>
           </Button>
         ) }
       </div>
-      <span class='flex-1 text-end text-base-content/60'>2240 resultados de 51720</span>
+
+      <span class='flex-1 text-end text-base-content/60'>{resultsInfo.found} resultados de {resultsInfo.total}</span>
     </div>
   )
 }
