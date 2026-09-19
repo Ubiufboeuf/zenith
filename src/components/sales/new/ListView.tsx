@@ -10,6 +10,7 @@ import { Icon } from '@/components/ui/Icon'
 import { IconList, IconPlus, IconSearch, IconX } from '@/components/ui/Icons'
 import { SearchBar } from '@/components/ui/search/simple/SearchBar'
 import { Keybinds } from '@/components/ui/Keybinds'
+import { Pagination } from '@/components/products/Pagination'
 
 const ivaOptions: SelectOption[] = [
   { id: '0', label: '0%' },
@@ -141,11 +142,17 @@ export function ListView () {
   // const [results, setResults] = useState<ProductWithCodes[] | null>(null)
   // const [products, setProducts] = useState<ProductWithCodes[]>([])
   // const [isSearching, setIsSearching] = useState(false)
+  const [searchListPage, setSearchListPage] = useState(1)
   
   function whenToFocus () {
     if (document.activeElement instanceof HTMLInputElement) return false
     if (document.activeElement instanceof HTMLTextAreaElement) return false
     return true
+  }
+
+  function changePage (currentPage: number, newPage: number) {
+    console.log({ currentPage, newPage })
+    setSearchListPage(newPage)
   }
   
   return <>
@@ -212,6 +219,25 @@ export function ListView () {
           <strong class='font-semibold text-base-content/80'>Buscar</strong>
           <Keybinds keys='2' onBind={() => setPage(2)} when={whenToFocus} />
         </Button>
+
+        <Pagination
+          showPerPage={20}
+          pages={3}
+          currentPage={searchListPage}
+
+          onClickPage={changePage}
+
+          buttons='always'
+          resultsInfo={{ found: 65, total: mockedProducts.length }}
+
+          size='sm'
+          fill='soft'
+          color='primary'
+          
+          id='list-view'
+          class='w-full h-full text-sm'
+          hidden={page !== 2}
+        />
       </div>
     </section>
   </>
