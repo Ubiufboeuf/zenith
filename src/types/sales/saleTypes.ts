@@ -28,12 +28,11 @@ export interface Sale {
 export interface SaleDetail {
   id: string
   saleId: string
-  SaleId: string
-  quantity: string
-  unitPriceAtMoment: string
-  currency: string
-  discount: string
-  ivaRate: string
+  quantity: number
+  unitPriceAtMoment: number
+  currency: Currency
+  discount: number
+  ivaRate: number
 }
 
 export interface SalePayment {

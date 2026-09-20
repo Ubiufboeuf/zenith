@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Select, type SelectOption } from '@/components/ui/Select'
 import { Table } from '@/components/ui/table/Table'
 import { mockedProducts } from '@/mocks/products'
 import type { ProductWithCodes } from '@/types/products/productTypes'
 import type { TableColumn } from '@/types/ui/tableTypes'
 import { formatCurrency } from '@/utils/currencies'
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import { Button } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
 import { IconList, IconPlus, IconSearch, IconX } from '@/components/ui/Icons'
 import { SearchBar } from '@/components/ui/search/simple/SearchBar'
 import { Keybinds } from '@/components/ui/Keybinds'
 import { Pagination } from '@/components/products/Pagination'
+import type { SaleDetail } from '@/types/sales/saleTypes'
+import { v4 } from 'uuid'
+
+export interface ListedItem extends Omit<SaleDetail, 'saleId' | 'currency'> {
+  product: ProductWithCodes
+}
 
 const ivaOptions: SelectOption[] = [
   { id: '0', label: '0%' },
@@ -18,7 +25,7 @@ const ivaOptions: SelectOption[] = [
   { id: '22', label: '22%', default: true }
 ]
 
-const columns: TableColumn<ProductWithCodes>[] = [
+const columns: TableColumn<ListedItem>[] = [
   {
     key: 'delete',
     header: '',
@@ -27,7 +34,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
     class: 'p-0!',
     render: () => {
       return (
-        <Button size='sm' shape='square' fill='soft' color='error' focusable={false}>
+        <Button size='sm' shape='square' fill='soft' color='error' tabIndex={-1}>
           <Icon class='size-4'>
             <IconX />
           </Icon>
@@ -41,7 +48,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
     width: 'minmax(240px, 1fr)',
     class: 'pl-0!',
     headerClass: 'pl-0!',
-    render: ({ title, subtitle, codes }) => {
+    render: ({ product: { title, subtitle, codes } }) => {
       const mainCode = codes.find((c) => c?.isMain)?.code
       
       return (
@@ -56,11 +63,11 @@ const columns: TableColumn<ProductWithCodes>[] = [
     key: 'count',
     header: 'Cantidad',
     width: 'min-content',
-    render: () => (
+    render: ({ quantity }) => (
       <input
         type='number'
         class='input input-xs w-full'
-        defaultValue='1'
+        value={quantity}
         min='0'
       />
     )
@@ -69,7 +76,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
     key: 'salePrice',
     header: 'Precio unitario',
     width: 'max-content',
-    render: ({ salePrice }) => <label class='input input-xs w-24 text-end text-base-content'>
+    render: ({ product: { salePrice } }) => <label class='input input-xs w-24 text-end text-base-content'>
       $  
       <input
         type='number'
@@ -108,7 +115,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
     key: 'price',
     header: 'Importe',
     width: 'min-content',
-    render: ({ salePrice }) => {
+    render: ({ product: { salePrice } }) => {
       const discount = 10
       const price = salePrice - discount
 
@@ -138,10 +145,8 @@ const columns: TableColumn<ProductWithCodes>[] = [
 export function ListView () {
   const [page, setPage] = useState(1)
 
-  // const [searchQuery, setSearchQuery] = useState('')
-  // const [results, setResults] = useState<ProductWithCodes[] | null>(null)
-  // const [products, setProducts] = useState<ProductWithCodes[]>([])
-  // const [isSearching, setIsSearching] = useState(false)
+  const [products, setProducts] = useState<ProductWithCodes[]>([])
+  const [listedItems, setListedItems] = useState<ListedItem[]>([])
   const [searchListPage, setSearchListPage] = useState(1)
   
   function whenToFocus () {
@@ -154,29 +159,61 @@ export function ListView () {
     console.log({ currentPage, newPage })
     setSearchListPage(newPage)
   }
+
+  function handleAddProduct (id: string) {
+    const product = products.find((p) => p.id === id)
+    if (!product) return
+    
+    const listedItemIndex = listedItems.findIndex((li) => li.product.id === id)
+    if (listedItemIndex !== -1) listedItems[listedItemIndex].quantity++
+    else listedItems.push({
+      id: v4(),
+      discount: 0,
+      ivaRate: 0.22,
+      product,
+      quantity: 1,
+      unitPriceAtMoment: product.salePrice
+    })
+    
+    setListedItems(listedItems)
+    setPage(1)
+  }
+
+  useEffect(() => {
+    setProducts(mockedProducts)
+  }, [])
   
   return <>
+    <Keybinds keys='Escape' onBind={() => (document.activeElement as any)?.blur()} hidden />
     <section class='h-full w-full flex flex-col gap-2 flex-1 p-4'>
-      <div class='h-full overflow-auto' hidden={page !== 1}>
+      <div class='relative h-full' hidden={page !== 1}>
+        { !listedItems.length && <div class='absolute z-4 left-1/2 top-1/2 -translate-1/2 flex flex-col gap-2 text-center text-base-content/60 font-semibold'>
+          <span>Nada cargado todavía.</span>
+          <span>Pulsa <kbd class='kbd'>2</kbd> para buscar un artículo.</span>
+        </div> }
         <Table
           id='loaded-products-in-new-sale'
-          data={mockedProducts}
+          data={listedItems}
           columns={columns}
           class='h-full w-full text-sm rounded-lg [&_.cell]:p-2 overflow-hidden border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
           stickyHeader
         />
       </div>
-      <div class='h-full overflow-auto flex flex-col gap-2' hidden={page !== 2}>
+      <div class='h-[calc(100%-48px)] flex flex-col gap-2' hidden={page !== 2}>
         <div class='flex items-center justify-between gap-2'>
           <SearchBar placeholder='Busca por nombre, proveedor, marca...' class='flex-1' />
           <SearchBar placeholder='Busca por código' />
         </div>
         <div class='flex-1 w-full overflow-y-auto rounded-lg border border-base-content/20 bg-base-100'>
-          { mockedProducts.map(({ id, title, subtitle, salePrice, codes, provider, stock }) => {
+          { products.map(({ id, title, subtitle, salePrice, codes, provider, stock }) => {
             const mainCode = codes.find((c) => c?.isMain)?.code
             const unit = Math.random() > 0.5 ? 'un' : 'mts'
             return (
-              <Button key={`list-item-${id}`} class='w-full h-fit justify-start gap-4 p-3 px-4 focus-visible:border-base-content focus-visible:outline-0'>
+              <Button
+                key={`list-item-${id}`}
+                class='w-full h-fit justify-start gap-4 p-3 px-4 focus-visible:border-base-content focus-visible:outline-0'
+                onClick={() => handleAddProduct(id)}
+              >
                 <div class='max-w-md flex flex-col items-start flex-1'>
                   <strong class='text-start font-semibold line-clamp-2 wrap-anywhere text-base-content'>
                     {mainCode}
@@ -224,7 +261,7 @@ export function ListView () {
           onClickPage={changePage}
 
           buttons='always'
-          resultsInfo={{ found: 65, total: mockedProducts.length }}
+          resultsInfo={{ found: 65, total: products.length }}
 
           size='sm'
           fill='soft'

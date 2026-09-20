@@ -5,6 +5,7 @@ import { Select, type SelectOption } from '@/components/ui/Select'
 import { CURRENCIES } from '@/constants/currencyConstants'
 import { mockedCashiers } from '@/mocks/cashiers'
 import { useEffect, useState } from 'preact/hooks'
+import { Temporal } from 'temporal-polyfill'
 
 const currencyOptions = [...CURRENCIES]
 const documentOptions: SelectOption[] = [
@@ -60,11 +61,11 @@ export function DetailsPanel () {
       <div class='flex justify-between gap-2'>
         <label class='flex-1'>
           <span class='text-xs font-semibold text-base-content/60'>Creación</span>
-          <input type='date' class='input input-sm' />
+          <input type='date' defaultValue={Temporal.Now.plainDateISO().toString()} class='input input-sm' />
         </label>
         <label class='flex-1' hidden={!isCredit}>
           <span class='text-xs font-semibold text-base-content/60'>Vencimiento</span>
-          <input type='date' class='input input-sm' />
+          <input type='date' defaultValue={Temporal.Now.plainDateISO().add({ months: 1 }).toString()} class='input input-sm' />
         </label>
       </div>
       <div class='flex items-center flex-1 w-full'>
