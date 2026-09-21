@@ -1,43 +1,69 @@
-# Astro Starter Kit: Minimal
+# Zenith
 
-```sh
-bun create astro@latest -- --template minimal
+## Sobre el Proyecto
+Zenith es una aplicación de Punto de Venta (POS) y gestión de inventario desarrollada bajo una sólida filosofía back-first.
+Cuenta con una API REST robusta y desacoplada construida con Bun y Express, respaldada por una base de datos LibSQL (Turso), y un frontend moderno, rápido y cómodo.
+
+## Stack Tecnológico
+
+### Backend
+
+- Runtime: Bun
+- Framework: Express.js
+- Base de datos: LibSQL (Turso)
+- Validación: Zod
+
+### Frontend
+
+- Framework: Astro & Preact
+- Estilos: Tailwind CSS + DaisyUI
+- Gestión de Estado: Zustand
+- Lenguaje: TypeScript
+
+## Configuración y Ejecución Local
+
+Prerrequisitos:
+- Tener instalado Bun o pnpm.
+
+### 1. Clonar el repositorio e instalar dependencias
+```Bash
+git clone --depth 1 https://github.com/Ubiufboeuf/zenith
+cd zenith
+bun install # pnpm install
+
+cd ..
+git clone --depth 1 https://github.com/Ubiufboeuf/zenith-api
+cd zenith-api
+bun install # pnpm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 2. Configurar las Variables de Entorno del Backend
 
-## 🚀 Project Structure
+Crea un archivo `.env` basado en la configuración requerida tanto para desarrollo local como para producción:
 
-Inside of your Astro project, you'll see the following folders and files:
+```.env
+TURSO_DATABASE_URL='tú_url_de_turso'
+TURSO_AUTH_TOKEN='tú_token_de_turso'
+LOCAL_DATABASE_URL='file:zenith.db'
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+PORT=8080
+DB='local' # o 'prod'. Indica qué BD usar
+
+ENV_ORIGINS='http://localhost:5173'
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### 3. Ejecutar en desarrollo
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Ambos se ejecutan de la misma manera:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```Bash
+bun run dev # pnpm run dev
+```
 
-## 🧞 Commands
+## Despliegue
 
-All commands are run from the root of the project, from a terminal:
+- Backend: Desplegado en Railway conectado a la base de datos en la nube de Turso.
+- Frontend: Desplegado de manera óptima en Vercel utilizando el adaptador oficial de Astro.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Licencia
+Este proyecto está bajo la licencia [LICENSE.md](/LICENSE.md).
