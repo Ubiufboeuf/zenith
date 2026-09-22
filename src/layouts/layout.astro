@@ -11,9 +11,30 @@ interface Props {
 }
 
 const { title, scrollbarGutter = 'auto', class: className = '', sidebar = true } = Astro.props
+
+
+// #region - detectDeviceType
+const deviceCode = Astro.cookies.get('_znt-dvctp')?.value
+const ua = Astro.request.headers.get('user-agent') || ''
+
+const mobileRegex = /(Mobi|Android(?!.*Nexus 7)|iPhone|iPod|Windows Phone|BlackBerry|Symbian|IEMobile|Opera Mini|Fennec|webOS|hpwos|avantgo|bada|blazer|compal|elaine|hiptop|kindle|lge|maemo|midp|mmp|netfront|palm|phone|plucker|pocket|psp|series60|treo|up\.browser|up\.link|vodafone|wap|windows ce|xda|xiino)/i
+const tabletRegex = /(iPad|Android(?!.*mobile)|Kindle|Playbook|Silk|Tablet|hpw|webos|Nexus 7)/i
+
+let detectedType = 'desktop'
+if (mobileRegex.test(ua)) detectedType = 'mobile'
+else if (tabletRegex.test(ua)) detectedType = 'tablet'
+
+const devices: Record<string, string> = { M: 'mobile', T: 'tablet', D: 'desktop' }
+const deviceType = devices[deviceCode!] || detectedType
+// #endregion
 ---
 
-<html lang='es' style={`scrollbar-gutter: ${scrollbarGutter}`} data-sidebar={sidebar ? 'true' : 'false'}>
+<html
+	lang='es'
+	style={`scrollbar-gutter: ${scrollbarGutter}`}
+	data-sidebar={sidebar ? 'true' : 'false'}
+	data-device-type={deviceType}
+>
 	<head>
 		<meta charset='utf-8' />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />

@@ -53,6 +53,18 @@
   }
 }
 
+@custom-variant mobile {
+  &:where([data-device-type='mobile'] *) {
+    @slot;
+  }
+}
+
+@custom-variant desktop {
+  &:where([data-device-type='desktop'] *) {
+    @slot;
+  }
+}
+
 :root {
   color-scheme: dark light;
   font-family: Inter, system-ui;
