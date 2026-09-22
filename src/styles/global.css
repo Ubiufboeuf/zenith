@@ -2,7 +2,7 @@
 @plugin 'daisyui' {
   themes:
     light,
-    dark --default,
+    dark,
     autumn,
     sunset
   ;
