@@ -3,6 +3,7 @@ import '../styles/global.css'
 import Sidebar from '@/components/ui/sidebar/Sidebar.astro'
 import Header from '@/components/ui/header/Header.astro'
 import { TabBar } from '@/components/ui/tabBar/TabBar'
+import { MobileSearchBar } from '@/components/ui/mobile/MobileSearchBar'
 
 interface Props {
 	title?: string
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const { title, scrollbarGutter = 'auto', class: className = '', sidebar = true } = Astro.props
+const currentPath = Astro.url.pathname
 
 
 // #region - detectDeviceType
@@ -46,10 +48,11 @@ const deviceType = devices[deviceCode!] || detectedType
 		<Sidebar />
 		<div class='w-full h-full min-h-fit sidebar:md:pl-sidebar bg-base-200'>
 			<Header />
+			<MobileSearchBar client:load />
 			<main class={`${className} flex flex-col w-full max-w-7xl h-[calc(100%-64px)] min-h-fit mx-auto`}>
 				<slot />
 			</main>
 		</div>
-		<TabBar />
+		<TabBar currentPath={currentPath} client:load />
 	</body>
 </html>
