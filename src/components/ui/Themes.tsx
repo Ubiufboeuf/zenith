@@ -11,7 +11,13 @@ export const themes = [
   'sunset'
 ]
 
-export function Themes ({ initialTheme }: { initialTheme?: string }) {
+interface Props {
+  initialTheme?: string
+  class?: string
+  btnClass?: string
+}
+
+export function Themes ({ initialTheme, class: className = '', btnClass = '' }: Props) {
   const [isThemesOpen, setIsThemesOpen] = useState(false)
   
   function changeTheme (event: TargetedInputEvent<HTMLInputElement>) {
@@ -22,10 +28,10 @@ export function Themes ({ initialTheme }: { initialTheme?: string }) {
   }
   
   return <>
-    <Button onClick={() => setIsThemesOpen((state) => !state)}>
+    <Button class={btnClass} onClick={() => setIsThemesOpen((state) => !state)}>
       Temas
     </Button>
-    <Dropdown hideWith={() => setIsThemesOpen(false)} isOpen={isThemesOpen} class='left-2 bottom-15 w-fit h-fit flex flex-col overflow-auto'>
+    <Dropdown hideWith={() => setIsThemesOpen(false)} isOpen={isThemesOpen} class={`${className} w-fit h-fit flex flex-col overflow-auto`}>
       <div class='menu w-full'>
         { themes.map((theme) => (
           <label key={theme}>
