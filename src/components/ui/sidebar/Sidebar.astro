@@ -1,17 +1,23 @@
 ---
-import { Button } from '../Button'
 import { SIDEBAR_SECTIONS } from '@/constants/ui/sidebarConstants'
 import SidebarSection from './SidebarSection.astro'
 import { LinkButton } from '../LinkButton'
+import { Themes } from '../Themes'
+
+const themeCookie = Astro.cookies.get('_znt-thm')
+const theme = themeCookie?.value ?? 'dark'
 ---
 
 <input id='sidebar-checkbox' type='checkbox' class='peer' hidden />
-<aside class='z-20 fixed not-md:-left-sidebar not-sidebar:-left-sidebar peer-checked:left-0 top-16 sidebar:md:top-0 h-[calc(100%-64px)] md:h-full w-sidebar overflow-y-auto scrollbar-gutter-stable border-r border-base-content/20 bg-base-100 transition-[left]'>
-  <div class='h-full min-h-fit w-full flex flex-col gap-2 p-3 py-4'>
+<aside class='z-20 fixed not-md:-left-sidebar not-sidebar:-left-sidebar peer-checked:left-0 top-16 sidebar:md:top-0 h-[calc(100%-64px)] md:h-full w-sidebar flex flex-col overflow-y-auto scrollbar-gutter-stable border-r border-base-content/20 bg-base-100 transition-[left]'>
+  <div class='h-full w-full flex flex-1 flex-col gap-2 p-3 py-4'>
     <div class='pb-4'>
       <LinkButton href='/sales/new' width='block' color='primary' fill='soft'>Nueva venta</LinkButton>
     </div>
     { SIDEBAR_SECTIONS.map((section) => <SidebarSection {...section} />) }
+  </div>
+  <div class='p-3 py-4 w-full'>
+    <Themes initialTheme={theme} client:load />
   </div>
 </aside>
 <button id='close-sidebar' class='z-18 peer-checked:not-md:block peer-checked:not-sidebar:block hidden fixed w-full h-full bg-black/50' />
