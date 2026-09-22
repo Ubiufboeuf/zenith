@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import Sidebar from '@/components/ui/sidebar/Sidebar.astro'
 import Header from '@/components/ui/header/Header.astro'
+import { TabBar } from '@/components/ui/tabBar/TabBar'
 
 interface Props {
 	title?: string
@@ -49,5 +50,6 @@ const deviceType = devices[deviceCode!] || detectedType
 				<slot />
 			</main>
 		</div>
+		<TabBar />
 	</body>
 </html>
