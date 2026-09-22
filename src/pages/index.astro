@@ -4,10 +4,12 @@ import { LowStock } from '@/components/dashboard/LowStock'
 import { TodaySalesCard } from '@/components/dashboard/TodaySalesCard'
 import { TopProductsCard } from '@/components/dashboard/TopProductsCard'
 import { WeeklySalesChart } from '@/components/dashboard/WeeklySalesChart'
+import { LinkButton } from '@/components/ui/LinkButton'
 import Layout from '@/layouts/layout.astro'
 ---
 
 <Layout title='Inicio' class='p-4 gap-6'>
+  <LinkButton href='/sales/new' width='block' color='primary' fill='soft' class='desktop:hidden h-12'>Nueva venta</LinkButton>
   <section class='h-fit w-full'>
     <KPIs client:load />
   </section>
@@ -19,7 +21,7 @@ import Layout from '@/layouts/layout.astro'
       <WeeklySalesChart client:load />
     </div>
   </section>
-  <section class='h-80 w-full grid grid-cols-2 items-center gap-6'>
+  <section class='mobile:h-fit h-80 w-full grid grid-cols-2 mobile:grid-cols-1 items-center gap-6'>
     <LowStock client:load />
     <TopProductsCard client:load />
   </section>

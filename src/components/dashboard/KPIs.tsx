@@ -40,7 +40,7 @@ export const kpis: KpiItem[] = [
 
 export function KPIs () {
   return (
-    <div class='h-fit flex flex-wrap items-center gap-4'>
+    <div class='h-fit grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 flex-wrap items-center gap-4 mobile:gap-2'>
       { kpis.map((kpi) => <KPI key={kpi.id} {...kpi} />) }
     </div>
   )
