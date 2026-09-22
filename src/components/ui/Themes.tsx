@@ -7,19 +7,8 @@ import type { TargetedInputEvent } from 'preact'
 export const themes = [
   'light',
   'dark',
-  'cupcake',
-  'luxury',
-  'dracula',
   'autumn',
-  'business',
-  'lemonade',
-  'night',
-  'coffee',
-  'winter',
-  'dim',
-  'nord',
-  'sunset',
-  'silk'
+  'sunset'
 ]
 
 export function Themes ({ initialTheme }: { initialTheme?: string }) {
@@ -36,7 +25,7 @@ export function Themes ({ initialTheme }: { initialTheme?: string }) {
     <Button onClick={() => setIsThemesOpen((state) => !state)}>
       Temas
     </Button>
-    <Dropdown hideWith={() => setIsThemesOpen(false)} isOpen={isThemesOpen} class='left-4 bottom-15 w-64 h-64 flex flex-col overflow-auto'>
+    <Dropdown hideWith={() => setIsThemesOpen(false)} isOpen={isThemesOpen} class='left-2 bottom-15 w-fit h-fit flex flex-col overflow-auto'>
       <div class='menu w-full'>
         { themes.map((theme) => (
           <label key={theme}>
