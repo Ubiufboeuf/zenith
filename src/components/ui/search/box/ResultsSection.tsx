@@ -25,7 +25,7 @@ export function SearchSection ({ title, searchMethod, items, isLoading, fallback
     
     return (
       <div class='flex flex-col gap-2 py-2'>
-        { searchMethod === 'both' && <span class='px-3 text-xs text-[11px] font-semibold tracking-wide text-primary-content/50 uppercase'>{title}</span> }
+        { searchMethod === 'both' && <span class='px-3 text-xs text-[11px] font-semibold tracking-wide text-base-content/50 uppercase'>{title}</span> }
         {fallback}
       </div>
     )
@@ -36,7 +36,7 @@ export function SearchSection ({ title, searchMethod, items, isLoading, fallback
 
     return (
       <div class='flex flex-col gap-2 py-2'>
-        { searchMethod === 'both' && <span class='px-3 text-xs text-[11px] font-semibold tracking-wide text-primary-content/50 uppercase'>{title}</span> }
+        { searchMethod === 'both' && <span class='px-3 text-xs text-[11px] font-semibold tracking-wide text-base-content/50 uppercase'>{title}</span> }
         {customContent}
       </div>
     )
@@ -44,7 +44,7 @@ export function SearchSection ({ title, searchMethod, items, isLoading, fallback
   
   return (
     <div class='flex flex-col gap-2 py-2'>
-      { searchMethod === 'both' && <span class='px-3 text-xs text-[11px] font-semibold tracking-wide text-primary-content/50 uppercase'>{title}</span> }
+      { searchMethod === 'both' && <span class='px-3 text-xs text-[11px] font-semibold tracking-wide text-base-content/50 uppercase'>{title}</span> }
       <div class='flex flex-col gap-1'>
         { items.length
           ? items.map(({ id, data }) => <SearchResult key={`local-search-${id}`} {...data} />)

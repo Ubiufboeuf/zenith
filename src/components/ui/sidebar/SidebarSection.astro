@@ -8,7 +8,7 @@ const { name, links } = Astro.props
 ---
 
 <div>
-  <strong class='px-3 text-xs text-[11px] font-semibold tracking-wide text-primary-content/50 uppercase'>{name}</strong>
+  <strong class='px-3 text-xs text-[11px] font-semibold tracking-wide text-base-content/50 uppercase'>{name}</strong>
   <div>
     { links.map((link) => <SidebarLink {...link} />) }
   </div>

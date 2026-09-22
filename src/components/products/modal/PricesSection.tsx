@@ -15,7 +15,7 @@ export function PricesSection () {
         Precios
       </span>
       <div class='flex flex-col gap-2'>
-        <strong class='text-xs font-semibold tracking-wide text-primary-content/40 uppercase'>Venta</strong>
+        <strong class='text-xs font-semibold tracking-wide text-base-content/40 uppercase'>Venta</strong>
         <div class='flex flex-wrap justify-between gap-2'>
           <NumberInput
             class='flex flex-1 flex-col gap-1 w-46 text-base-content/50 *:text-xs'
@@ -43,7 +43,7 @@ export function PricesSection () {
         </div>
       </div>
       <div class='flex flex-col gap-2'>
-        <strong class='text-xs font-semibold tracking-wide text-primary-content/40 uppercase'>Compra</strong>
+        <strong class='text-xs font-semibold tracking-wide text-base-content/40 uppercase'>Compra</strong>
         <div class='flex flex-wrap justify-between gap-2'>
           <NumberInput
             class='flex flex-1 flex-col gap-1 w-46 text-base-content/50 *:text-xs'
