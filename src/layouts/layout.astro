@@ -47,7 +47,7 @@ const deviceType = devices[deviceCode!] || detectedType
 	</head>
 	<body class='flex flex-col'>
 		<Sidebar />
-		<div class={`${containerClass} w-full h-full mobile:flex-1 min-h-fit sidebar:md:pl-sidebar bg-base-200`}>
+		<div class={`${containerClass} w-full h-full mobile:flex-1 mobile:min-h-0 sidebar:md:pl-sidebar bg-base-200`}>
 			<Header />
 			<MobileSearchBar client:load />
 			<main class={`${className} flex flex-col w-full max-w-7xl h-[calc(100%-64px)] mobile:h-full min-h-fit mx-auto`}>
