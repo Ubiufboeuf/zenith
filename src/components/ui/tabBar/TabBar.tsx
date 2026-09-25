@@ -14,7 +14,7 @@ const tabBarActions = [
 
 export function TabBar ({ currentPath }: { currentPath: string }) {
   return (
-    <footer class='desktop:hidden z-2 sticky bottom-0 left-0 right-0 w-full h-16 bg-base-200 border-t border-base-content/20'>
+    <footer class='desktop:hidden z-2 sticky bottom-0 left-0 right-0 w-full h-16 min-h-16 bg-base-200 border-t border-base-content/20'>
       <nav class='flex justify-around items-center gap-2 w-full h-full py-2'>
         { tabBarActions.map((tab) => {
           const { id, icon: TbaIcon } = tab
