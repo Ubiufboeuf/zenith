@@ -4,16 +4,16 @@ import { LowStock } from '@/components/dashboard/LowStock'
 import { TodaySalesCard } from '@/components/dashboard/TodaySalesCard'
 import { TopProductsCard } from '@/components/dashboard/TopProductsCard'
 import { WeeklySalesChart } from '@/components/dashboard/WeeklySalesChart'
-import { LinkButton } from '@/components/ui/LinkButton'
+import { MobileLowStock } from '@/components/ui/mobile/MobileLowStock'
+import { MobileTodaySalesCard } from '@/components/ui/mobile/MobileTodaySalesCard'
 import Layout from '@/layouts/layout.astro'
 ---
 
-<Layout title='Inicio' class='p-4 gap-6'>
-  <LinkButton href='/sales/new' width='block' color='primary' fill='soft' class='desktop:hidden h-12'>Nueva venta</LinkButton>
+<Layout title='Inicio' containerClass='min-h-0!' class='p-4 gap-6 mobile:gap-2'>
   <section class='h-fit w-full'>
     <KPIs client:load />
   </section>
-  <section class='h-80 w-full grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-6 *:card'>
+  <section class='mobile:hidden h-80 w-full grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-6 *:card'>
     <div class='col-1 h-full overflow-hidden border border-base-content/20 bg-base-100'>
       <TodaySalesCard client:load />
     </div>
@@ -21,8 +21,15 @@ import Layout from '@/layouts/layout.astro'
       <WeeklySalesChart client:load />
     </div>
   </section>
-  <section class='mobile:h-fit h-80 w-full grid grid-cols-2 mobile:grid-cols-1 items-center gap-6'>
+  <section class='mobile:hidden h-80 w-full grid grid-cols-2 items-center gap-6'>
     <LowStock client:load />
     <TopProductsCard client:load />
+  </section>
+  <section class='desktop:hidden h-full flex-1 flex flex-col items-center overflow-hidden'>
+    <div class='w-full h-full max-h-full overflow-scroll flex flex-row overflow-x-auto overflow-y-scroll border border-base-content/20 bg-base-100'>
+      <!-- <div class='h-[2000px]'></div> -->
+      <MobileTodaySalesCard client:load />
+      <MobileLowStock client:load />
+    </div>
   </section>
 </Layout>

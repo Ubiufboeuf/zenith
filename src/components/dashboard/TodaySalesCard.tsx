@@ -4,7 +4,7 @@ import { SegmentedBarChart } from '../ui/chart/SegmentedBarChart'
 import { Dot } from '../ui/Dot'
 import type { CurrencySalesBreakdown } from '@/types/dashboard/salesTypes'
 
-const salesByCurrency: CurrencySalesBreakdown[] = [
+export const salesByCurrency: CurrencySalesBreakdown[] = [
   {
     id: 'ventas-en-pesos-uruguayos',
     label: 'Peso uruguayo',
@@ -52,7 +52,7 @@ export function TodaySalesCard () {
         <span class='text-sm font-semibold text-base-content'>Ventas por divisa</span>
         <TrendBadge label='20.4%' sentiment='positive' class='border-none bg-transparent p-0' />
       </div>
-      <div class='h-full flex flex-col px-4 py-3 gap-2.5'>
+      <div class='h-full flex flex-col px-4 py-3 mobile:py-4 gap-2.5'>
         <SegmentedBarChart segments={salesByCurrency} />
         <div class='h-px border-b border-base-content/20' />
       </div>

@@ -9,4 +9,5 @@ export interface KpiItem {
   trend?: TrendBadgeProps
   color?: string
   icon: () => ReactNode
+  class?: string
 }

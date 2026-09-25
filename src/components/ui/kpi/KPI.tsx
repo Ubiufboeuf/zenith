@@ -9,11 +9,11 @@ const COLORS: Record<string, string> = {
   info: 'text-info'
 }
 
-export function KPI ({ title, value, subtext, trend, color, icon: KpiIcon }: KpiItem) {
+export function KPI ({ title, value, subtext, trend, color, icon: KpiIcon, class: className = '' }: KpiItem) {
   const iconColor = (color ? COLORS[color] : '') || color
 
   return (
-    <article class='card h-full w-full flex flex-col justify-between p-4 px-5 gap-1 border border-base-content/20 bg-base-100'>
+    <article class={`${className} card h-full w-full flex flex-col justify-between p-4 px-5 gap-1 border border-base-content/20 bg-base-100`}>
       <div class='h-fit w-full flex justify-between items-center'>
         <span class='text-sm text-base-content/50'>{title}</span>
         <Icon class={`${iconColor} size-5`}>

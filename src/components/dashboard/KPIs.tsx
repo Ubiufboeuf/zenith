@@ -1,6 +1,7 @@
 import type { KpiItem } from '@/types/ui/kpiTypes'
 import { KPI } from '../ui/kpi/KPI'
 import { IconCart, IconDollar, IconPackage, IconUsers } from '../ui/Icons'
+import { MobileKPI } from '../ui/mobile/MobileKPI'
 
 export const kpis: KpiItem[] = [
   {
@@ -41,7 +42,11 @@ export const kpis: KpiItem[] = [
 export function KPIs () {
   return (
     <div class='h-fit grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 flex-wrap items-center gap-4 mobile:gap-2'>
-      { kpis.map((kpi) => <KPI key={kpi.id} {...kpi} />) }
+      { kpis.map((kpi) => <>
+        <MobileKPI key={`mobile-${kpi.id}`} {...kpi} class='desktop:hidden desktop:invisible' />
+        <KPI key={kpi.id} {...kpi} class='mobile:hidden mobile:invisible' />
+        </> )
+      }
     </div>
   )
 }

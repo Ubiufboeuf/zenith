@@ -2,7 +2,7 @@ import { StatusBadge } from '../ui/badges/StatusBadge'
 import { Icon } from '../ui/Icon'
 import { IconAlert, IconCritical, IconPackage } from '../ui/Icons'
 
-const CATEGORIES: Record<string, string> = {
+export const _low_stock_mocked_categories: Record<string, string> = {
   procesadores: 'CPU',
   'memoria ram': 'RAM',
   'memorias ram': 'RAM',
@@ -10,11 +10,11 @@ const CATEGORIES: Record<string, string> = {
   'periféricos': 'I/O'
 }
 
-function getShortCategory (cat: string): string {
-  return CATEGORIES[cat.toLowerCase()] ?? cat
+export function getShortCategory (cat: string): string {
+  return _low_stock_mocked_categories[cat.toLowerCase()] ?? cat
 }
 
-const _products = [
+export const _low_stock_mocked_products = [
   {
     id: 'a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d',
     title: 'AMD Ryzen 5 5600G',
@@ -92,21 +92,21 @@ const _products = [
   }
 ]
 
-type Product = typeof _products[number];
+type Product = typeof _low_stock_mocked_products[number];
 
-function getStockSeverity (p: Product): number {
+export function getStockSeverity (p: Product): number {
   if (p.stock === 0) return 0
   if (p.stock <= p.criticalStock) return 1
   if (p.stock <= p.warningStock) return 2
   return 3
 }
 
-function getMargin (p: Product): number {
+export function getMargin (p: Product): number {
   if (p.stock <= p.criticalStock) return p.stock  
   return p.stock - p.criticalStock
 }
 
-const products = _products
+const products = _low_stock_mocked_products
   .filter((p) => p.stock <= p.warningStock)
   .toSorted((a, b) => {
     const severityA = getStockSeverity(a)

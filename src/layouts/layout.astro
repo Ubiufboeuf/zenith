@@ -9,10 +9,11 @@ interface Props {
 	title?: string
 	scrollbarGutter?: 'auto' | 'both' | 'stable'
 	class?: string
+	containerClass?: string
 	sidebar?: boolean
 }
 
-const { title, scrollbarGutter = 'auto', class: className = '', sidebar = true } = Astro.props
+const { title, scrollbarGutter = 'auto', class: className = '', containerClass = '', sidebar = true } = Astro.props
 const currentPath = Astro.url.pathname
 
 
@@ -44,12 +45,12 @@ const deviceType = devices[deviceCode!] || detectedType
 		<title>{title ? `${title} - Zenith` : 'Zenith'}</title>
 		<link rel='preload' href='/Inter.woff2' as='font' type='font/woff2' crossorigin />
 	</head>
-	<body>
+	<body class='flex flex-col'>
 		<Sidebar />
-		<div class='w-full h-full min-h-fit sidebar:md:pl-sidebar bg-base-200'>
+		<div class={`${containerClass} w-full h-full mobile:flex-1 min-h-fit sidebar:md:pl-sidebar bg-base-200`}>
 			<Header />
 			<MobileSearchBar client:load />
-			<main class={`${className} flex flex-col w-full max-w-7xl h-[calc(100%-64px)] min-h-fit mx-auto`}>
+			<main class={`${className} flex flex-col w-full max-w-7xl h-[calc(100%-64px)] mobile:h-full min-h-fit mx-auto`}>
 				<slot />
 			</main>
 		</div>
