@@ -37,7 +37,7 @@ const state =
 
 export function MobileLowStock () {
   return (
-    <article class={`${state} group card flex flex-col gap-2 h-full max-h-full w-full min-w-full p-4 border [.critic]:border-error/50 [.warning]:border-warning/50 border-base-content/20`}>
+    <article class={`${state} group card flex flex-col gap-2 h-full max-h-full w-full min-w-full p-4 border [.critic]:border-error/50 [.warning]:border-warning/50 border-base-content/20 bg-base-100`}>
       <div class='flex items-center justify-between gap-2 flex-wrap'>
         <div class='flex items-center gap-1'>
           <Icon class='size-6 group-[.critic]:text-error group-[.warning]:text-warning text-neutral-500'>
@@ -63,13 +63,13 @@ export function MobileLowStock () {
             const shortCategory = getShortCategory(category)
               
             return (
-              <li key={`low-stock-${id}`} class='list-row'>
+              <li key={`low-stock-${id}`} class='list-row items-center'>
                 <div class='flex flex-col items-center'>
                   <span class={`${state} badge badge-sm [.critic]:badge-error [.warning]:badge-warning [.normal]:badge-soft`}>{stock}</span>
                   <span class='text-base-content/50 list-col-grow'>({shortCategory})</span>
                 </div>
                 <a href={`/products/${id}`} class='link link-hover list-col-grow font-semibold line-clamp-2'>
-                  {title} {title} {title}
+                  {title}
                 </a>
               </li>
             )

@@ -26,8 +26,7 @@ import Layout from '@/layouts/layout.astro'
     <TopProductsCard client:load />
   </section>
   <section class='desktop:hidden h-full flex-1 flex flex-col items-center overflow-hidden'>
-    <div class='w-full h-full max-h-full overflow-scroll flex flex-row overflow-x-auto overflow-y-scroll border border-base-content/20 bg-base-100'>
-      <!-- <div class='h-[2000px]'></div> -->
+    <div class='w-full h-full max-h-full flex flex-row gap-2 overflow-x-auto snap-mandatory snap-x overflow-y-hidden [&>astro-island>article]:snap-start'>
       <MobileTodaySalesCard client:load />
       <MobileLowStock client:load />
     </div>

@@ -6,7 +6,7 @@ import { SEGMENT_COLORS } from '@/constants/ui/chartConstants'
 
 export function MobileTodaySalesCard () {
   return (
-    <article class='card flex flex-col gap-2 h-full w-full min-w-full p-4'>
+    <article class='card flex flex-col gap-2 h-full w-full min-w-full p-4 border border-base-content/20 bg-base-100'>
       <div class='w-full flex justify-between items-center'>
         <span class='text-sm font-semibold text-base-content'>Ventas por divisa</span>
         <TrendBadge label='20.4%' sentiment='positive' class='border-none bg-transparent p-0' />
