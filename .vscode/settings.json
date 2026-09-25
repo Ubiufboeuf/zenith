@@ -17,6 +17,7 @@
     "deps",
     "dx",
     "a11y",
-    "ux"
+    "ux",
+    "responsive"
   ]
 }
