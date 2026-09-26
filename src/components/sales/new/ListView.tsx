@@ -137,7 +137,7 @@ export function ListView () {
         </div>
       </div>
       <div class='flex items-center gap-2'>
-        <Button fill={page !== 1 ? 'ghost' : 'soft'} class='gap-3' onClick={() => setPage(1)}>
+        <Button fill={page !== 1 ? 'ghost' : 'outline'} class={`${page !== 1 ? '' : 'current'} gap-3 [.current]:border-base-content/20 [.current]:bg-base-100`} onClick={() => setPage(1)}>
           <Icon class='size-5'>
             <IconList />
           </Icon>
@@ -145,7 +145,7 @@ export function ListView () {
           <Keybinds keys='1' onBind={() => setPage(1)} when={whenToFocus} />
         </Button>
 
-        <Button fill={page !== 2 ? 'ghost' : 'soft'} class='gap-3' onClick={() => setPage(2)}>
+        <Button fill={page !== 2 ? 'ghost' : 'outline'} class={`${page !== 2 ? '' : 'current'} gap-3 [.current]:border-base-content/20 [.current]:bg-base-100`} onClick={() => setPage(2)}>
           <Icon class='size-4'>
             <IconSearch />
           </Icon>
