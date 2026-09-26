@@ -1,6 +1,45 @@
 import { Select } from '@/components/ui/Select'
+import { useNewSaleStore } from '@/stores/newSaleStore'
+import { useEffect, useState } from 'preact/hooks'
+import type { ListedItem } from '../ListView'
+import { calculateLineIva, calculateLineNet, calculateLineTotal } from '@/lib/sales/newSaleUtils'
 
 export function SaleSummary () {
+  const listedItems = useNewSaleStore((state) => state.listedItems)
+  const [subtotal, setSubtotal] = useState<string | number>('0')
+  const [totalDiscount, setTotalDiscount] = useState<string | number>('0')
+  const [taxableNet, setTaxableNet] = useState<string | number>('0')
+  const [ivaAmount, setIvaAmount] = useState<string | number>('0')
+  const [total, setTotal] = useState<string | number>('0')
+
+  function updateSummary (listedItems: ListedItem[]) {
+    let subtotal = 0
+    let taxableNet = 0
+    let ivaAmount = 0
+    let total = 0
+
+    for (const listedItem of listedItems) {
+      if (!listedItem.enabled || !listedItem.unitPriceAtMoment) continue
+      
+      subtotal += calculateLineTotal(listedItem, false)
+      taxableNet += calculateLineNet(listedItem, true)
+      ivaAmount += calculateLineIva(listedItem, true)
+      total += calculateLineTotal(listedItem, true)
+    }
+    
+    const totalDiscount = Math.abs(total - subtotal)
+
+    setSubtotal(subtotal.toFixed(2))
+    setTotalDiscount(totalDiscount.toFixed(2))
+    setTaxableNet(taxableNet.toFixed(2))
+    setIvaAmount(ivaAmount.toFixed(2))
+    setTotal(total.toFixed(2))
+  }
+
+  useEffect(() => {
+    updateSummary(listedItems)
+  }, [listedItems])
+  
   return (
     <div class='flex flex-col gap-2'>
       {/* Title */}
@@ -21,29 +60,25 @@ export function SaleSummary () {
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Subtotal</span>
-          <span class='text-base-content font-semibold'>UYU 16.000,20</span>
+          <span class='text-base-content font-semibold'>UYU {subtotal}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Descuentos</span>
-          <span class='text-secondary'>- UYU 16.000,20</span>
+          <span class='text-secondary'>- UYU {totalDiscount}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Neto gravado</span>
-          <span>UYU 16.000,20</span>
+          <span>UYU {taxableNet}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>IVA</span>
-          <span>UYU 16.000,20</span>
+          <span>UYU {ivaAmount}</span>
         </div>
       </div>
       <div>
         <div class='flex justify-between items-center text-sm h-fit text-base-content/70'>
           <strong class='flex h-full items-center pt-1'>Total</strong>
-          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>UYU 16.000,20</span>
-        </div>
-        <div class='flex items-center justify-between text-sm text-base-content/70'>
-          <span>Vuelto</span>
-          <strong class='text-accent'>UYU 16.000,20</strong>
+          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>UYU {total}</span>
         </div>
       </div>
     </div>

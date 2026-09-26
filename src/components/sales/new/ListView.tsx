@@ -75,7 +75,7 @@ export function ListView () {
       enabled: true
     })
     
-    setListedItems(listedItems)
+    setListedItems([...listedItems])
     setPage(1)
   }
 
