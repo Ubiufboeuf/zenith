@@ -99,7 +99,7 @@ export function DetailsPanel () {
           <strong class='flex h-full items-center pt-2'>Total</strong>
           <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>UYU 16.000,20</span>
         </div>
-        <Button color='primary' width='block'>Cobrar</Button>
+        <Button color='primary' width='block' tabIndex={0}>Cobrar</Button>
       </div>
     </section>
   )
