@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Select, type SelectOption } from '@/components/ui/Select'
 import { Table } from '@/components/ui/table/Table'
 import { mockedProducts } from '@/mocks/products'
 import type { ProductWithCodes } from '@/types/products/productTypes'
@@ -8,147 +7,47 @@ import { formatCurrency } from '@/utils/currencies'
 import { useEffect, useState } from 'preact/hooks'
 import { Button } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
-import { IconList, IconPlus, IconSearch, IconX } from '@/components/ui/Icons'
+import { IconList, IconPlus, IconSearch } from '@/components/ui/Icons'
 import { SearchBar } from '@/components/ui/search/simple/SearchBar'
 import { Keybinds } from '@/components/ui/Keybinds'
 import { Pagination } from '@/components/products/Pagination'
 import type { SaleDetail } from '@/types/sales/saleTypes'
 import { v4 } from 'uuid'
+import { useNewSaleStore } from '@/stores/newSaleStore'
+import { UnitPrice } from './list/UnitPrice'
+import { IvaRate } from './list/IvaRate'
+import { Discount } from './list/Discount'
+import { LineTotal } from './list/LineTotal'
+import { ToggleItem } from './list/ToggleItem'
+import { Quantity } from './list/Quantity'
+import { ProductInfo } from './list/ProductInfo'
+import { DeleteProduct } from './list/DeleteProduct'
 
 export interface ListedItem extends Omit<SaleDetail, 'saleId' | 'currency'> {
   product: ProductWithCodes
+  enabled: boolean
 }
 
-const ivaOptions: SelectOption[] = [
-  { id: '0', label: '0%' },
-  { id: '10', label: '10%' },
-  { id: '22', label: '22%', default: true }
-]
-
 const columns: TableColumn<ListedItem>[] = [
-  {
-    key: 'delete',
-    header: '',
-    width: '64px',
-    align: 'center',
-    class: 'p-0!',
-    render: () => {
-      return (
-        <Button size='sm' shape='square' fill='soft' color='error' tabIndex={-1}>
-          <Icon class='size-4'>
-            <IconX />
-          </Icon>
-        </Button>
-      )
-    }
-  },
-  {
-    key: 'product',
-    header: 'Producto',
-    width: 'minmax(240px, 1fr)',
-    class: 'pl-0!',
-    headerClass: 'pl-0!',
-    render: ({ product: { title, subtitle, codes } }) => {
-      const mainCode = codes.find((c) => c?.isMain)?.code
-      
-      return (
-        <div class='flex flex-col items-start'>
-          <strong class='font-semibold line-clamp-2 wrap-anywhere text-base-content'>{mainCode} · {title}</strong>
-          <span class='text-xs text-base-content/50 line-clamp-2 wrap-anywhere'>{subtitle}</span>
-        </div>
-      )
-    }
-  },
-  {
-    key: 'count',
-    header: 'Cantidad',
-    width: 'min-content',
-    render: ({ quantity }) => (
-      <input
-        type='number'
-        class='input input-xs w-full'
-        value={quantity}
-        min='0'
-      />
-    )
-  },
-  {
-    key: 'salePrice',
-    header: 'Precio unitario',
-    width: 'max-content',
-    render: ({ product: { salePrice } }) => <label class='input input-xs w-24 text-end text-base-content'>
-      $  
-      <input
-        type='number'
-        defaultValue={salePrice}
-        placeholder={String(salePrice)}
-        min='0'
-      />
-    </label>
-  },
-  {
-    key: 'iva',
-    header: 'IVA',
-    width: 'min-content',
-    render: () => (
-      <Select
-        options={ivaOptions}
-        class='select-xs w-16 text-base-content'
-      />
-    )
-  },
-  {
-    key: 'discount',
-    header: 'Descuento',
-    width: 'min-content',
-    render: () => (
-      <input
-        type='number'
-        class='input input-xs w-16 text-base-content'
-        min='0'
-        max='100'
-        placeholder='0%'
-      />
-    )
-  },
-  {
-    key: 'price',
-    header: 'Importe',
-    width: 'min-content',
-    render: ({ product: { salePrice } }) => {
-      const discount = 10
-      const price = salePrice - discount
-
-      return <strong class='text-base-content'>{formatCurrency(price)}</strong>
-    }
-  },
-  {
-    key: 'checkbox',
-    header: '',
-    width: '64px',
-    align: 'center',
-    class: 'p-0!',
-    render: () => {
-      const [checked] = useState(true)
-
-      return (
-        <input
-          type='checkbox'
-          checked={checked}
-          class='checkbox checkbox-accent checkbox-sm'
-        />
-      )
-    }
-  }
+  { key: 'delete', header: '', width: '64px', align: 'center', class: 'p-0!', render: DeleteProduct },
+  { key: 'product', header: 'Producto', width: 'minmax(240px, 1fr)', class: 'pl-0!', headerClass: 'pl-0!', render: ProductInfo },
+  { key: 'count', header: 'Cantidad', width: 'min-content', render: Quantity},
+  { key: 'salePrice', header: 'Precio unitario', width: 'max-content', render: UnitPrice },
+  { key: 'iva', header: 'IVA', width: 'min-content', render: IvaRate },
+  { key: 'discount', header: 'Descuento', width: 'min-content', render: Discount },
+  { key: 'price', header: 'Importe', width: 'minmax(240px, 1fr)', render: LineTotal },
+  { key: 'checkbox', header: '', width: '64px', align: 'center', class: 'p-0!', render: ToggleItem }
 ]
 
 export function ListView () {
-  const [page, setPage] = useState(1)
+  const products = useNewSaleStore((state) => state.products)
+  const setProducts = useNewSaleStore((state) => state.setProducts)
+  const listedItems = useNewSaleStore((state) => state.listedItems)
+  const setListedItems = useNewSaleStore((state) => state.setListedItems)
 
-  const [products, setProducts] = useState<ProductWithCodes[]>([])
-  const [listedItems, setListedItems] = useState<ListedItem[]>([])
+  const [page, setPage] = useState(1)
   const [searchListPage, setSearchListPage] = useState(1)
-  
+
   function whenToFocus () {
     if (document.activeElement instanceof HTMLInputElement) return false
     if (document.activeElement instanceof HTMLTextAreaElement) return false
@@ -172,7 +71,8 @@ export function ListView () {
       ivaRate: 0.22,
       product,
       quantity: 1,
-      unitPriceAtMoment: product.salePrice
+      unitPriceAtMoment: product.salePrice,
+      enabled: true
     })
     
     setListedItems(listedItems)
