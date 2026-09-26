@@ -23,16 +23,13 @@ export const useNewSaleStore = create<NewSaleStore>((set, get) => ({
   getListedItem: (id) => get().listedItems.find((li) => li.id === id),
   setListedItems: (listedItems) => set({ listedItems }),
   updateListedItem: (id, data) => set(({ listedItems }) => {
-    let listedItem = listedItems.find((li) => li.id === id)
-    if (!listedItem) return {}
+    const idx = listedItems.findIndex((li) => li.id === id)
+    if (idx === -1) return {}
 
-    const filteredListedItems = listedItems.filter((li) => li.id !== id)
-    if (filteredListedItems.length === listedItems.length) return {}
-    
-    listedItem = {...listedItem, ...data}
+    listedItems[idx] = {...listedItems[idx], ...data}
 
     return {
-      listedItems: [...filteredListedItems, listedItem]
+      listedItems: [...listedItems]
     }
   }),
   deleteListedItem: (id) => set(({ listedItems }) => ({ listedItems: listedItems.filter((li) => li.id !== id) }))
