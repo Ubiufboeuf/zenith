@@ -68,7 +68,7 @@ export function ListView () {
     else listedItems.push({
       id: v4(),
       discount: 0,
-      ivaRate: 0.22,
+      ivaRate: 22,
       product,
       quantity: 1,
       unitPriceAtMoment: product.salePrice,
