@@ -5,11 +5,17 @@ interface UIStore {
   openSearch: () => void
   closeSearch: () => void
   toggleSearch: () => void
+
+  currentTheme: string | undefined
+  setCurrentTheme: (newTheme: string | undefined) => void
 }
 
 export const useUIStore = create<UIStore>((set) => ({
   isSearchOpen: false,
   openSearch: () => set({ isSearchOpen: true }),
   closeSearch: () => set({ isSearchOpen: false }),
-  toggleSearch: () => set(({ isSearchOpen }) => ({ isSearchOpen: !isSearchOpen }))
+  toggleSearch: () => set(({ isSearchOpen }) => ({ isSearchOpen: !isSearchOpen })),
+
+  currentTheme: undefined,
+  setCurrentTheme: (currentTheme) => set({ currentTheme })
 }))

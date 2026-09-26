@@ -3,9 +3,13 @@ import { SIDEBAR_SECTIONS } from '@/constants/ui/sidebarConstants'
 import SidebarSection from './SidebarSection.astro'
 import { LinkButton } from '../LinkButton'
 import { Themes } from '../Themes'
+import { useUIStore } from '@/stores/uiStore'
 
 const themeCookie = Astro.cookies.get('_znt-thm')
 const theme = themeCookie?.value ?? 'dark'
+
+const { setCurrentTheme } = useUIStore.getState()
+setCurrentTheme(theme)
 ---
 
 <input id='sidebar-checkbox' type='checkbox' class='peer' hidden />

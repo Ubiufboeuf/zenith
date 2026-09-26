@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unknown-property */
+import { useUIStore } from '@/stores/uiStore'
 import type { LineChartProps } from '@/types/ui/chartTypes'
 import { useId } from 'preact/hooks'
 
@@ -6,7 +7,16 @@ const paddingX = 24
 const paddingY = 24
 const textSpace = 24
 
+const colors: Record<string, string> = {
+  light: '#422ad5',
+  dark: '#605dff',
+  autumn: '#8c0327',
+  sunset: '#ff865b'
+}
+
 export function LineChart ({ size, columns, rows, points, pointSize, pointStrokeWidth }: LineChartProps) {
+  const currentTheme = useUIStore((state) => state.currentTheme)
+  
   const id = useId()
   const gradientId = `gradient-${id}`
 
@@ -33,8 +43,8 @@ export function LineChart ({ size, columns, rows, points, pointSize, pointStroke
       <svg viewBox={viewBox} class='h-full w-full border-base-content/20 overflow-hidden'>
         <defs>
           <linearGradient id={gradientId} x1='0' x2='0' y1='0' y2='1'>
-            <stop offset='0%' stop-color='#6366f1' stop-opacity='0.35' />
-            <stop offset='100%' stop-color='#6366f1' stop-opacity='0' />
+            <stop offset='0%' stop-color={currentTheme ? colors[currentTheme] : ''} stop-opacity='0.35' />
+            <stop offset='100%' stop-color={currentTheme ? colors[currentTheme] : ''} stop-opacity='0' />
           </linearGradient>
         </defs>
         

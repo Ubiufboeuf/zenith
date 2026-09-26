@@ -3,6 +3,7 @@ import { Dropdown } from './Dropdown'
 import { Button } from './Button'
 import { capitalize } from '@/utils/capitalize'
 import type { TargetedInputEvent } from 'preact'
+import { useUIStore } from '@/stores/uiStore'
 
 export const themes = [
   'light',
@@ -19,14 +20,16 @@ interface Props {
 
 export function Themes ({ initialTheme, class: className = '', btnClass = '' }: Props) {
   const [isThemesOpen, setIsThemesOpen] = useState(false)
+  const setCurrentTheme = useUIStore((state) => state.setCurrentTheme)
   
   function changeTheme (event: TargetedInputEvent<HTMLInputElement>) {
     const value = event?.currentTarget.value
     if (!value) return
 
     cookieStore.set('_znt-thm', value)
+    setCurrentTheme(value)
   }
-  
+
   return <>
     <Button class={btnClass} onClick={() => setIsThemesOpen((state) => !state)}>
       Temas
