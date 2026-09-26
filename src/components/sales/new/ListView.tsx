@@ -35,7 +35,7 @@ const columns: TableColumn<ListedItem>[] = [
   { key: 'salePrice', header: 'Precio unitario', width: 'max-content', render: UnitPrice },
   { key: 'iva', header: 'IVA', width: 'min-content', render: IvaRate },
   { key: 'discount', header: 'Descuento', width: 'min-content', render: Discount },
-  { key: 'price', header: 'Importe', width: 'minmax(240px, 1fr)', render: LineTotal },
+  { key: 'price', header: 'Importe', width: 'minmax(auto,200px)', render: LineTotal },
   { key: 'checkbox', header: '', width: '64px', align: 'center', class: 'p-0!', render: ToggleItem }
 ]
 
