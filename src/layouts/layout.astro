@@ -50,7 +50,7 @@ const deviceType = devices[deviceCode!] || detectedType
 		<div class={`${containerClass} w-full h-full mobile:flex-1 mobile:min-h-0 sidebar:md:pl-sidebar bg-base-200`}>
 			<Header />
 			<MobileSearchBar client:load />
-			<main class={`${className} flex flex-col w-full max-w-7xl h-[calc(100%-64px)] mobile:h-full min-h-fit mx-auto`}>
+			<main class={`${className} flex flex-col w-full h-[calc(100%-64px)] mobile:h-full min-h-fit mx-auto`}>
 				<slot />
 			</main>
 		</div>
