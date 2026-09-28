@@ -32,9 +32,9 @@ export function CheckoutModal () {
   function createPayment () {
     addPayment({
       id: v4(),
-      amount: 0,
+      amountPaid: 0,
       currency: 'UYU',
-      method: 'cash'
+      paymentMethod: 'cash'
     })
   }
 
@@ -45,13 +45,13 @@ export function CheckoutModal () {
     if (isCheckoutModalOpen) modal.showModal()
     else modal.close()
 
-    const sum = payments.reduce((acc, p) => acc + p.amount, 0)
+    const sum = payments.reduce((acc, p) => acc + p.amountPaid, 0)
     setPaymentsAmount(sum)
     setRest(sum - Number(total))
   }, [isCheckoutModalOpen])
   
   useEffect(() => {
-    const sum = payments.reduce((acc, p) => acc + p.amount, 0)
+    const sum = payments.reduce((acc, p) => acc + p.amountPaid, 0)
     setPaymentsAmount(sum)
     setRest(sum - Number(total))
   }, [payments])

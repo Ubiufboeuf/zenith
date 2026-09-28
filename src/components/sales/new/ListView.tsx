@@ -67,6 +67,7 @@ export function ListView () {
     if (listedItemIndex !== -1) listedItems[listedItemIndex].quantity++
     else listedItems.push({
       id: v4(),
+      productId: id,
       discount: 0,
       ivaRate: 22,
       product,

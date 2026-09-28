@@ -58,7 +58,7 @@ export const useNewSaleStore = create<NewSaleStore>((set, get) => ({
   total: 0,
   setTotal: (total) => set({ total }),
 
-  payments: [{ id: 'initial', method: 'cash', amount: 0, currency: 'UYU' }],
+  payments: [{ id: 'initial', paymentMethod: 'cash', amountPaid: 0, currency: 'UYU' }],
   setPayments: (payments) => set({ payments }),
   addPayment: (payment) => set(({ payments }) => ({ payments: [...payments, payment] })),
   deletePayment: (id) => set(({ payments }) => ({ payments: payments.filter((p) => p.id !== id) })),

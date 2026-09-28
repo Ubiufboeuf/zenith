@@ -38,7 +38,7 @@ export function CheckoutPayment ({ idx, payment: { id } }: Props) {
     const newAmount = (rest * -1) + value
     
     setAmount(newAmount)
-    updatePayment(id, { amount: newAmount })
+    updatePayment(id, { amountPaid: newAmount })
   }
 
   function removePayment () {
@@ -48,7 +48,7 @@ export function CheckoutPayment ({ idx, payment: { id } }: Props) {
   function handleInput (event: TargetedInputEvent<HTMLInputElement>) {
     const { value } = event.currentTarget
     setAmount(Number(value))
-    updatePayment(id, { amount: Number(value) })
+    updatePayment(id, { amountPaid: Number(value) })
   }
 
   function handleChangeMethod (option: SelectOption) {
