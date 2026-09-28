@@ -1,7 +1,7 @@
 import { useNewSaleStore } from '@/stores/newSaleStore'
 import type { ListedItem } from '../ListView'
 import type { TargetedInputEvent } from 'preact'
-import { useState } from 'preact/hooks'
+import { useEffect, useState } from 'preact/hooks'
 import { limit } from '@/lib/utils'
 
 export function Quantity ({ id, quantity: initialQuantity }: ListedItem) {
@@ -15,6 +15,10 @@ export function Quantity ({ id, quantity: initialQuantity }: ListedItem) {
     setQuantity(quantityValue)
     setListedItemPrice(id, { quantity: quantityValue ?? 0 })
   }
+
+  useEffect(() => {
+    setQuantity(initialQuantity)
+  }, [initialQuantity])
   
   return (
     <input

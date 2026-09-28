@@ -31,7 +31,7 @@ export interface ListedItem extends Omit<SaleDetail, 'saleId' | 'currency'> {
 const columns: TableColumn<ListedItem>[] = [
   { key: 'delete', header: '', width: '64px', align: 'center', class: 'p-0!', render: DeleteProduct },
   { key: 'product', header: 'Producto', width: 'minmax(240px, 1fr)', class: 'pl-0!', headerClass: 'pl-0!', render: ProductInfo },
-  { key: 'count', header: 'Cantidad', width: 'min-content', render: Quantity},
+  { key: 'count', header: 'Cantidad', width: 'min-content', render: Quantity },
   { key: 'salePrice', header: 'Precio unitario', width: 'max-content', render: UnitPrice },
   { key: 'iva', header: 'IVA', width: 'min-content', render: IvaRate },
   { key: 'discount', header: 'Descuento', width: 'min-content', render: Discount },
