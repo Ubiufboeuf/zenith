@@ -293,3 +293,60 @@ export const IconList = () => (
     <path d='M7 17.995v.02c0 1.099 -.895 1.99 -2 1.99s-2 -.891 -2 -1.99v-.02c0 -1.099 .895 -1.99 2 -1.99s2 .891 2 1.99' />
   </Svg>
 )
+
+export const IconExit = () => (
+  <Svg>
+    <path d='M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2' />
+    <path d='M9 12h12l-3 -3' />
+    <path d='M18 15l3 -3' />
+  </Svg>
+)
+
+export const IconSave = () => (
+  <Svg>
+    <path d='M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2' />
+    <path d='M10 14a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' />
+    <path d='M14 4l0 4l-6 0l0 -4' />
+  </Svg>
+)
+
+export const IconTrash = () => (
+  <Svg>
+    <path d='M4 7l16 0' />
+    <path d='M10 11l0 6' />
+    <path d='M14 11l0 6' />
+    <path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12' />
+    <path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' />
+  </Svg>
+)
+
+export const IconCash = () => (
+  <Svg>
+    <path d='M7 15h-3a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v3' />
+    <path d='M7 10a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8' />
+    <path d='M12 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0' />
+  </Svg>
+)
+
+export const IconPrinter = () => (
+  <Svg>
+    <path d='M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2' />
+    <path d='M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4' />
+    <path d='M7 15a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2l0 -4' />
+  </Svg>
+)
+
+export const IconDownload = () => (
+  <Svg>
+    <path d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2' />
+    <path d='M7 11l5 5l5 -5' />
+    <path d='M12 4l0 12' />
+  </Svg>
+)
+
+export const IconSend = () => (
+  <Svg>
+    <path d='M10 14l11 -11' />
+    <path d='M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5' />
+  </Svg>
+)

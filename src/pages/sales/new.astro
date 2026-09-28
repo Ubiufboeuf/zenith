@@ -1,4 +1,5 @@
 ---
+import { CheckoutModal } from '@/components/sales/new/CheckoutModal';
 import { DetailsPanel } from '@/components/sales/new/DetailsPanel'
 import { ListView } from '@/components/sales/new/ListView'
 import Layout from '@/layouts/layout.astro'
@@ -7,4 +8,5 @@ import Layout from '@/layouts/layout.astro'
 <Layout title='Nueva venta' class='flex flex-row' sidebar={false}>
   <ListView client:load />
   <DetailsPanel client:load />
+  <CheckoutModal client:load />
 </Layout>

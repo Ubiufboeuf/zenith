@@ -57,3 +57,10 @@ export interface SaleFull extends Sale {
   details: SaleDetail[]
   payments: SalePayment[]
 }
+
+export interface Payment {
+  id: string
+  method: string
+  currency: string
+  amount: number
+}

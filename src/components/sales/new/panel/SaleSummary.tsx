@@ -10,7 +10,8 @@ export function SaleSummary () {
   const [totalDiscount, setTotalDiscount] = useState<string | number>('0')
   const [taxableNet, setTaxableNet] = useState<string | number>('0')
   const [ivaAmount, setIvaAmount] = useState<string | number>('0')
-  const [total, setTotal] = useState<string | number>('0')
+  const total = useNewSaleStore((state) => state.total)
+  const setTotal = useNewSaleStore((state) => state.setTotal)
 
   function updateSummary (listedItems: ListedItem[]) {
     let subtotal = 0
