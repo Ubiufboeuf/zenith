@@ -7,6 +7,7 @@ import type { TargetedMouseEvent } from 'preact'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { CheckoutPayment } from './checkout/CheckoutPayment'
 import { v4 } from 'uuid'
+import { checkout } from '@/lib/sales/checkout'
 
 export function CheckoutModal () {
   const modalRef = useRef<HTMLDialogElement>(null)
@@ -112,14 +113,14 @@ export function CheckoutModal () {
                   <IconDownload />
                 </Icon>
               </Button>
-              <Button color='secondary' fill='soft' class='flex-1'>
+              <Button color='secondary' fill='soft' class='flex-1' onClick={checkout}>
                 <Icon class='size-5'>
                   <IconSave />
                 </Icon>
                 <span>Guardar</span>
               </Button>
             </div>
-            <Button color='primary'>
+            <Button color='primary' onClick={checkout}>
               <Icon class='size-5'>
                 <IconExit />
               </Icon>

@@ -64,9 +64,26 @@ export interface SaleFull extends Sale {
   payments: SalePayment[]
 }
 
-export interface Payment {
-  id: string
-  method: string
-  currency: string
-  amount: number
+export interface SalePayload {
+  documentType: DocumentType
+  saleType: SaleType
+  currency: Currency
+  exchangeRate?: number
+  
+  userId: string | null
+  cashierId: string
+  clientId: string | null
+  
+  subtotal: number
+  totalDiscount: number
+  generalDiscount: number
+  total: number
+  
+  details: Omit<SaleDetail, 'id' | 'saleId'>[]
+  
+  payments: (Omit<Payment, 'id'> & {
+    reference?: string // Para guardar el número del voucher
+  })[]
+  
+  notes?: string
 }
