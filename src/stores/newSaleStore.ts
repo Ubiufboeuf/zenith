@@ -51,7 +51,7 @@ export const useNewSaleStore = create<NewSaleStore>((set, get) => ({
   }),
   deleteListedItem: (id) => set(({ listedItems }) => ({ listedItems: listedItems.filter((li) => li.id !== id) })),
 
-  isCheckoutModalOpen: true,
+  isCheckoutModalOpen: false,
   openCheckoutModal: () => set({ isCheckoutModalOpen: true }),
   closeCheckoutModal: () => set({ isCheckoutModalOpen: false }),
 

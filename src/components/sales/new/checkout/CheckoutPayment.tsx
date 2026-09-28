@@ -56,7 +56,7 @@ export function CheckoutPayment ({ idx, payment: { id } }: Props) {
   }
   
   return (
-    <div class='card w-full h-fit flex flex-col gap-3 p-3 px-5 bg-base-200'>
+    <div class='card w-full h-fit flex flex-col gap-3 p-4 bg-base-200'>
       <div class='h-fit w-full flex items-center gap-2'>
         <span class='text-sm text-base-content/50 font-semibold uppercase mr-auto'>Pago {idx + 1}</span>
         <Button fill='ghost' color='accent' size='sm' onClick={handleFillRest} disabled={rest >= 0}>
