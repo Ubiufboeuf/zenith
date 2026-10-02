@@ -4,6 +4,7 @@ import type { Sale } from '@/types/sales/saleTypes'
 import { SearchSales } from './SearchSales'
 import { API_URL } from '@/constants/envConstants'
 import { structureSaleByApiSale } from '@/lib/api'
+import { Temporal } from 'temporal-polyfill'
 
 async function getSales (): Promise<Sale[]> {
   let data
@@ -27,7 +28,18 @@ async function getSales (): Promise<Sale[]> {
     sales.push(sale)
   }
 
-  return sales
+  if (sales.length === 0) return []
+
+  const sortedSales = sales.sort((a, b) => {
+    const epochA = Temporal.Instant.from(a.createdAt).epochMilliseconds
+    const epochB = Temporal.Instant.from(b.createdAt).epochMilliseconds
+
+    if (epochA > epochB) return 1
+    if (epochA < epochB) return -1
+    return 0
+  })
+
+  return sortedSales
 }
 
 export function SalesView () {
