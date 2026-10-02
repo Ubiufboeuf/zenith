@@ -1,6 +1,9 @@
 import { Select, type SelectOption } from '@/components/ui/Select'
 import { CURRENCIES } from '@/constants/currencyConstants'
 import { mockedCashiers } from '@/mocks/cashiers'
+import { useNewSaleStore } from '@/stores/newSaleStore'
+import type { Currency } from '@/types/currencyTypes'
+import type { DocumentType, SaleType } from '@/types/sales/saleTypes'
 import { useEffect, useState } from 'preact/hooks'
 import { Temporal } from 'temporal-polyfill'
 
@@ -20,6 +23,9 @@ async function getCashiers () {
 export function SaleInfo () {
   const [isCredit, setIsCredit] = useState(false)
   const [cashierOptions, setCashierOptions] = useState<SelectOption[]>([{ id: 'default', label: '- Selecciona un cajero -', default: true }])
+  const setCurrency = useNewSaleStore((state) => state.setCurrency)
+  const setDocumentType = useNewSaleStore((state) => state.setDocumentType)
+  const setSaleType = useNewSaleStore((state) => state.setSaleType)
   
   async function loadCashiers () {
     const cashiers = await getCashiers()
@@ -28,8 +34,12 @@ export function SaleInfo () {
     setCashierOptions(cashiers)
   }
 
-  function handleChange (option: SelectOption) {
+  function handleChangeDocumentType (option: SelectOption) {
     setIsCredit(option.id.includes('credit'))
+    const [,saleType, documentType] = option.id.toUpperCase().split(/(immediate|credit)/i)
+    console.log({ saleType, documentType })
+    setSaleType(saleType as SaleType)
+    setDocumentType(documentType as DocumentType)
   }
 
   useEffect(() => {
@@ -40,8 +50,16 @@ export function SaleInfo () {
     <div class='flex flex-col gap-2'>
       <Select options={cashierOptions} class='select-sm text-base-content [&_option]:text-base-content/70 [&_option]:shr:text-base-content [&_option:checked]:text-base-content [&_option:checked]:font-semibold' />
       <div class='flex gap-2'>
-        <Select options={documentOptions} class='text-base-content [&_option]:text-base-content/70 [&_option]:shr:text-base-content [&_option:checked]:text-base-content [&_option:checked]:font-semibold' onChange={handleChange} />
-        <Select options={currencyOptions} class='w-32 text-base-content [&_option]:text-base-content/70 [&_option]:shr:text-base-content [&_option:checked]:text-base-content [&_option:checked]:font-semibold' />
+        <Select
+          options={documentOptions}
+          class='text-base-content [&_option]:text-base-content/70 [&_option]:shr:text-base-content [&_option:checked]:text-base-content [&_option:checked]:font-semibold'
+          onChange={handleChangeDocumentType}
+        />
+        <Select
+          options={currencyOptions}
+          class='w-32 text-base-content [&_option]:text-base-content/70 [&_option]:shr:text-base-content [&_option:checked]:text-base-content [&_option:checked]:font-semibold'
+          onChange={(option) => setCurrency(option.id as Currency)}
+        />
       </div>
       <div class='flex justify-between gap-2'>
         <label class='flex-1'>

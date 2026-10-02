@@ -6,7 +6,8 @@ import { calculateLineIva, calculateLineNet, calculateLineTotal } from '@/lib/sa
 
 export function SaleSummary () {
   const listedItems = useNewSaleStore((state) => state.listedItems)
-  const [subtotal, setSubtotal] = useState<string | number>('0')
+  const subtotal = useNewSaleStore((state) => state.subtotal)
+  const setSubtotal = useNewSaleStore((state) => state.setSubtotal)
   const [totalDiscount, setTotalDiscount] = useState<string | number>('0')
   const [taxableNet, setTaxableNet] = useState<string | number>('0')
   const [ivaAmount, setIvaAmount] = useState<string | number>('0')

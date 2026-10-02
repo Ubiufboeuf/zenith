@@ -1,6 +1,9 @@
 import type { ListedItem } from '@/components/sales/new/ListView'
+import { CURRENCIES } from '@/constants/currencyConstants'
+import { DOCUMENT_TYPE, SALE_TYPE } from '@/constants/saleConstants'
+import type { Currency } from '@/types/currencyTypes'
 import type { ProductWithCodes } from '@/types/products/productTypes'
-import type { Payment } from '@/types/sales/saleTypes'
+import type { DocumentType, Payment, SaleType } from '@/types/sales/saleTypes'
 import { create } from 'zustand'
 
 interface NewSaleStore {
@@ -29,6 +32,19 @@ interface NewSaleStore {
 
   rest: number
   setRest: (rest: number) => void
+
+  documentType?: DocumentType
+  setDocumentType: (documentType?: DocumentType) => void
+  saleType?: SaleType
+  setSaleType: (saleType?: SaleType) => void
+  currency?: Currency
+  setCurrency: (currency?: Currency) => void
+  subtotal?: string | number
+  setSubtotal: (subtotal?: string | number) => void
+  totalDiscount?: number
+  setTotalDiscount: (totalDiscount?: number) => void
+  generalDiscount?: number
+  setGeneralDiscount: (generalDiscount?: number) => void
 }
 
 export const useNewSaleStore = create<NewSaleStore>((set, get) => ({
@@ -75,5 +91,18 @@ export const useNewSaleStore = create<NewSaleStore>((set, get) => ({
   }),
 
   rest: 0,
-  setRest: (rest) => set({ rest })
+  setRest: (rest) => set({ rest }),
+
+  documentType: DOCUMENT_TYPE.RECEIPT,
+  setDocumentType: (documentType) => set({ documentType }),
+  saleType: SALE_TYPE.IMMEDIATE,
+  setSaleType: (saleType) => set({ saleType }),
+  currency: CURRENCIES[0],
+  setCurrency: (currency) => set({ currency }),
+  subtotal: '0',
+  setSubtotal: (subtotal) => set({ subtotal }),
+  totalDiscount: undefined,
+  setTotalDiscount: (totalDiscount) => set({ totalDiscount }),
+  generalDiscount: undefined,
+  setGeneralDiscount: (generalDiscount) => set({ generalDiscount })
 }))

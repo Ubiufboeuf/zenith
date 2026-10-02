@@ -5,10 +5,23 @@ import { useNewSaleStore } from '@/stores/newSaleStore'
 export async function checkout () {
   const {
     documentType, saleType, currency,
-    subtotal, totalDiscount, generalDiscount, total,
+    subtotal, totalDiscount = 0, generalDiscount = 0, total,
     listedItems, payments
   } = useNewSaleStore.getState()
-  
+
+  const payloadPayments = payments
+    .filter((p) => Number(p.amountPaid) > 0)
+    .map((p) => ({
+      paymentMethod: p.paymentMethod,
+      currency: p.currency,
+      amountPaid: Number(p.amountPaid)
+    }))
+  const totalPayments = payloadPayments.reduce((acc, val) => val.amountPaid + acc, 0)
+
+  if (!documentType || !saleType || !currency || !subtotal || totalPayments < Number(total)) {
+    throw new Error('Faltan datos importantes para completar la venta')
+  }
+
   const payload: SalePayload = {
     documentType,
     saleType, 
@@ -20,9 +33,9 @@ export async function checkout () {
     cashierId: 'default_cashier', 
     clientId: null,
     
-    subtotal, 
-    totalDiscount: 0,
-    generalDiscount: 0,
+    subtotal: Number(subtotal),
+    totalDiscount,
+    generalDiscount,
     total: Number(total),
     
     details: listedItems.map((item) => ({
@@ -32,21 +45,15 @@ export async function checkout () {
       ivaRate: item.ivaRate,
       discount: item.discount,
       // currency: item.currency
-      currency: 'UYU'
+      currency: 'UYU' // <- este es temporal
     })),
     
-    payments: payments
-      .filter((p) => Number(p.amountPaid) > 0)
-      .map((p) => ({
-        paymentMethod: p.paymentMethod,
-        currency: p.currency,
-        amountPaid: Number(p.amountPaid)
-      }))
+    payments: payloadPayments
   }
 
   try {
     await createSale(payload)
-    // reiniciar la store, por ejemplo (aunque si solo guardas y no sales no debería)
+    // reiniciar la store, por ejemplo (aunque si solo guardas y no quieres salir no debería)
   } catch (err) {
     console.error('Error al guardar:', err)
   }
