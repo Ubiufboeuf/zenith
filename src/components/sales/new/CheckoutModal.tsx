@@ -39,6 +39,11 @@ export function CheckoutModal () {
     })
   }
 
+  async function checkoutAndExit () {
+    await checkout()
+    location.href = '/sales'
+  }
+
   useEffect(() => {
     const modal = modalRef.current
     if (!modal) return
@@ -120,7 +125,7 @@ export function CheckoutModal () {
                 <span>Guardar</span>
               </Button>
             </div>
-            <Button color='primary' onClick={checkout}>
+            <Button color='primary' onClick={checkoutAndExit}>
               <Icon class='size-5'>
                 <IconExit />
               </Icon>
