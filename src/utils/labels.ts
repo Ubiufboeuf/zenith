@@ -4,8 +4,8 @@ import type { DocumentType, PaymentStatus, SaleStatus, SaleType } from '@/types/
 export function getSaleDocumentLabel (documentType: DocumentType, saleType: SaleType) {
   if (documentType === DOCUMENT_TYPE.INVOICE && saleType === SALE_TYPE.CREDIT) return 'Factura Crédito'
   if (documentType === DOCUMENT_TYPE.INVOICE && saleType === SALE_TYPE.IMMEDIATE) return 'Factura Contado'
-  if (documentType === DOCUMENT_TYPE.RECEIPT && saleType === SALE_TYPE.IMMEDIATE) return 'Ticket Crédito'
-  if (documentType === DOCUMENT_TYPE.RECEIPT && saleType === SALE_TYPE.IMMEDIATE) return 'Factura Contado'
+  if (documentType === DOCUMENT_TYPE.RECEIPT && saleType === SALE_TYPE.CREDIT) return 'Ticket Crédito'
+  if (documentType === DOCUMENT_TYPE.RECEIPT && saleType === SALE_TYPE.IMMEDIATE) return 'Ticket Contado'
 }
 
 export function getSaleStatusLabel (status: SaleStatus) {
