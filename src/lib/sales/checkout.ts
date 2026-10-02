@@ -12,7 +12,7 @@ export async function checkout () {
   const payloadPayments = payments
     .filter((p) => Number(p.amountPaid) > 0)
     .map((p) => ({
-      paymentMethod: p.paymentMethod,
+      paymentMethod: p.paymentMethod.toUpperCase(),
       currency: p.currency,
       amountPaid: Number(p.amountPaid)
     }))
@@ -50,7 +50,7 @@ export async function checkout () {
     
     payments: payloadPayments
   }
-
+  
   try {
     await createSale(payload)
     // reiniciar la store, por ejemplo (aunque si solo guardas y no quieres salir no debería)

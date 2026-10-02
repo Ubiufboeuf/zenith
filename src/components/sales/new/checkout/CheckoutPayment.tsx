@@ -9,10 +9,10 @@ import type { TargetedInputEvent } from 'preact'
 import { useState } from 'preact/hooks'
 
 const paymentOptions: SelectOption[] = [
-  { id: 'cash', label: 'Efectivo', default: true },
-  { id: 'debit', label: 'Débito' },
-  { id: 'credit', label: 'Crédito' },
-  { id: 'transfer', label: 'Transferencia' }
+  { id: 'CASH', label: 'Efectivo', default: true },
+  { id: 'DEBIT', label: 'Débito' },
+  { id: 'CREDIT', label: 'Crédito' },
+  { id: 'BANK_TRANSFER', label: 'Transferencia' }
 ]
 
 interface Props {
