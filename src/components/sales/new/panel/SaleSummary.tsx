@@ -3,6 +3,7 @@ import { useNewSaleStore } from '@/stores/newSaleStore'
 import { useEffect, useState } from 'preact/hooks'
 import type { ListedItem } from '../ListView'
 import { calculateLineIva, calculateLineNet, calculateLineTotal } from '@/lib/sales/newSaleUtils'
+import { formatCurrency } from '@/utils/currencies'
 
 export function SaleSummary () {
   const listedItems = useNewSaleStore((state) => state.listedItems)
@@ -62,25 +63,25 @@ export function SaleSummary () {
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Subtotal</span>
-          <span class='text-base-content font-semibold'>UYU {subtotal}</span>
+          <span class='text-base-content font-semibold'>UYU {formatCurrency(Number(subtotal))}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Descuentos</span>
-          <span class='text-secondary'>- UYU {totalDiscount}</span>
+          <span class='text-secondary'>- UYU {formatCurrency(Number(totalDiscount))}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Neto gravado</span>
-          <span>UYU {taxableNet}</span>
+          <span>UYU {formatCurrency(Number(taxableNet))}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>IVA</span>
-          <span>UYU {ivaAmount}</span>
+          <span>UYU {formatCurrency(Number(ivaAmount))}</span>
         </div>
       </div>
       <div>
         <div class='flex justify-between items-center text-sm h-fit text-base-content/70'>
           <strong class='flex h-full items-center pt-1'>Total</strong>
-          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>UYU {total}</span>
+          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>UYU {formatCurrency(Number(total))}</span>
         </div>
       </div>
     </div>
