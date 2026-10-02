@@ -103,8 +103,8 @@ const columns: TableColumn<Sale>[] = [
     header: 'Total',
     width: '1fr',
     align: 'end',
-    render: ({ subtotal, currency }) => (
-      <strong class='font-semibold text-base-content'>{formatCurrency(subtotal, currency)}</strong>
+    render: ({ total, currency }) => (
+      <strong class='font-semibold text-base-content'>{formatCurrency(total / 100, currency)}</strong>
     )
   }
 ]

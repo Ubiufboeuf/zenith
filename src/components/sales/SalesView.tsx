@@ -1,13 +1,29 @@
 import { useEffect, useState } from 'preact/hooks'
 import { SalesTable } from './SalesTable'
 import type { Sale } from '@/types/sales/saleTypes'
-import { mockedSales } from '@/mocks/sales'
 import { SearchSales } from './SearchSales'
+import { API_URL } from '@/constants/envConstants'
+import { structureSaleByApiSale } from '@/lib/api'
 
 async function getSales (): Promise<Sale[]> {
+  let data
+  try {
+    const res = await fetch(`${API_URL}/sales?limit=100`)
+    data = await res.json()
+  } catch (err) {
+    console.error('Error recuperando las ventas:', err)
+  }
+
+  if (!data || data.success !== true) {
+    return []
+  }
+
   const sales: Sale[] = []
 
-  for (const sale of mockedSales) {
+  for (const apiSale of data.sales) {
+    console.log(apiSale)
+    const sale = structureSaleByApiSale(apiSale)
+    if (!sale) continue
     sales.push(sale)
   }
 
