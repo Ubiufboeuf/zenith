@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table } from '@/components/ui/table/Table'
-import { mockedProducts } from '@/mocks/products'
 import type { ProductWithCodes } from '@/types/products/productTypes'
 import type { TableColumn } from '@/types/ui/tableTypes'
 import { formatCurrency } from '@/utils/currencies'
@@ -22,6 +21,7 @@ import { ToggleItem } from './list/ToggleItem'
 import { Quantity } from './list/Quantity'
 import { ProductInfo } from './list/ProductInfo'
 import { DeleteProduct } from './list/DeleteProduct'
+import { getProducts } from '@/components/products/ProductsView'
 
 export interface ListedItem extends Omit<SaleDetail, 'saleId' | 'currency'> {
   product: ProductWithCodes
@@ -81,7 +81,7 @@ export function ListView () {
   }
 
   useEffect(() => {
-    setProducts(mockedProducts)
+    getProducts().then((products) => products && setProducts(products))
   }, [])
   
   return <>

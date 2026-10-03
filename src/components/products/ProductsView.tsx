@@ -6,7 +6,7 @@ import { FilterProductsModal } from './FilterProductsModal'
 import { API_URL } from '@/constants/envConstants'
 import { structureProductByApiProduct } from '@/lib/api'
 
-async function getProducts (): Promise<ProductWithCodes[] | undefined> {
+export async function getProducts (): Promise<ProductWithCodes[] | undefined> {
   let data
   try {
     const res = await fetch(`${API_URL}/products?limit=100&include=codes`)
