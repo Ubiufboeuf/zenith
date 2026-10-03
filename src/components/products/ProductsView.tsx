@@ -3,20 +3,46 @@ import { ProductsTable } from './ProductsTable'
 import { SearchProducts } from './SearchProducts'
 import type { ProductWithCodes } from '@/types/products/productTypes'
 import { FilterProductsModal } from './FilterProductsModal'
-import { mockedProducts } from '@/mocks/products'
+import { API_URL } from '@/constants/envConstants'
+import { structureProductByApiProduct } from '@/lib/api'
 
 async function getProducts (): Promise<ProductWithCodes[] | undefined> {
-  const products: ProductWithCodes[] = []
+  let data
+  try {
+    const res = await fetch(`${API_URL}/products?limit=100&include=codes`)
+    data = await res.json()
+  } catch (err) {
+    console.error('Error recuperando los productos:', err)
+  }
 
-  for (const prod of mockedProducts) {
-    products.push({
-      ...prod,
-      costPrice: prod.costPrice / 100,
-      salePrice: prod.salePrice / 100
-    })
+  if (!data || data.success !== true) {
+    return []
   }
   
-  return products
+  const products: ProductWithCodes[] = []
+
+  for (const apiProduct of data.products) {
+    const product = structureProductByApiProduct(apiProduct)
+    if (!product) continue
+    products.push(product)
+  }
+
+  console.log(products)
+
+  if (products.length === 0) return []
+
+  const sortedProducts = products.sort((a, b) => {
+    const codeA = a.codes.find((c) => c?.isMain)?.code
+    const codeB = b.codes.find((c) => c?.isMain)?.code
+
+    if (!codeA || !codeB) return 0
+    if (codeA > codeB) return 1
+    if (codeA < codeB) return -1
+    return 0
+  })
+
+  
+  return sortedProducts
 }
 
 export function ProductsView () {

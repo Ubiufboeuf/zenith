@@ -43,7 +43,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
     align: 'end',
     render: ({ costCurrency, costPrice }) => (
       <span>
-        {formatCurrency(costPrice, costCurrency)}
+        {formatCurrency(costPrice / 100, costCurrency)}
       </span>
     )
   },
@@ -55,7 +55,7 @@ const columns: TableColumn<ProductWithCodes>[] = [
     render ({ saleCurrency, salePrice }) {
       return (
         <strong>
-          {formatCurrency(salePrice, saleCurrency)}
+          {formatCurrency(salePrice / 100, saleCurrency)}
         </strong>
       )
     }
