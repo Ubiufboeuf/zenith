@@ -7,7 +7,7 @@ export function LineTotal ({ id }: ListedItem) {
   const listedItem = useNewSaleStore.getState().getListedItem(id)
   if (!listedItem) return <strong class='text-base-content'>0</strong>
   
-  const total = calculateLineNet(listedItem)
+  const total = calculateLineNet(listedItem) / 100
 
   return <strong class='text-base-content max-w-60 overflow-x-auto scrollbar-thin'>{formatCurrency(total)}</strong>
 }

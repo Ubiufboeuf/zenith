@@ -63,25 +63,25 @@ export function SaleSummary () {
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Subtotal</span>
-          <span class='text-base-content font-semibold'>UYU {formatCurrency(Number(subtotal))}</span>
+          <span class='text-base-content font-semibold'>{formatCurrency(Number(subtotal) / 100)}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Descuentos</span>
-          <span class='text-secondary'>- UYU {formatCurrency(Number(totalDiscount))}</span>
+          <span class='text-secondary'>- {formatCurrency(Number(totalDiscount) / 100)}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Neto gravado</span>
-          <span>UYU {formatCurrency(Number(taxableNet))}</span>
+          <span>{formatCurrency(Number(taxableNet) / 100)}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>IVA</span>
-          <span>UYU {formatCurrency(Number(ivaAmount))}</span>
+          <span>{formatCurrency(Number(ivaAmount) / 100)}</span>
         </div>
       </div>
       <div>
         <div class='flex justify-between items-center text-sm h-fit text-base-content/70'>
           <strong class='flex h-full items-center pt-1'>Total</strong>
-          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>UYU {formatCurrency(Number(total))}</span>
+          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>{formatCurrency(Number(total) / 100)}</span>
         </div>
       </div>
     </div>
