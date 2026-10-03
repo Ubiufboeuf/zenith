@@ -1,12 +1,19 @@
 import { useNewSaleStore } from '@/stores/newSaleStore'
 import type { ListedItem } from '../ListView'
 import type { TargetedInputEvent } from 'preact'
-import { useState } from 'preact/hooks'
+import { useRef, useState } from 'preact/hooks'
 import { limit } from '@/lib/utils'
 
 export function UnitPrice ({ id, product: { salePrice } }: ListedItem) {
   const setListedItemPrice = useNewSaleStore((state) => state.updateListedItem)
   const [unitPrice, setUnitPrice] = useState<number | undefined>(salePrice)
+  const isFirstRenderRef = useRef(true)
+
+  if (isFirstRenderRef.current) {
+    isFirstRenderRef.current = false
+    setUnitPrice(salePrice / 100)
+    setListedItemPrice(id, { unitPriceAtMoment: salePrice / 100 })
+  }
 
   function updateUnitPrice (event: TargetedInputEvent<HTMLInputElement>) {
     const { value } = event.currentTarget
@@ -24,6 +31,7 @@ export function UnitPrice ({ id, product: { salePrice } }: ListedItem) {
         value={unitPrice}
         placeholder={String(salePrice)}
         min='0'
+        step={0.01}
         onInput={updateUnitPrice}
       />
     </label>

@@ -127,7 +127,7 @@ export function ListView () {
                 </div>
                 <div class='ml-auto flex items-center gap-4'>
                   <span class='text-base-content/70'>{stock} {unit}</span>
-                  <strong class='text-base-content font-semibold'>{formatCurrency(salePrice)}</strong>
+                  <strong class='text-base-content font-semibold'>{formatCurrency(salePrice / 100)}</strong>
                 </div>
                 <Icon class='size-5 text-base-content opacity-70'>
                   <IconPlus />

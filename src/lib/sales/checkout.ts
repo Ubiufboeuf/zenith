@@ -14,7 +14,7 @@ export async function checkout () {
     .map((p) => ({
       paymentMethod: p.paymentMethod.toUpperCase(),
       currency: p.currency,
-      amountPaid: Number(p.amountPaid)
+      amountPaid: Math.round(Number(p.amountPaid * 100))
     }))
   const totalPayments = payloadPayments.reduce((acc, val) => val.amountPaid + acc, 0)
 
@@ -33,15 +33,15 @@ export async function checkout () {
     cashierId: 'default_cashier', 
     clientId: null,
     
-    subtotal: Number(subtotal),
-    totalDiscount,
-    generalDiscount,
-    total: Number(total),
+    subtotal: Math.round(Number(subtotal) * 100),
+    totalDiscount: Math.round(Number(totalDiscount) * 100),
+    generalDiscount: Math.round(Number(generalDiscount) * 100),
+    total: Math.round(Number(total) * 100),
     
     details: listedItems.map((item) => ({
       productId: item.product.id,
       quantity: item.quantity,
-      unitPriceAtMoment: item.unitPriceAtMoment,
+      unitPriceAtMoment: Math.round(Number(item.unitPriceAtMoment * 100)),
       ivaRate: item.ivaRate,
       discount: item.discount,
       // currency: item.currency
