@@ -44,8 +44,7 @@ export async function checkout () {
       unitPriceAtMoment: Math.round(Number(item.unitPriceAtMoment * 100)),
       ivaRate: item.ivaRate,
       discount: item.discount,
-      // currency: item.currency
-      currency: 'UYU' // <- este es temporal
+      currency: item.product.saleCurrency
     })),
     
     payments: payloadPayments
