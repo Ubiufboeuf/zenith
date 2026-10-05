@@ -52,7 +52,7 @@ export function CheckoutPayment ({ idx, payment: { id } }: Props) {
   }
 
   function handleChangeMethod (option: SelectOption) {
-    setNeedsAPos(option.id === 'debit' || option.id === 'credit')
+    setNeedsAPos(option.id === 'DEBIT' || option.id === 'CREDIT')
   }
   
   return (
