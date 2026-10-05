@@ -9,7 +9,7 @@ export function formatCurrency (amount: number, currency: Currency = 'UYU', loca
   const formattedNumber = new Intl.NumberFormat(locale, {
     style: 'decimal',
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 5
   }).format(amount)
 
   return `${currency} ${formattedNumber}`
