@@ -56,14 +56,18 @@ export function CheckoutModal () {
     else modal.close()
 
     const sum = payments.reduce((acc, p) => acc + p.amountPaid, 0)
-    setPaymentsAmount(sum)
-    setRest(sum - Number(total))
+    setPaymentsAmount(sum * 100)
+
+    const rest = sum - Number(total) / 100
+    setRest(rest)
   }, [isCheckoutModalOpen])
   
   useEffect(() => {
     const sum = payments.reduce((acc, p) => acc + p.amountPaid, 0)
-    setPaymentsAmount(sum)
-    setRest(sum - Number(total))
+    setPaymentsAmount(sum * 100)
+
+    const rest = sum - Number(total) / 100
+    setRest(rest)
   }, [payments])
   
   return (
