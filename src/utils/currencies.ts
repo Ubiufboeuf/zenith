@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS: FormatOptions = {
   currencyInDisplay: 'UYU',
   locale: 'es-UY',
   minDigits: 2,
-  maxDigits: 5
+  maxDigits: 2
 }
 
 export const SYMBOL_MAP: Record<string, string> = {

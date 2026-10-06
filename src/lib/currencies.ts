@@ -17,9 +17,9 @@ export function convertToCurrency (amount: number, from: Currency | undefined, t
   return amount * (prevRate / newRate)
 }
 
-export function getAmountToDisplay (amount: string | number | undefined, saleCurrency: Currency | undefined) {
+export function getAmountToDisplay (amount: string | number | undefined, saleCurrency: Currency | undefined, minDigits?: number, maxDigits?: number) {
   if (amount === undefined || saleCurrency === undefined) return amount ? Number(amount) : 0
   const converted = convertToCurrency(Number(amount), DEFAULT_CURRENCY, saleCurrency)
   const toDisplay = converted > 0 ? converted / 100 : converted
-  return formatCurrency(toDisplay, saleCurrency)
+  return formatCurrency(toDisplay, { currencyInDisplay: saleCurrency, minDigits, maxDigits })
 }

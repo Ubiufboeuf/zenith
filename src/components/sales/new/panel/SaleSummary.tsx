@@ -16,11 +16,11 @@ export function SaleSummary () {
   const setTotal = useNewSaleStore((state) => state.setTotal)
   const saleCurrency = useNewSaleStore((state) => state.currency)
 
-  const displayTotal = getAmountToDisplay(total, saleCurrency)
-  const displaySubtotal = getAmountToDisplay(subtotal, saleCurrency)
-  const displayTotalDiscount = getAmountToDisplay(totalDiscount, saleCurrency)
-  const displayTaxableNet = getAmountToDisplay(taxableNet, saleCurrency)
-  const displayIvaAmount = getAmountToDisplay(ivaAmount, saleCurrency)
+  const displayTotal = getAmountToDisplay(total, saleCurrency, 2, 5)
+  const displaySubtotal = getAmountToDisplay(subtotal, saleCurrency, 2, 5)
+  const displayTotalDiscount = getAmountToDisplay(totalDiscount, saleCurrency, 2, 5)
+  const displayTaxableNet = getAmountToDisplay(taxableNet, saleCurrency, 2, 5)
+  const displayIvaAmount = getAmountToDisplay(ivaAmount, saleCurrency, 2, 5)
 
   function updateSummary (listedItems: ListedItem[]) {
     let subtotal = 0
@@ -39,11 +39,11 @@ export function SaleSummary () {
     
     const totalDiscount = Math.abs(total - subtotal)
 
-    setSubtotal(subtotal.toFixed(2))
-    setTotalDiscount(totalDiscount.toFixed(2))
-    setTaxableNet(taxableNet.toFixed(2))
-    setIvaAmount(ivaAmount.toFixed(2))
-    setTotal(total.toFixed(2))
+    setSubtotal(subtotal.toFixed(5))
+    setTotalDiscount(totalDiscount.toFixed(5))
+    setTaxableNet(taxableNet.toFixed(5))
+    setIvaAmount(ivaAmount.toFixed(5))
+    setTotal(total.toFixed(5))
   }
 
   useEffect(() => {
