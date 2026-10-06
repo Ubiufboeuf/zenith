@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'preact/hooks'
 import { CheckoutPayment } from './checkout/CheckoutPayment'
 import { v4 } from 'uuid'
 import { checkout } from '@/lib/sales/checkout'
+import { getAmountToDisplay } from '@/lib/currencies'
 
 export function CheckoutModal () {
   const modalRef = useRef<HTMLDialogElement>(null)
@@ -15,11 +16,14 @@ export function CheckoutModal () {
   const isCheckoutModalOpen = useNewSaleStore((state) => state.isCheckoutModalOpen)
   const closeCheckoutModal = useNewSaleStore((state) => state.closeCheckoutModal)
   
+  const saleCurrency = useNewSaleStore((state) => state.currency)
   const total = useNewSaleStore((state) => state.total)
+  const displayTotal = getAmountToDisplay(total, saleCurrency)
 
   const payments = useNewSaleStore((state) => state.payments)
   const addPayment = useNewSaleStore((state) => state.addPayment)
   const [paymentsAmount, setPaymentsAmount] = useState(0)
+  const displayPaymentsAmount = getAmountToDisplay(paymentsAmount, saleCurrency)
 
   const rest = useNewSaleStore((state) => state.rest) || paymentsAmount - Number(total)
   const setRest = useNewSaleStore((state) => state.setRest)
@@ -93,12 +97,12 @@ export function CheckoutModal () {
 
           <div class='w-full h-fit flex flex-col gap-2 pt-6 pb-4 border-b border-base-content/20'>
             <span class='text-base-content/50 text-sm font-semibold uppercase'>Total a pagar</span>
-            <strong class='text-3xl text-primary text-nowrap overflow-x-auto scrollbar-thin'>{formatCurrency(Number(total))}</strong>
+            <strong class='text-3xl text-primary text-nowrap overflow-x-auto scrollbar-thin'>{displayTotal}</strong>
           </div>
           <div class='w-full h-fit flex flex-col gap-2 py-6'>
             <div class='w-full h-fit flex items-center justify-between gap-2 flex-wrap'>
               <span class='text-base-content/50'>Suma de pagos</span>
-              <span class='font-semibold'>{formatCurrency(paymentsAmount)}</span>
+              <span class='font-semibold'>{displayPaymentsAmount}</span>
             </div>
             <div class={`${rest >= 0 ? 'ok' : ''} w-full h-fit flex items-center justify-between gap-2 flex-wrap text-error [.ok]:text-accent`}>
               { rest < 0 && <span>Faltan</span> }

@@ -33,10 +33,10 @@ export async function checkout () {
     cashierId: 'default_cashier', 
     clientId: null,
     
-    subtotal: Math.round(Number(subtotal) * 100),
-    totalDiscount: Math.round(Number(totalDiscount) * 100),
-    generalDiscount: Math.round(Number(generalDiscount) * 100),
-    total: Math.round(Number(total) * 100),
+    subtotal: Math.round(Number(subtotal)),
+    totalDiscount: Math.round(Number(totalDiscount)),
+    generalDiscount: Math.round(Number(generalDiscount)),
+    total: Math.round(Number(total)),
     
     details: listedItems.map((item) => ({
       productId: item.product.id,

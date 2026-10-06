@@ -3,9 +3,7 @@ import { useNewSaleStore } from '@/stores/newSaleStore'
 import { useEffect, useState } from 'preact/hooks'
 import type { ListedItem } from '../ListView'
 import { calculateLineIva, calculateLineNet, calculateLineTotal } from '@/lib/sales/newSaleUtils'
-import { formatCurrency } from '@/utils/currencies'
-import { convertToCurrency } from '@/lib/iva'
-import { DEFAULT_CURRENCY } from '@/constants/currencyConstants'
+import { getAmountToDisplay } from '@/lib/currencies'
 
 export function SaleSummary () {
   const listedItems = useNewSaleStore((state) => state.listedItems)
@@ -18,17 +16,11 @@ export function SaleSummary () {
   const setTotal = useNewSaleStore((state) => state.setTotal)
   const saleCurrency = useNewSaleStore((state) => state.currency)
 
-  const displayTotal = getAmountToDisplay(total)
-  const displaySubtotal = getAmountToDisplay(subtotal)
-  const displayTotalDiscount = getAmountToDisplay(totalDiscount)
-  const displayTaxableNet = getAmountToDisplay(taxableNet)
-  const displayIvaAmount = getAmountToDisplay(ivaAmount)
-
-  function getAmountToDisplay (amount: string | number | undefined) {
-    if (amount === undefined) return 0
-    const converted = convertToCurrency(Number(amount), DEFAULT_CURRENCY, saleCurrency)
-    return converted > 0 ? converted / 100 : converted
-  }
+  const displayTotal = getAmountToDisplay(total, saleCurrency)
+  const displaySubtotal = getAmountToDisplay(subtotal, saleCurrency)
+  const displayTotalDiscount = getAmountToDisplay(totalDiscount, saleCurrency)
+  const displayTaxableNet = getAmountToDisplay(taxableNet, saleCurrency)
+  const displayIvaAmount = getAmountToDisplay(ivaAmount, saleCurrency)
 
   function updateSummary (listedItems: ListedItem[]) {
     let subtotal = 0
@@ -78,25 +70,25 @@ export function SaleSummary () {
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Subtotal</span>
-          <span class='text-base-content font-semibold'>{formatCurrency(displaySubtotal, saleCurrency)}</span>
+          <span class='text-base-content font-semibold'>{displaySubtotal}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Descuentos</span>
-          <span class='text-secondary'>- {formatCurrency(displayTotalDiscount, saleCurrency)}</span>
+          <span class='text-secondary'>- {displayTotalDiscount}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>Neto gravado</span>
-          <span>{formatCurrency(displayTaxableNet, saleCurrency)}</span>
+          <span>{displayTaxableNet}</span>
         </div>
         <div class='flex justify-between text-sm text-base-content/70'>
           <span>IVA</span>
-          <span>{formatCurrency(displayIvaAmount, saleCurrency)}</span>
+          <span>{displayIvaAmount}</span>
         </div>
       </div>
       <div>
         <div class='flex justify-between items-center text-sm h-fit text-base-content/70'>
           <strong class='flex h-full items-center pt-1'>Total</strong>
-          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>{formatCurrency(displayTotal, saleCurrency)}</span>
+          <span class='text-xl text-primary font-semibold border-t border-base-content/40 pt-1'>{displayTotal}</span>
         </div>
       </div>
     </div>
