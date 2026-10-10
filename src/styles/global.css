@@ -70,6 +70,16 @@
   font-family: Inter, system-ui;
 }
 
+:root:has(input.theme-controller[value='light']:checked),
+:root:has(input.theme-controller[value='autumn']:checked) {
+  color-scheme: light;
+}
+
+:root:has(input.theme-controller[value='dark']:checked),
+:root:has(input.theme-controller[value='sunset']:checked) {
+  color-scheme: dark;
+}
+
 html,
 body {
   height: 100%;
