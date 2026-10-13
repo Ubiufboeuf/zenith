@@ -50,3 +50,11 @@ export function structureProductByApiProduct (apiProduct: any): ProductWithCodes
     title: apiProduct.title
   }
 }
+
+export function structureProductSnapshot (apiProduct: any): ProductWithCodes | undefined {
+  const snapshot = typeof apiProduct.snapshot === 'string'
+    ? JSON.parse(apiProduct.snapshot)
+    : apiProduct.snapshot
+
+  return structureProductByApiProduct(snapshot)
+}

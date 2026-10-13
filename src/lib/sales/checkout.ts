@@ -44,7 +44,8 @@ export async function checkout () {
       unitPriceAtMoment: Math.round(Number(item.unitPriceAtMoment * 100)),
       ivaRate: item.ivaRate,
       discount: item.discount,
-      currency: item.product.saleCurrency
+      currency: item.product.saleCurrency,
+      snapshot: JSON.stringify(item.product)
     })),
     
     payments: payloadPayments

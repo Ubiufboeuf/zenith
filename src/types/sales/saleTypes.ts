@@ -1,5 +1,6 @@
 import type { DOCUMENT_TYPE, PAYMENT_STATUS, SALE_TYPE, SALE_STATUS } from '@/constants/saleConstants'
 import type { Currency } from '../currencyTypes'
+import type { ProductWithCodes } from '../products/productTypes'
 
 export type DocumentType = typeof DOCUMENT_TYPE[keyof typeof DOCUMENT_TYPE]
 export type SaleType = typeof SALE_TYPE[keyof typeof SALE_TYPE]
@@ -79,7 +80,7 @@ export interface SalePayload {
   generalDiscount: number
   total: number
   
-  details: Omit<SaleDetail, 'id' | 'saleId'>[]
+  details: (Omit<SaleDetail, 'id' | 'saleId'> & { snapshot: string })[]
   
   payments: (Omit<Payment, 'id'> & {
     reference?: string // Para guardar el número del voucher
@@ -87,3 +88,5 @@ export interface SalePayload {
   
   notes?: string
 }
+
+export type SaleProductSnapshot = ProductWithCodes
