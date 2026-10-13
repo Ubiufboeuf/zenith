@@ -1,4 +1,5 @@
 import { DEFAULT_CURRENCY } from '@/constants/currencyConstants'
+import { useNewSaleStore } from '@/stores/newSaleStore'
 import type { Currency } from '@/types/currencyTypes'
 import { formatCurrency } from '@/utils/currencies'
 
@@ -6,6 +7,11 @@ const CURRENCY_VALUE_IN_UYU: Record<Currency, number> = {
   UYU: 1,
   USD: 40.46,
   EUR: 45.36
+}
+
+export function getExchangeRate (): number | undefined {
+  const { currency } = useNewSaleStore.getState()
+  return currency && CURRENCY_VALUE_IN_UYU[currency]
 }
 
 export function convertToCurrency (amount: number, from: Currency | undefined, to: Currency | undefined) {

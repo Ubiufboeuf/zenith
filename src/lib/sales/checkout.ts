@@ -1,6 +1,7 @@
 import type { SalePayload } from '@/types/sales/saleTypes'
 import { createSale } from '../api'
 import { useNewSaleStore } from '@/stores/newSaleStore'
+import { getExchangeRate } from '../currencies'
 
 export async function checkout () {
   const {
@@ -17,6 +18,7 @@ export async function checkout () {
       amountPaid: Math.round(Number(p.amountPaid * 100))
     }))
   const totalPayments = payloadPayments.reduce((acc, val) => val.amountPaid + acc, 0)
+  const exchangeRate = getExchangeRate()
 
   if (!documentType || !saleType || !currency || !subtotal || totalPayments < Number(total)) {
     throw new Error('Faltan datos importantes para completar la venta')
@@ -26,6 +28,7 @@ export async function checkout () {
     documentType,
     saleType, 
     currency,
+    exchangeRate,
     
     // userId: user?.id || null,
     userId: null,

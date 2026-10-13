@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/layout.astro'
+import { SaleView } from '@/components/sales/[id]/SaleView'
+
+const { id } = Astro.params
+if (!id) return Astro.redirect('/sales')
+---
+
+<Layout class='p-4'>
+  <SaleView id={id} client:load />
+</Layout>
