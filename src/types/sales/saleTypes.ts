@@ -35,6 +35,7 @@ export interface SaleDetail {
   currency: Currency
   discount: number
   ivaRate: number
+  snapshot: ProductWithCodes
 }
 
 export interface Payment {

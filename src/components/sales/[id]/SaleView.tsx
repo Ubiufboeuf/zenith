@@ -1,14 +1,13 @@
-import { ProductsTable } from '@/components/products/ProductsTable'
 import { API_URL } from '@/constants/envConstants'
-import { structureProductSnapshot } from '@/lib/api'
-import type { ProductWithCodes } from '@/types/products/productTypes'
 import { useEffect, useState } from 'preact/hooks'
+import { ProductsTable } from './ProductsTable'
+import type { SaleDetail } from '@/types/sales/saleTypes'
 
 interface Props {
   id: string
 }
 
-export async function getProductsOfSale (id: string): Promise<ProductWithCodes[] | undefined> {
+export async function getSaleDetails (id: string): Promise<SaleDetail[] | undefined> {
   let data
   try {
     const res = await fetch(`${API_URL}/sales/${id}?include=all`)
@@ -22,20 +21,17 @@ export async function getProductsOfSale (id: string): Promise<ProductWithCodes[]
   }
 
   const sale = data.sale
-  const products: ProductWithCodes[] = []
+  const details: SaleDetail[] = []
 
   for (const apiProduct of sale.details) {
-    console.log('api product:', apiProduct)
-    const snapshot = structureProductSnapshot(apiProduct)
-    if (!snapshot) continue
-    products.push(snapshot)
+    details.push(apiProduct)
   }
 
-  if (products.length === 0) return []
+  if (details.length === 0) return []
 
-  const sortedProducts = products.sort((a, b) => {
-    const codeA = a.codes.find((c) => c?.isMain)?.code
-    const codeB = b.codes.find((c) => c?.isMain)?.code
+  const sortedProducts = details.sort((a, b) => {
+    const codeA = a.snapshot.codes.find((c) => c?.isMain)?.code
+    const codeB = b.snapshot.codes.find((c) => c?.isMain)?.code
 
     if (!codeA || !codeB) return 0
     if (codeA > codeB) return 1
@@ -48,19 +44,19 @@ export async function getProductsOfSale (id: string): Promise<ProductWithCodes[]
 }
 
 export function SaleView ({ id }: Props) {
-  const [products, setProducts] = useState<ProductWithCodes[]>([])
+  const [saleDetails, setSaleDetails] = useState<SaleDetail[]>([])
 
-  async function loadProducts () {
-    const products = await getProductsOfSale(id)
+  async function loadSaleDetails () {
+    const products = await getSaleDetails(id)
     if (!products || products.length === 0) return
 
     console.log('products:', products)
-    setProducts(products)
+    setSaleDetails(products)
   }
   
   useEffect(() => {
-    loadProducts()
+    loadSaleDetails()
   }, [])
 
-  return <ProductsTable products={products} query='' results={null} />
+  return <ProductsTable saleDetails={saleDetails} />
 }
