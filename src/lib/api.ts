@@ -16,21 +16,21 @@ export async function createSale (payload: SalePayload) {
 export function structureSaleByApiSale (apiSale: any): Sale | undefined {
   return {
     id: apiSale.id,
-    clientId: apiSale.client_id,
-    createdAt: apiSale.created_at,
+    clientId: apiSale.clientId,
+    createdAt: apiSale.createdAt,
     currency: apiSale.currency,
-    documentNumber: apiSale.document_number,
-    documentSerie: apiSale.document_serie,
-    documentType: apiSale.document_type,
-    generalDiscount: apiSale.general_discount,
-    lastModified: apiSale.last_modified,
-    paymentStatus: apiSale.payment_status,
-    saleType: apiSale.sale_type,
+    documentNumber: apiSale.documentNumber,
+    documentSerie: apiSale.documentSerie,
+    documentType: apiSale.documentType,
+    generalDiscount: apiSale.generalDiscount,
+    lastModified: apiSale.lastModified,
+    paymentStatus: apiSale.paymentStatus,
+    saleType: apiSale.saleType,
     status: apiSale.status,
     subtotal: apiSale.subtotal,
     total: apiSale.total,
-    totalDiscount: apiSale.total_discount,
-    userId: apiSale.user_id
+    totalDiscount: apiSale.totalDiscount,
+    userId: apiSale.userId
   }
 }
 
@@ -40,11 +40,11 @@ export function structureProductByApiProduct (apiProduct: any): ProductWithCodes
     brand: apiProduct.brand,
     category: apiProduct.category,
     codes: apiProduct.codes ?? [],
-    costCurrency: apiProduct.cost_currency,
-    costPrice: apiProduct.cost_price,
+    costCurrency: apiProduct.costCurrency,
+    costPrice: apiProduct.costPrice,
     provider: apiProduct.provider,
-    saleCurrency: apiProduct.sale_currency,
-    salePrice: apiProduct.sale_price,
+    saleCurrency: apiProduct.saleCurrency,
+    salePrice: apiProduct.salePrice,
     stock: apiProduct.stock,
     subtitle: apiProduct.subtitle,
     title: apiProduct.title
