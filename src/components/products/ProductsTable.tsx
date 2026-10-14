@@ -130,7 +130,7 @@ export function ProductsTable ({ products, results }: Props) {
       columns={columns}
       data={data}
       // footer={Pagination}
-      class='h-full w-full text-sm rounded-lg border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
+      class='h-full w-full text-sm rounded-lg *:rounded-lg border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
       stickyHeader
     />
   </div>

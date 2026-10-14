@@ -96,7 +96,7 @@ export function ListView () {
           id='loaded-products-in-new-sale'
           data={listedItems}
           columns={columns}
-          class='h-full w-full text-sm rounded-lg [&_.cell]:p-2 overflow-hidden border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
+          class='h-full w-full text-sm rounded-lg *:rounded-lg [&_.cell]:p-2 overflow-hidden border border-base-content/20 bg-base-100 [&_.group:hover_.body-row]:bg-base-200 [&_.body-row]:transition-colors'
           stickyHeader
         />
       </div>
