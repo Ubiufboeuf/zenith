@@ -81,7 +81,7 @@ export interface SalePayload {
   generalDiscount: number
   total: number
   
-  details: (Omit<SaleDetail, 'id' | 'saleId'> & { snapshot: string })[]
+  details: (Omit<SaleDetail, 'id' | 'saleId' | 'snapshot'> & { snapshot: string })[]
   
   payments: (Omit<Payment, 'id'> & {
     reference?: string // Para guardar el número del voucher
