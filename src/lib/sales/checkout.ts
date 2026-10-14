@@ -44,7 +44,7 @@ export async function checkout () {
     details: listedItems.map((item) => ({
       productId: item.product.id,
       quantity: item.quantity,
-      unitPriceAtMoment: Math.round(Number(item.unitPriceAtMoment * 100)),
+      unitPriceAtMoment: Math.round(Number(item.unitPriceAtMoment)),
       ivaRate: item.ivaRate,
       discount: item.discount,
       currency: item.product.saleCurrency,

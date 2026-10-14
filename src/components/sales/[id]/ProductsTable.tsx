@@ -46,7 +46,7 @@ const columns: TableColumn<SaleDetail>[] = [
     render ({ unitPriceAtMoment, currency }) {
       return (
         <strong>
-          {formatCurrency(unitPriceAtMoment / (100 * 100), currency)}
+          {formatCurrency(unitPriceAtMoment / 100, currency)}
         </strong>
       )
     }
