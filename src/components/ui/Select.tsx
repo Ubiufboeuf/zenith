@@ -12,9 +12,10 @@ interface SelectProps {
   options: (SelectOption | string)[]
   class?: string
   onChange?: (option: SelectOption) => void
+  disabled?: boolean
 }
 
-export function Select ({ options, onChange, class: className = '' }: SelectProps) {
+export function Select ({ options, onChange, class: className = '', disabled }: SelectProps) {
   const selectId = useId()
 
   function handleChange (event: TargetedEvent<HTMLSelectElement>) {
@@ -40,7 +41,7 @@ export function Select ({ options, onChange, class: className = '' }: SelectProp
   }
 
   return (
-    <select class={`${className} select cursor-pointer`} onChange={handleChange}>
+    <select class={`${className} ${disabled ? 'cursor-default!' : ''} select cursor-pointer`} onChange={handleChange} disabled={disabled}>
       { options.map((option) => {
         if (typeof option === 'string') {
           return (
