@@ -1,11 +1,13 @@
 ---
 import Layout from '@/layouts/layout.astro'
 import { SaleView } from '@/components/sales/[id]/SaleView'
+import { DetailsPanel } from '@/components/sales/[id]/DetailsPanel'
 
 const { id } = Astro.params
 if (!id) return Astro.redirect('/sales')
 ---
 
-<Layout class='p-4'>
+<Layout class='flex flex-row' sidebar={false}>
   <SaleView id={id} client:load />
+  <DetailsPanel client:load />
 </Layout>
