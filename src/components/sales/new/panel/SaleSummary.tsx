@@ -16,11 +16,11 @@ export function SaleSummary () {
   const setTotal = useNewSaleStore((state) => state.setTotal)
   const saleCurrency = useNewSaleStore((state) => state.currency)
 
-  const displayTotal = getAmountToDisplay(total, saleCurrency, 2, 5)
-  const displaySubtotal = getAmountToDisplay(subtotal, saleCurrency, 2, 5)
-  const displayTotalDiscount = getAmountToDisplay(totalDiscount, saleCurrency, 2, 5)
-  const displayTaxableNet = getAmountToDisplay(taxableNet, saleCurrency, 2, 5)
-  const displayIvaAmount = getAmountToDisplay(ivaAmount, saleCurrency, 2, 5)
+  const displayTotal = getAmountToDisplay(total, saleCurrency, 2, 2)
+  const displaySubtotal = getAmountToDisplay(subtotal, saleCurrency, 2, 2)
+  const displayTotalDiscount = getAmountToDisplay(totalDiscount, saleCurrency, 2, 2)
+  const displayTaxableNet = getAmountToDisplay(taxableNet, saleCurrency, 2, 2)
+  const displayIvaAmount = getAmountToDisplay(ivaAmount, saleCurrency, 2, 2)
 
   function updateSummary (listedItems: ListedItem[]) {
     let subtotal = 0
