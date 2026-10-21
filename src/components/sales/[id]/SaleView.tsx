@@ -58,5 +58,9 @@ export function SaleView ({ id }: Props) {
     loadSaleDetails()
   }, [])
 
-  return <ProductsTable saleDetails={saleDetails} />
+  return (
+    <section class='h-full w-full flex flex-col gap-2 flex-1 p-4'>
+      <ProductsTable saleDetails={saleDetails} />
+    </section>
+  )
 }
