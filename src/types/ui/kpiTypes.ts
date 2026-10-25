@@ -4,9 +4,9 @@ import type { TrendBadgeProps } from './badgeTypes'
 export interface KpiItem {
   id: string
   title: string
-  value: string
+  value: string | (() => string)
   subtext?: string 
-  trend?: TrendBadgeProps
+  trend?: TrendBadgeProps | (() => TrendBadgeProps)
   color?: string
   icon: () => ReactNode
   class?: string

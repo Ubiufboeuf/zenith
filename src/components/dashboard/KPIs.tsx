@@ -2,13 +2,28 @@ import type { KpiItem } from '@/types/ui/kpiTypes'
 import { KPI } from '../ui/kpi/KPI'
 import { IconCart, IconDollar, IconPackage, IconUsers } from '../ui/Icons'
 import { MobileKPI } from '../ui/mobile/MobileKPI'
+import type { TrendBadgeProps } from '@/types/ui/badgeTypes'
+
+function getTodaySales () {
+  const rnd = Math.random()
+  if (rnd > 0.5) return 'U$S 2.100,00'
+  else return 'U$S 5.809,00'
+}
+
+function getTodaySalesTrend () {
+  const rnd = Math.random()
+  const trendA: TrendBadgeProps = { label: '+12.5%', sentiment: 'positive' }
+  const trendB: TrendBadgeProps = { label: '-34.2%', sentiment: 'negative' }
+  if (rnd > 0.5) return trendA
+  else return trendB
+}
 
 export const kpis: KpiItem[] = [
   {
     id: 'today-sales',
     title: 'Ventas de hoy',
-    value: 'U$S 2.100,00',
-    trend: { label: '+12.5%', sentiment: 'positive' },
+    value: getTodaySales,
+    trend: getTodaySalesTrend,
     color: 'accent',
     icon: IconDollar
   },
