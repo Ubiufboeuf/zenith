@@ -10,12 +10,13 @@ export interface SelectOption {
 
 interface SelectProps {
   options: (SelectOption | string)[]
+  defaultValue?: SelectOption | string
   class?: string
   onChange?: (option: SelectOption) => void
   disabled?: boolean
 }
 
-export function Select ({ options, onChange, class: className = '', disabled }: SelectProps) {
+export function Select ({ options, defaultValue, onChange, class: className = '', disabled }: SelectProps) {
   const selectId = useId()
 
   function handleChange (event: TargetedEvent<HTMLSelectElement>) {
@@ -41,7 +42,7 @@ export function Select ({ options, onChange, class: className = '', disabled }: 
   }
 
   return (
-    <select class={`${className} ${disabled ? 'cursor-default!' : ''} select cursor-pointer`} onChange={handleChange} disabled={disabled}>
+    <select defaultValue={typeof defaultValue === 'string' ? defaultValue : defaultValue?.id} class={`${className} ${disabled ? 'cursor-default!' : ''} select cursor-pointer`} onChange={handleChange} disabled={disabled}>
       { options.map((option) => {
         if (typeof option === 'string') {
           return (
