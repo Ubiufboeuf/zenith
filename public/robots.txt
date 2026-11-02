@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zenith-delta-dusky.pages.dev/sitemap-index.xml
