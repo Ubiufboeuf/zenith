@@ -29,6 +29,13 @@ if (mobileRegex.test(ua)) detectedType = 'mobile'
 const devices: Record<string, string> = { M: 'mobile', D: 'desktop' }
 const deviceType = devices[deviceCode!] || detectedType
 // #endregion
+
+// SEO
+const lastUpdate = new Date().toISOString().split('T')[0]
+const url = Astro.url.href
+const pageTitle = title ? `${title} - Zenith - mAngo (Ubiufboeuf)` : 'Zenith - mAngo (Ubiufboeuf)'
+const description = "Sistema de ventas con gestión de inventario y clientes, diseñado para superar las limitaciones habituales del software de gestión.";
+const imageURL = "https://zenith-delta-dusky.vercel.app/preview.webp";
 ---
 
 <html
@@ -42,8 +49,52 @@ const deviceType = devices[deviceCode!] || detectedType
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 		<link rel='icon' href='/favicon.ico' />
 		<meta name='viewport' content='width=device-width' />
-		<title>{title ? `${title} - Zenith` : 'Zenith'}</title>
-		<link rel='preload' href='/Inter.woff2' as='font' type='font/woff2' crossorigin />
+		<title>{pageTitle}</title>
+
+		<meta name="description" content={description} />
+    <meta name="author" content="Federico Artencio" />
+
+    <link rel="canonical" href={url} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="google-site-verification" content="Aw3cGucJEnizdS4mK6JC74MdcYiLCaFrdDQ1OFrloXk" />
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={url}>
+    <meta property="og:title" content={pageTitle}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={imageURL}>
+    <meta property="og:image:alt" content="Vista previa del proyecto">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content={url}>
+    <meta name="twitter:title" content={pageTitle}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={imageURL}>
+  
+    <meta property="article:published_time" content="2026-07-01">
+    <meta property="article:modified_time" content={lastUpdate}>
+    <meta name="theme-color" content="#191E24">
+
+    <link rel="preload" href="/Inter.woff2" as="font" type="font/woff2" crossorigin />
+
+		<script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Zenith",
+        "operatingSystem": "All",
+        "applicationCategory": "PointOfSale",
+        "offers": {
+          "@type": "Offer",
+          "price": "0"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Federico Artencio",
+          "url": "https://portafolio-dej.pages.dev/"
+        }
+      }
+    </script>
 	</head>
 	<body class='flex flex-col'>
 		<Sidebar />
