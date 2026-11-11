@@ -1,14 +1,14 @@
 import { Button } from '@/components/ui/Button'
 import { Icon } from '@/components/ui/Icon'
-import { IconDownload, IconExit, IconPlus, IconPrinter, IconSave, IconX } from '@/components/ui/Icons'
+import { IconDownload, IconPlus, IconPrinter, IconX } from '@/components/ui/Icons'
 import { useNewSaleStore } from '@/stores/newSaleStore'
 import { formatCurrency } from '@/utils/currencies'
 import type { TargetedMouseEvent } from 'preact'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { CheckoutPayment } from './checkout/CheckoutPayment'
 import { v4 } from 'uuid'
-import { checkout } from '@/lib/sales/checkout'
 import { getAmountToDisplay } from '@/lib/currencies'
+import { SaveSale } from './checkout/SaveSale'
 
 export function CheckoutModal () {
   const modalRef = useRef<HTMLDialogElement>(null)
@@ -27,6 +27,8 @@ export function CheckoutModal () {
 
   const rest = useNewSaleStore((state) => state.rest) || paymentsAmount - Number(total)
   const setRest = useNewSaleStore((state) => state.setRest)
+
+  const [notEnoughPayments, setNotEnoughPayments] = useState(true)
   
   function handleExitModal (event: TargetedMouseEvent<HTMLDialogElement>) {
     const modal = event.currentTarget
@@ -43,8 +45,7 @@ export function CheckoutModal () {
     })
   }
 
-  async function checkoutAndExit () {
-    await checkout()
+  async function exit () {
     location.href = '/sales'
   }
 
@@ -68,7 +69,9 @@ export function CheckoutModal () {
 
     const rest = sum - Number(total) / 100
     setRest(rest)
-  }, [payments])
+
+    setNotEnoughPayments(sum <= 0 || rest < 0)
+  }, [payments, total])
   
   return (
     <dialog
@@ -126,19 +129,13 @@ export function CheckoutModal () {
                   <IconDownload />
                 </Icon>
               </Button>
-              <Button color='secondary' fill='soft' class='flex-1' onClick={checkout}>
-                <Icon class='size-5'>
-                  <IconSave />
-                </Icon>
-                <span>Guardar</span>
-              </Button>
+              <SaveSale color='secondary' fill='soft' class='flex-1' disabled={notEnoughPayments}>
+                Guardar
+              </SaveSale>
             </div>
-            <Button color='primary' onClick={checkoutAndExit}>
-              <Icon class='size-5'>
-                <IconExit />
-              </Icon>
-              <span>Guardar y salir</span>
-            </Button>
+            <SaveSale color='primary' onSave={exit} disabled={notEnoughPayments}>
+              Guardar y salir
+            </SaveSale>
           </div>
         </div>
       </div>

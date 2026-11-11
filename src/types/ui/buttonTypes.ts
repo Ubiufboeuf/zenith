@@ -30,3 +30,5 @@ export interface ButtonLinkProps extends UIProps {
   
   selected?: boolean
 }
+
+export type State = 'idle' | 'loading' | 'success' | 'failure'
