@@ -1,4 +1,4 @@
-import type { TargetedEvent } from 'preact'
+import type { RefObject, TargetedEvent } from 'preact'
 import { useId } from 'preact/hooks'
 
 export interface SelectOption {
@@ -9,6 +9,7 @@ export interface SelectOption {
 }
 
 interface SelectProps {
+  selectRef?: RefObject<HTMLSelectElement>
   options: (SelectOption | string)[]
   defaultValue?: SelectOption | string
   class?: string
@@ -16,7 +17,7 @@ interface SelectProps {
   disabled?: boolean
 }
 
-export function Select ({ options, defaultValue, onChange, class: className = '', disabled }: SelectProps) {
+export function Select ({ selectRef, options, defaultValue, onChange, class: className = '', disabled }: SelectProps) {
   const selectId = useId()
 
   function handleChange (event: TargetedEvent<HTMLSelectElement>) {
@@ -42,7 +43,7 @@ export function Select ({ options, defaultValue, onChange, class: className = ''
   }
 
   return (
-    <select defaultValue={typeof defaultValue === 'string' ? defaultValue : defaultValue?.id} class={`${className} ${disabled ? 'cursor-default!' : ''} select cursor-pointer`} onChange={handleChange} disabled={disabled}>
+    <select ref={selectRef} defaultValue={typeof defaultValue === 'string' ? defaultValue : defaultValue?.id} class={`${className} ${disabled ? 'cursor-default!' : ''} select cursor-pointer`} onChange={handleChange} disabled={disabled}>
       { options.map((option) => {
         if (typeof option === 'string') {
           return (
