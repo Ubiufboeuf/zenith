@@ -7,8 +7,9 @@ import type { TargetedMouseEvent } from 'preact'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { CheckoutPayment } from './checkout/CheckoutPayment'
 import { v4 } from 'uuid'
-import { getAmountToDisplay } from '@/lib/currencies'
+import { convertToCurrency, getAmountToDisplay } from '@/lib/currencies'
 import { SaveSale } from './checkout/SaveSale'
+import { DEFAULT_CURRENCY } from '@/constants/currencyConstants'
 
 export function CheckoutModal () {
   const modalRef = useRef<HTMLDialogElement>(null)
@@ -56,7 +57,7 @@ export function CheckoutModal () {
     if (isCheckoutModalOpen) modal.showModal()
     else modal.close()
 
-    const sum = payments.reduce((acc, p) => acc + p.amountPaid, 0)
+    const sum = payments.reduce((acc, p) => acc + convertToCurrency(p.amountPaid, p.currency, DEFAULT_CURRENCY), 0)
     setPaymentsAmount(sum * 100)
 
     const rest = sum - Number(total) / 100
@@ -64,7 +65,7 @@ export function CheckoutModal () {
   }, [isCheckoutModalOpen])
   
   useEffect(() => {
-    const sum = payments.reduce((acc, p) => acc + p.amountPaid, 0)
+    const sum = payments.reduce((acc, p) => acc + convertToCurrency(p.amountPaid, p.currency, DEFAULT_CURRENCY), 0)
     setPaymentsAmount(sum * 100)
 
     const rest = sum - Number(total) / 100
